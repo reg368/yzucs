@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.answer.model.AnswerVO" table="YZU_ANSWER" >
+			
+		<id name="a_id" column="a_id">
+			<generator class="sequence">
+				<param name="sequence">yzu_answer_seq</param>
+			</generator>
+		</id>
+			
+			<property name="a_qid" column="a_qid" />
+			<property name="a_text" column="a_text" />
+			<property name="a_is_correct" column="a_is_correct" />
+			<property name="a_joindate" column="a_joindate" insert="false"/>
+			<property name="a_pic" column="a_pic" />		
+	</class>
+</hibernate-mapping>

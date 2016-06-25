@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.character_image.model.CharImageVO" table="yzu_character_image" >
+			
+		<id name="cImage_id" column="cImage_id">
+			<generator class="sequence">
+				<param name="sequence">yzu_character_image_seq</param>
+			</generator>
+		</id>
+			
+			<property name="cImage_path" column="cImage_path" />
+			<property name="cImage_mood" column="cImage_mood" />
+			<property name="cImage_gender" column="cImage_gender" />
+			<property name="cImage_profession" column="cImage_profession" />
+			<property name="cImage_joindate" column="cImage_joindate" insert="false"/>
+			<property name="image_level" column="image_level" />		
+	</class>
+</hibernate-mapping>

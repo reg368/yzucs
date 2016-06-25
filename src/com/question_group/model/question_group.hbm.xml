@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.question_group.model.Question_groupVO" table="YZU_QUESTION_GROUP" >
+			
+		<id name="g_id" column="g_id">
+			<generator class="sequence">
+				<param name="sequence">yzu_question_group_seq</param>
+			</generator>
+		</id>
+			<property name="g_name" column="g_name" />
+			<property name="g_joindate" column="g_joindate" />		
+	</class>
+</hibernate-mapping>

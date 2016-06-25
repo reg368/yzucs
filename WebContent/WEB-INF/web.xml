@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>YZUCS</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.user.controller.User_controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/front/user/UserServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>QuestionServlet</servlet-name>
+    <servlet-class>com.question.controller.Question_controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QuestionServlet</servlet-name>
+    <url-pattern>/front/question/QuestionServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CharacterImageServlet</servlet-name>
+    <servlet-class>com.character_image.controller.CharacterImage_controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CharacterImageServlet</servlet-name>
+    <url-pattern>/back/character/CharacterImageServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ShowImageServlet</servlet-name>
+    <servlet-class>com.tool.ShowImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowImageServlet</servlet-name>
+    <url-pattern>/ShowImageServlet.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>UserServletNew</servlet-name>
+    <servlet-class>com.user.controller.User_controller_new</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServletNew</servlet-name>
+    <url-pattern>/front/user/User_controller_new.do</url-pattern>
+  </servlet-mapping> 
+
+
+  <context-param>  
+    <param-name>char_image.dir</param-name>
+    <param-value>char_image</param-value>
+  </context-param>
+</web-app>
