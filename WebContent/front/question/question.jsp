@@ -27,372 +27,186 @@
 <meta charset="utf-8">
 <title>index</title>
 <meta name="generator" content="Google Web Designer 1.6.0.0429">
-  <style type="text/css" id="gwd-text-style">p {
-    margin: 0px;
-}
-h1 {
-    margin: 0px;
-}
-h2 {
-    margin: 0px;
-}
-h3 {
-    margin: 0px;
-}</style>
-  <style type="text/css">html,
-body {
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-}
-body {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-    -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-    -moz-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-    perspective: 1400px;
-    -webkit-perspective: 1400px;
-    -moz-perspective: 1400px;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    background-color: transparent;
-}
-.gwd-img-1j4a {
-    position: absolute;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    transform-origin: 609.869px 188.594px 0px;
-    -webkit-transform-origin: 609.869px 188.594px 0px;
-    -moz-transform-origin: 609.869px 188.594px 0px;
-    width: 100%;
-    height: 100%;
-    left: 2px;
-    top: 2px;
-}
-.gwd-input-1puq {
-    left: -258px;
-    top: 449px;
-}
-.gwd-input-1f7k {} .gwd-input-pd36 {
-    position: absolute;
-    width: 356.25px;
-    height: 36.25px;
-    left: 288.25px;
-    top: 130.75px;
-    border-radius: 3px;
-}
-.gwd-input-132i {
-    left: 0px;
-}
-.gwd-input-qy9j {
-    top: 0px;
-}
-.gwd-input-1uwv {} .gwd-input-1j2i {} .gwd-form-14az {
-    left: 1px;
-    top: 1px;
-}
-.gwd-div-8yx7 {
-    height: 123px;
-    position: absolute;
-    top: 7px;
-    width: 97%;
-    left: 1.5%;
-    background-image: none;
-    background-color: rgb(139, 155, 158);
-}
-.gwd-p-mjfw {
-    position: absolute;
-    width: 184px;
-    height: 59px;
-    left: 215px;
-    top: 142px;
-}
-.gwd-p-1rer {
-    top: 142px;
-    transform-origin: 118.753px 29.5px 0px;
-    -webkit-transform-origin: 118.753px 29.5px 0px;
-    -moz-transform-origin: 118.753px 29.5px 0px;
-    left: 53%;
-    width: 27.5%;
-    background-image: none;
-    background-color: rgb(176, 191, 197);
-}
-.gwd-p-1skb {
-    top: 213px;
-    left: 22.97%;
-    transform-origin: 123.12px 29.5px 0px;
-    -webkit-transform-origin: 123.12px 29.5px 0px;
-    -moz-transform-origin: 123.12px 29.5px 0px;
-    width: 27.5%;
-    background-image: none;
-    background-color: rgb(176, 191, 197);
-}
-.gwd-p-1m21 {
-    top: 213px;
-    transform-origin: 119.958px 29.5px 0px;
-    -webkit-transform-origin: 119.958px 29.5px 0px;
-    -moz-transform-origin: 119.958px 29.5px 0px;
-    left: 53%;
-    width: 27.5%;
-    background-image: none;
-    background-color: rgb(187, 201, 206);
-}
-.gwd-p-1rp8 {
-    top: 142px;
-    left: 23.09%;
-    transform-origin: 122.723px 29.5px 0px;
-    -webkit-transform-origin: 122.723px 29.5px 0px;
-    -moz-transform-origin: 122.723px 29.5px 0px;
-    width: 27.5%;
-    background-image: none;
-    background-color: rgb(181, 196, 202);
-}
-.gwd-input-1ljq {
-    position: absolute;
-    height: 49.512px;
-    top: 142px;
-    left: 209px;
-    width: 5%;
-}
-.gwd-input-ei3p {
-    top: 215px;
-}
-.gwd-input-e5rh {
-    left: 477px;
-    top: 144px;
-}
-.gwd-input-yhnx {
-    left: 477px;
-    top: 213px;
-}
-.gwd-img-k7xl {
-    position: absolute;
-    height: 203px;
-    left: 70%;
-    top: 300px;
-    width: 18%;
-}
-.gwd-img-13rr {
-    position: absolute;
-    height: 207px;
-    left: 10%;
-    top: 300px;
-    width: 18%;
-}
-.gwd-p-lgvv {
-    position: absolute;
-    height: 94px;
-    top: 18px;
-    transform-origin: 418.5px 47px 0px;
-    -webkit-transform-origin: 418.5px 47px 0px;
-    -moz-transform-origin: 418.5px 47px 0px;
-    text-align: center;
-    width: 93%;
-    left: 3%;
-    font-size: 20px;
-    font-family: 'Arial Black';
-    color: white;
-}
-.gwd-button-eu7f {
-    position: absolute;
-    height: 131px;
-    top: 142px;
-    left: 82%;
-    width: 13%;
-    background-image: none;
-    background-color: rgb(227, 128, 28);
-}
-.gwd-div-1xr0 {
-    position: absolute;
-    top: 141px;
-    transform-origin: 84px 66px 0px;
-    -webkit-transform-origin: 84px 66px 0px;
-    -moz-transform-origin: 84px 66px 0px;
-    height: 131px;
-    width: 18%;
-    left: 3%;
-    background-image: none;
-    background-color: rgb(225, 202, 202);
-}
-.gwd-div-1xr0-btn {
 	
-    height: 30px;
-    width: 100%;
-    background-image: none;
-    background-color: rgb(227, 128, 28);
-}
-.gwd-img-1jva {
-    position: absolute;
-    height: 104px;
-    top: 299px;
-    left: 53%;
-    width: 9%;
-}
- .gwd-p-9588 {
+  <style type="text/css" id="gwd-text-style">
+    p {
+      margin: 0px;
+    }
+    h1 {
+      margin: 0px;
+    }
+    h2 {
+      margin: 0px;
+    }
+    h3 {
+      margin: 0px;
+    }
+  </style>
+  <style type="text/css">
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+    }
+    body {
+      transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+      transform-style: preserve-3d;
+      background-color: transparent;
+    }
+    .gwd-img-1j4a {
       position: absolute;
-      left: 270px;
-      top: 151px;
-      height: 45px;
-      width: 179px;
-      transform-origin: 89.5px 22.5px 0px;
-      text-align: left;
+      transform-style: preserve-3d;
+      transform-origin: 609.869px 188.594px 0px;
+      width: 100%;
+      height: 100%;
+      left: 2px;
+      top: 2px;
+    }
+    .gwd-input-1puq {
+      left: -258px;
+      top: 449px;
+    }
+    .gwd-input-1f7k {}
+    .gwd-input-pd36 {
+      position: absolute;
+      width: 356.25px;
+      height: 36.25px;
+      left: 288.25px;
+      top: 130.75px;
+      border-radius: 3px;
+    }
+    .gwd-input-132i {
+      left: 0px;
+    }
+    .gwd-input-qy9j {
+      top: 0px;
+    }
+    .gwd-input-1uwv {}
+    .gwd-input-1j2i {}
+    .gwd-form-14az {
+      left: 1px;
+      top: 1px;
+    }
+    .gwd-div-8yx7 {
+      height: 123px;
+      position: absolute;
+      top: 7px;
+      width: 97%;
+      left: 1.5%;
+      background-image: none;
+      background-color: rgb(139, 155, 158);
+    }
+    .gwd-p-mjfw {
+      position: absolute;
+      width: 184px;
+      left: 215px;
+      top: 142px;
+      height: 126px;
+    }
+    .gwd-p-1m21 {
+      left: 25%;
+      top: 143px;
+      width: 54.39%;
+      transform-origin: 237.439px 63px 0px;
+      background-image: none;
+      background-color: rgb(187, 201, 206);
+    }
+    .gwd-img-k7xl {
+      position: absolute;
+      height: 203px;
+      left: 70%;
+      top: 300px;
+      width: 18%;
+    }
+    .gwd-img-13rr {
+      position: absolute;
+      height: 207px;
+      left: 10%;
+      top: 300px;
+      width: 18%;
+    }
+    .gwd-p-lgvv {
+      position: absolute;
+      height: 94px;
+      top: 18px;
+      transform-origin: 418.5px 47px 0px;
+      text-align: center;
+      width: 93%;
+      left: 3%;
+      font-size: 20px;
       font-family: 'Arial Black';
-      color: black;
+      color: white;
     }
-    .gwd-p-e1k2 {
-      top: 219px;
+    .gwd-button-eu7f {
+      position: absolute;
+      height: 131px;
+      top: 142px;
+      left: 82%;
+      width: 13%;
+      background-image: none;
+      background-color: rgb(227, 128, 28);
     }
-    .gwd-p-1l7u {
-      top: 149px;
+    .gwd-div-1xr0 {
+      position: absolute;
+      top: 141px;
+      transform-origin: 84px 66px 0px;
+      height: 131px;
+      width: 18%;
+      left: 3%;
+      background-image: none;
+      background-color: rgb(225, 202, 202);
     }
-    .gwd-p-cpkp {
-      top: 219px;
+    .gwd-img-1jva {
+      position: absolute;
+      height: 104px;
+      top: 299px;
+      left: 53%;
+      width: 9%;
+      transform-style: preserve-3d;
+      transform: translate3d(-1px, 0px, 0px);
     }
-    .divSelection0 {
-    	position: absolute;
-    	width: 184px;
-    	height: 59px;
-    	left: 215px;
-    	top: 142px;
-    	
-    	top: 142px;
-    	left: 23.09%;
-    	transform-origin: 122.723px 29.5px 0px;
-    	-webkit-transform-origin: 122.723px 29.5px 0px;
-    	-moz-transform-origin: 122.723px 29.5px 0px;
-    	width: 27.5%;
-    	background-image: none;
-    	background-color: rgb(181, 196, 202);
+    @keyframes gwd-gen-3zyegwdanimation_gwd-keyframes {
+      0% {
+        transform: translate3d(-1px, 0px, 0px);
+        animation-timing-function: linear;
+      }
+      50% {
+        transform: translate3d(-185px, 1px, 0px);
+        animation-timing-function: linear;
+      }
+      100% {
+        transform: translate3d(-1px, 0px, 0px);
+        animation-timing-function: linear;
+      }
     }
-    .divSelection1 {
-    	position: absolute;
-    	width: 184px;
-    	height: 59px;
-    	left: 215px;
-    	top: 142px;
-    	
-    	top: 142px;
-    	transform-origin: 118.753px 29.5px 0px;
-    	-webkit-transform-origin: 118.753px 29.5px 0px;
-    	-moz-transform-origin: 118.753px 29.5px 0px;
-    	left: 53%;
-    	width: 27.5%;
-    	background-image: none;
-    	background-color: rgb(176, 191, 197);
-    }
-    .divSelection2 {
-    	position: absolute;
-    	width: 184px;
-    	height: 59px;
-    	left: 215px;
-    	top: 142px;
-    	
-    	top: 213px;
-    	left: 22.97%;
-    	transform-origin: 123.12px 29.5px 0px;
-    	-webkit-transform-origin: 123.12px 29.5px 0px;
-    	-moz-transform-origin: 123.12px 29.5px 0px;
-    	width: 27.5%;
-    	background-image: none;
-    	background-color: rgb(176, 191, 197);
-    }
-    .divSelection3 {
-    	position: absolute;
-    	width: 184px;
-    	height: 59px;
-    	left: 215px;
-    	top: 142px;
-    	
-    	top: 213px;
-    	transform-origin: 119.958px 29.5px 0px;
-    	-webkit-transform-origin: 119.958px 29.5px 0px;
-    	-moz-transform-origin: 119.958px 29.5px 0px;
-    	left: 53%;
-    	width: 27.5%;
-    	background-image: none;
-    	background-color: rgb(187, 201, 206);
-    }
-    .pSelection0{
-        position: absolute;
-      	left: 30%;
-      	top: 151px;
-      	height: 45px;
-      	width: 179px;
-      	transform-origin: 89.5px 22.5px 0px;
-      	text-align: left;
-      	font-family: 'Arial Black';
-      	color: black;
-    }
-    .pSelection1{
-    	position: absolute;
-      	left: 60%;
-      	top: 151px;
-      	height: 45px;
-      	width: 179px;
-      	transform-origin: 89.5px 22.5px 0px;
-      	text-align: left;
-      	font-family: 'Arial Black';
-      	color: black;
-    }
-    .pSelection2{
-    	position: absolute;
-      	left: 30%;
-      	top: 219px;
-      	height: 45px;
-      	width: 179px;
-      	transform-origin: 89.5px 22.5px 0px;
-      	text-align: left;
-      	font-family: 'Arial Black';
-      	color: black;
-    }
-    .pSelection3{
-    	position: absolute;
-      	left: 60%;
-      	top: 219px;
-      	height: 45px;
-      	width: 179px;
-      	transform-origin: 89.5px 22.5px 0px;
-      	text-align: left;
-      	font-family: 'Arial Black';
-      	color: black;
-    }
-    .inputSelection0{
-    	position: absolute;
-    	height: 49.512px;
-    	top: 142px;
-    	left: 24%;
-    	width: 5%;
-    }
-    .inputSelection1{
-    	position: absolute;
-    	height: 49.512px;
-    	top: 142px;
-    	left: 54%;
-    	width: 5%;
-    }
-    .inputSelection2{
-    	position: absolute;
-    	height: 49.512px;
-    	top: 215px;
-    	left: 24%;
-    	width: 5%;
-    }
-    .inputSelection3{
-    	position: absolute;
-    	height: 49.512px;
-    	top: 215px;
-    	left: 54%;
-    	width: 5%;
+    body .gwd-gen-3zyegwdanimation {
+      animation: gwd-gen-3zyegwdanimation_gwd-keyframes 1s linear 0s 1 normal forwards;
     }
     .gwd-button-fg7z {
       position: absolute;
-      width: 15%px;
+      width: 15%;
       height: 29px;
-      top: 75px;
       left: 80%;
+      top: 67px;
     }
-</style>
+    .gwd-button-v14w {
+      height: 33px;
+      top: 227px;
+      width: 17.12%;
+      transform-origin: 95.9101px 15.8702px 0px;
+      left: 61%;
+    }
+    .gwd-p-esc7 {
+      position: absolute;
+      left: 27%;
+      top: 152px;
+      width: 454px;
+      height: 70px;
+      transform-origin: 227px 35px 0px;
+    }
+  </style>	
+	
+
  <script>
  /*
     setInterval(
@@ -416,18 +230,10 @@ body {
   <form class="gwd-form-14az"></form>
   <div class="gwd-div-8yx7"></div> <!--題目背景 -->  
   
-  <c:forEach var="answer" items="${answers}" varStatus="loop">
-  		<div class="divSelection${loop.index}"></div> 
-  </c:forEach>
   
   <!-- 答題form表單 -->
   <form mehtod="post" action="<%= request.getContextPath()%>/front/question/QuestionServlet.do">
-  	
-  	 <c:forEach var="answer" items="${answers}" varStatus="loop">
-  	 	<p class="pSelection${loop.index}" style="">${answer.a_text}</p> <!-- 1 -->
-  	 	<input name="answer_id" type="radio" class="inputSelection${loop.index}" style="" value="${answer.a_id}">
-  	 </c:forEach>
-  	 
+  	 <input type="hidden" name="answer_id" id="a_id">
   	 <input type="hidden" name="action" value="answer_submit">
   	 <input type="hidden" name="qindex" value="${qindex}"> 
   	 <button type="submit" class="gwd-button-eu7f" style="" >送出</button>
@@ -445,6 +251,24 @@ body {
   			<font style="color:red;">提示:</font> ${tip}
   		</c:if>
   </div>	
+  
+  
+  <!-- 答案選擇 -->
+  <div class="gwd-p-mjfw gwd-p-1m21 gwd-gen-1c1ngwdanimation"></div>
+  <input type="button" 
+  		 value="開始作答" 
+  		 class="gwd-button-fg7z gwd-button-v14w"
+  		 id="question_detail"
+  		 data-toggle="modal"
+  		 href="<%=request.getContextPath()%>/front/question/question_modal_detail.jsp"
+  		 data-target="#question_detail" 
+  		 >
+  <p class="gwd-p-esc7" id="a_text">
+   		 尚未選擇任何選項
+  </p>
+  
+  
+  
   <div class="gwd-div-1xr0" style="">
   	<input type="button" value="答題狀況" 
   		   class="gwd-div-1xr0-btn"  
@@ -463,34 +287,6 @@ body {
   <img class="gwd-img-1jva" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_pet_image}"> <!-- 寵物圖 -->
   <img class="gwd-img-13rr" src="<%=request.getContextPath()%>/images/question/manbearpig.jpg ">  <!-- 對手圖 -->
   
-  <c:choose>
-  		<c:when test="${not empty question.q_pic}">
-  			<input type="button" value="點我看完整題目"  
-   			 		data-toggle="modal"
-   			 		class="gwd-button-fg7z"
-   			 		data-target="#question_detail" 
-   			 		href="<%=request.getContextPath()%>/front/question/question_modal_detail.jsp?q_id=${question.q_id}"
-   			 		>
-  		</c:when>
-  		<c:otherwise>
-  		<% pageContext.setAttribute("contiune", "contiune"); %>
-  		
-   			 <c:forEach var="answer" items="${answers}" varStatus="loop">
-   			 
-   			 	<c:if test="${not empty answer.a_pic && not empty contiune}">
-   			 		<input type="button" value="點我看完整題目"  
-   			 		data-toggle="modal"
-   			 		class="gwd-button-fg7z"
-   			 		data-target="#question_detail" 
-   			 		href="<%=request.getContextPath()%>/front/question/question_modal_detail.jsp?q_id=${question.q_id}"
-   			 		>
-   			 		<% pageContext.setAttribute("contiune", null); %>
-   			 	</c:if>
-   			 	
-   			 </c:forEach>
-   			 
-  		</c:otherwise>		
-  </c:choose>
   
 </body>
 </html>

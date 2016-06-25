@@ -58,14 +58,13 @@ public class Question_controller extends HttpServlet {
     		Collections.shuffle(questions);
     		session.setAttribute("questionList", questions);
     		 
-    		req.setAttribute("qindex", 0);
-    		req.setAttribute("question", questions.get(0));
+    		session.setAttribute("qindex", 0);
+    		session.setAttribute("question", questions.get(0));
     		List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(0).getQ_id());
-    		req.setAttribute("answers", answer);
+    		session.setAttribute("answers", answer);
+    		session.setAttribute("tip", null);
     		
-    		RequestDispatcher view = req
-					.getRequestDispatcher("/front/question/question.jsp");
-			view.forward(req, res);	
+    		res.sendRedirect("/YZUCS/front/question/question.jsp");
 			return;
     	}else if("answer_submit".equals(action)){
     		List<QuestionVO> questions = (List<QuestionVO>)session.getAttribute("questionList");
@@ -123,7 +122,7 @@ public class Question_controller extends HttpServlet {
     				session.setAttribute("question", questions.get(qindex+1));
     				List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(qindex+1).getQ_id());
     				session.setAttribute("answers", answer);
-    	    	
+    				
     				res.sendRedirect("/YZUCS/front/question/question.jsp");
     				return;	
     			//題目沒了	
