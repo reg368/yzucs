@@ -116,7 +116,7 @@
       height: 203px;
       left: 70%;
       top: 300px;
-      width: 18%;
+      width: 15%;
     }
     .gwd-img-13rr {
       position: absolute;
@@ -283,7 +283,7 @@
   	姓名  : ${UserVO.user_name}
   </div> <!-- 角色資訊欄位 -->
   
-  <img id="cimage" class="gwd-img-k7xl" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_character_image}"> <!-- 角色圖 -->
+  <img id="cimage" class="gwd-img-k7xl" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_character_image}" > <!-- 角色圖 -->
   <img class="gwd-img-1jva" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_pet_image}"> <!-- 寵物圖 -->
   <img class="gwd-img-13rr" src="<%=request.getContextPath()%>/images/question/manbearpig.jpg ">  <!-- 對手圖 -->
   

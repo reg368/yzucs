@@ -163,6 +163,7 @@ body {
 <body>
   <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg" style="">
   <div class="gwd-div-ilnq" style=""></div>
+  
   <form action="<%= request.getContextPath()%>/front/user/UserServlet.do" method="post"  class="gwd-form-14az" name="indexForm" >
     <input id="login" type="text" value="${user_login_id}" name="user_login_id"  placeholder="請輸入帳號" class="gwd-input-gbnv" style="">
     <input id="pwd" type="password" value="${user_password}" name="user_password" placeholder="請輸入密碼" class="gwd-input-imcr" style="">
