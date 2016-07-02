@@ -146,7 +146,11 @@ body {
       left: 148px;
       top: 112px;
     }
-
+	.logout{
+	 position: absolute;
+	 left: 50%;
+	 top: 90%;
+	}
 </style>
 </head>
  	<body>
@@ -164,6 +168,8 @@ body {
     	<button class="gwd-button-1yad" style="" type="submit">開始遊戲</button>
     	<input type="hidden" name="action" value="startgame">
     </form>
+    
+    <a class="logout" href="<%= request.getContextPath() %>/login.jsp" >登出開發人員</a>
     
 	</body>
 </html>

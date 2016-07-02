@@ -147,6 +147,11 @@ body {
     left: 25%;
     top: 400px;
 }
+.logout{
+	 position: absolute;
+	 left: 50%;
+	 top: 90%;
+}
 </style>
 </head>
 
@@ -188,4 +193,5 @@ body {
 		</ul>	
 	</c:if>
   </div>
+  <a class="logout" href="<%= request.getContextPath() %>/login.jsp" >登出開發人員</a>
 </body></html>

@@ -204,6 +204,11 @@
       height: 70px;
       transform-origin: 227px 35px 0px;
     }
+    .logout{
+	 position: absolute;
+	 left: 50%;
+	 top: 90%;
+	}
   </style>	
 	
 
@@ -287,6 +292,7 @@
   <img class="gwd-img-1jva" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_pet_image}"> <!-- 寵物圖 -->
   <img class="gwd-img-13rr" src="<%=request.getContextPath()%>/images/question/manbearpig.jpg ">  <!-- 對手圖 -->
   
+  <a class="logout" href="<%= request.getContextPath() %>/login.jsp" >登出開發人員</a>
   
 </body>
 </html>

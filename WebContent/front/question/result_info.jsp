@@ -112,7 +112,13 @@ body {
     top: 17px;
     left: 5%;
     width: 90%;
-}</style>
+}
+.logout{
+	 position: absolute;
+	 left: 50%;
+	 top: 90%;
+}
+</style>
 </head>
 <body>
 	  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg" style="">
@@ -159,6 +165,7 @@ body {
 		</c:if>
   	  
   	  </div>
-
+	
+	 <a class="logout" href="<%= request.getContextPath() %>/login.jsp" >登出開發人員</a>
 </body>
 </html>

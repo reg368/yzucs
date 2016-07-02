@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>YZUCS</display-name>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>/index/index.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>UserServlet</servlet-name>
@@ -36,19 +36,55 @@
     <servlet-name>ShowImageServlet</servlet-name>
     <url-pattern>/ShowImageServlet.do</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>UserServletNew</servlet-name>
     <servlet-class>com.user.controller.User_controller_new</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserServletNew</servlet-name>
     <url-pattern>/front/user/User_controller_new.do</url-pattern>
-  </servlet-mapping> 
-
-
-  <context-param>  
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DevelopServlet</servlet-name>
+    <servlet-class>com.develop.controller.Develop_controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DevelopServlet</servlet-name>
+    <url-pattern>/develop.do</url-pattern>
+  </servlet-mapping>
+  <context-param>
     <param-name>char_image.dir</param-name>
     <param-value>char_image</param-value>
   </context-param>
+  <error-page>
+    <error-code>400</error-code>
+    <location>/error_page/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error_page/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error_page/error.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>
+            javax.servlet.ServletException
+        </exception-type>
+    <location>/error_page/error.jsp</location>
+  </error-page>
+  <filter>
+    <filter-name>Developer_login</filter-name>
+    <filter-class>com.filter.DeveloperFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Developer_login</filter-name>
+    <url-pattern>/front/*</url-pattern>
+    <url-pattern>/back/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+  </filter-mapping>
 </web-app>
