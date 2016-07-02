@@ -38,9 +38,9 @@ public class Develop_controller extends HttpServlet {
     	HttpSession session = req.getSession();
     	if("login".equals(action)){
     		if("YzuDigitalLearning".equals(req.getParameter("did")) && "LearningDeveloper_0702".equals(req.getParameter("dpwd"))){
-    			String requestURI = (String)session.getAttribute("location");
+    			//String requestURI = (String)session.getAttribute("location");
     			session.setAttribute("developer", "develop correct");
-    			res.sendRedirect(requestURI);
+    			res.sendRedirect("/YZUCS/front/index/index.jsp");
     			return;
     		}else{
     			errorMessage.add("µn¤J¥¢±Ñ");
