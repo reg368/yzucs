@@ -85,7 +85,7 @@ body {
     transform-origin: 98.8968px 98.6323px 0px;
     -webkit-transform-origin: 98.8968px 98.6323px 0px;
     -moz-transform-origin: 98.8968px 98.6323px 0px;
-    top: 86px;
+    top: 136px;
     left: 16%;
     font-size: 300%;
     background-image: none;
@@ -95,10 +95,10 @@ body {
     position: absolute;
     width: 445px;
     height: 131px;
-    color: red;
+    color: black;
     font-weight: bold;
     left: 25%;
-    top: 400px;
+    top: 470px;
 }
 .gwd-button-1nxp {
     left: 56%;
@@ -107,7 +107,7 @@ body {
 .gwd-div-ptqp {
     position: absolute;
     height: 47px;
-    top: 17px;
+    top: 57px;
     width: 50%;
     left: 22%;
     text-align: center;
@@ -117,7 +117,7 @@ body {
 </head>
 
 <body>
-  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg" style="">
+  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/background/background_login.png" style="">
   
   	<form method="post" action="<%= request.getContextPath()%>/front/user/User_controller_new.do">
     	<button class="gwd-button-r673"  type="submit" style="">男</button>
@@ -131,7 +131,7 @@ body {
     	<input type="hidden" value="gender_select"  name="action">
     </form>
     
-    <div class="gwd-div-ptqp" style="">
+    <div class="gwd-div-ptqp" style="color:white">
       <h1>請選擇性別</h1>
     </div>
 

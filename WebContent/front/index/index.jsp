@@ -166,7 +166,7 @@ body {
 </script>
 
 <body>
-  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg" style="">
+  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/background/background_login.png" style="">
   <div class="gwd-div-ilnq" style=""></div>
   
   <form action="<%= request.getContextPath()%>/front/user/UserServlet.do" method="post"  class="gwd-form-14az" name="indexForm" >

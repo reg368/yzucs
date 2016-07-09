@@ -65,7 +65,7 @@ body {
 .gwd-div-ilnq {
     position: absolute;
     border-radius: 3px;
-    top: 22px;
+    top: 72px;
     left: 2.03%;
     height: 82.91%;
     width: 32.66%;
@@ -76,14 +76,14 @@ body {
 }
 .gwd-input-1puq {
     left: -258px;
-    top: 449px;
+    top: 499px;
 }
 .gwd-input-1f7k {} .gwd-input-pd36 {
     position: absolute;
     width: 356.25px;
     height: 36.25px;
     left: 288.25px;
-    top: 130.75px;
+    top: 180.75px;
     border-radius: 3px;
 }
 .gwd-input-132i {
@@ -94,7 +94,7 @@ body {
 }
 .gwd-input-1uwv {} .gwd-input-1j2i {} .gwd-form-14az {
     left: -54px;
-    top: 219px;
+    top: 269px;
 }
 .gwd-button-r673 {
     position: absolute;
@@ -106,7 +106,7 @@ body {
     transform-origin: 35.0494px 17.3474px 0px;
     -webkit-transform-origin: 35.0494px 17.3474px 0px;
     -moz-transform-origin: 35.0494px 17.3474px 0px;
-    top: 319px;
+    top: 369px;
     left: 4%;
     background-image: none;
     background-color: rgb(98, 206, 224);
@@ -116,12 +116,12 @@ body {
     width: 268px;
     height: 88px;
     left: 3%;
-    top: 360px;
+    top: 410px;
     color: red;
 }
 .gwd-swipegallery-algo {
     position: absolute;
-    top: 25px;
+    top: 225px;
     height: 283px;
     left: 49.32%;
     width: 323px;
@@ -135,7 +135,7 @@ body {
     height: 27.8333px;
     font-weight: bold;
     color: blue;
-    top: 36px;
+    top: 86px;
     left: 4%;
 }
 .gwd-p-17d8 {
@@ -144,14 +144,14 @@ body {
     font-weight: bold;
     width: 432px;
     left: 45.05%;
-    top: 363px;
+    top: 483px;
     height: 86px;
     transform-origin: 216px 43px 0px;
     -webkit-transform-origin: 216px 43px 0px;
     -moz-transform-origin: 216px 43px 0px;
 }
 .gwd-button-4l0e {
-    top: 33px;
+    top: 83px;
     left: 4.05%;
     width: 26.58%;
     transform-origin: 119.363px 17.3438px 0px;
@@ -163,19 +163,19 @@ body {
 }
 .gwd-button-5gf7 {
     left: 4%;
-    top: 139px;
+    top: 189px;
 }
 .gwd-button-n0nc {
     left: 4%;
-    top: 190px;
+    top: 240px;
 }
 .gwd-button-sfoc {
     left: 4%;
-    top: 241px;
+    top: 291px;
 }
 .gwd-button-ndms {
     left: 4%;
-    top: 79px;
+    top: 129px;
 }
 .gwd-gallerynavigation-15zl {
     position: absolute;
@@ -186,7 +186,7 @@ body {
     -webkit-transform-origin: 117px 14px 0px;
     -moz-transform-origin: 117px 14px 0px;
     left: 53%;
-    top: 318px;
+    top: 368px;
     background-image: none;
 }</style>
 
@@ -234,11 +234,11 @@ body {
   
 </head>
 <body>
-  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg" style="">
+  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/background/background_login.png" style="">
   <div class="gwd-div-ilnq" style=""></div>
   
     <form method="post" action="<%=request.getContextPath()%>/front/user/User_controller_new.do">
-    	<button class="gwd-button-r673" style="top: 400px;">完成送出</button>
+    	<button class="gwd-button-r673" style="top: 450px;">完成送出</button>
     	<input type="hidden" name="action" value="pet_selected">
     	<input type="hidden" name="pet_index" id="pet_index"  >
     </form>
@@ -246,13 +246,13 @@ body {
     
      <c:forEach var="pro" items="${professions_pet}" varStatus="loop">
      	<form method="post" action="<%=request.getContextPath()%>/front/user/User_controller_new.do">
-     		<button  type="submit" class="gwd-button-r673 gwd-button-4l0e gwd-button-1k6i " style="left: 4%; top: ${ (loop.index * 35) + (loop.index * 10) + 79 }px;">${pro.cprofession_title}</button>
+     		<button  type="submit" class="gwd-button-r673 gwd-button-4l0e gwd-button-1k6i " style="left: 4%; top: ${ (loop.index * 35) + (loop.index * 10) + 129 }px;">${pro.cprofession_title}</button>
      		<input type="hidden" name="professionid" value="${pro.cprofession_id}">
      		<input type="hidden" name="action" value="profession_pet_change">
      	</form>
      </c:forEach>
   
-  <p class="gwd-p-lswn" style="top: 420px;">
+  <p class="gwd-p-lswn" style="top: 470px;">
   		<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -264,7 +264,7 @@ body {
   
   <gwd-gallerynavigation id="gwd-gallerynavigation_1" class="gwd-gallerynavigation-15zl" for="gwd-swipegallery_1" data-gwd-name="gwd-swipegallery" highlight="rgba(38,158,209,1)"></gwd-gallerynavigation>
   <p class="gwd-p-xfrq" style="">請選擇角色職業</p>
-  <p class="gwd-p-17d8" style="">description</p>
+  <!--  <p class="gwd-p-17d8" style="">description</p> -->
   
   <gwd-swipegallery id="gwd-swipegallery_1" scaling="contain" class="gwd-swipegallery-algo" 
   	images="${imagesPath_pet}" 

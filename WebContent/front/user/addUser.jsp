@@ -148,7 +148,7 @@
 </head>
 
 <body>
-  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg" style="">
+  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/background/background_login.png" style="">
   <div class="gwd-div-ilnq" style=""></div>
   <input type="hidden" id="context_path" value="<%=request.getContextPath()%>">
   

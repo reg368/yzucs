@@ -60,14 +60,14 @@ body {
 }
 .gwd-input-1puq {
     left: -258px;
-    top: 449px;
+    top: 519px;
 }
 .gwd-input-1f7k {} .gwd-input-pd36 {
     position: absolute;
     width: 356.25px;
     height: 36.25px;
     left: 288.25px;
-    top: 130.75px;
+    top: 200.75px;
     border-radius: 3px;
 }
 .gwd-input-132i {
@@ -85,7 +85,7 @@ body {
     width: 244px;
     height: 267px;
     left: 43px;
-    top: 25px;
+    top: 135px;
 }
 .gwd-img-1p90 {
     height: 223px;
@@ -108,7 +108,7 @@ body {
     width: 235px;
     height: 122px;
     left: 135px;
-    top: 269px;
+    top: 369px;
     color: blue;
     font-weight: bold;
 }
@@ -133,18 +133,18 @@ body {
       width: 69px;
       height: 26px;
       transform-origin: 34.5528px 13.2114px 0px;
-      top: 25px;
+      top: 95px;
       left: 155px;
       color: blue;
       font-weight: bold;
     }
     .gwd-div-akxl {
       left: 577px;
-      top: 112px;
+      top: 202px;
     }
     .gwd-div-1q4e {
       left: 148px;
-      top: 112px;
+      top: 202px;
     }
 	.logout{
 	 position: absolute;
@@ -154,15 +154,15 @@ body {
 </style>
 </head>
  	<body>
-  		<img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg" style="">
+  		<img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/background/background_login.png" style="">
   	<form class="gwd-form-14az" id="character_image_gallary">
     	<img class="gwd-img-hlmt gwd-img-bim2" style="" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_character_image}">
     	<img class="gwd-img-hlmt gwd-img-1p90" style="" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_pet_image}">
-    	<div class="gwd-div-14vd gwd-div-1433" style="">${UserVO.user_name}</div>
-    	<div class="gwd-div-14vd gwd-div-1wfg" style="">${UserVO.user_pet_name}</div>
+    	<div class="gwd-div-14vd gwd-div-1433" style="color:white;">${UserVO.user_name}</div>
+    	<div class="gwd-div-14vd gwd-div-1wfg" style="color:white;">${UserVO.user_pet_name}</div>
    </form>
-    <div class="gwd-div-1aos gwd-div-1q4e" style="">角色名稱</div>
-    <div class="gwd-div-1aos gwd-div-akxl" style="">寵物名稱</div>
+    <!--   <div class="gwd-div-1aos gwd-div-1q4e" style="">角色名稱</div> -->
+    <!--   <div class="gwd-div-1aos gwd-div-akxl" style="">寵物名稱</div> -->
     
     <form method="post" action="<%= request.getContextPath()%>/front/question/QuestionServlet.do">
     	<button class="gwd-button-1yad" style="" type="submit">開始遊戲</button>

@@ -121,7 +121,7 @@ public class Answer_recordDAO implements Answer_record_interface{
 				answervo = new Answer_recordVO();
 				answervo.setR_questionId(rs.getInt(1));
 				answervo.setR_correct_count(rs.getInt(2));
-				answervo.setR_incorrect_count(3);
+				answervo.setR_incorrect_count(rs.getInt(3));
 				answervos.add(answervo);
 			}
 		} catch (Exception ex) {

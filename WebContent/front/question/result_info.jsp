@@ -97,12 +97,12 @@ body {
     top: 1px;
 }
 .gwd-button-fujb {
-    position: absolute;
+   // position: absolute;
     height: 41.125px;
     border-radius: 3px;
-    width: 15%;
-    left: 43%;
-    top: 90%;
+    width: 100%;
+    //left: 43%;
+    //top: 100%;
     background-image: none;
     background-color: rgb(21, 201, 69);
 }
@@ -122,10 +122,13 @@ body {
 </head>
 <body>
 	  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg" style="">
+  	  
+  	  <!-- 
   	  <form class="gwd-form-14az" method="post" action="<%= request.getContextPath()%>/front/user/UserServlet.do">
     	<input type="hidden" name="action" value="playAgain"> 
     	<button class="gwd-button-fujb" type="submit" style="">再玩一次</button>
   	  </form>
+  	   -->
   	  <div class="gwd-div-62t3">
   	    	
   	  	<c:if test="${not empty records}">
@@ -160,12 +163,23 @@ body {
 				</tr>	
 			</c:forEach>
 			
+		
 		</table>	
 		
 		</c:if>
-  	  
+  	  	<table  border="0" >
+  	  		<tr>
+  	  			<td>
+  	  				<form class="" method="post" action="<%= request.getContextPath()%>/front/user/UserServlet.do">
+    					<input type="hidden" name="action" value="playAgain"> 
+    					<button class="gwd-button-fujb" type="submit" style="">再玩一次</button>
+  	 				 </form>
+  	  			</td>
+  	  		</tr>
+			<tr>
+  	  			<td><a class="" href="<%= request.getContextPath() %>/login.jsp" >登出開發人員</a></td>
+  	  		</tr>
+  	  	</table>
   	  </div>
-	
-	 <a class="logout" href="<%= request.getContextPath() %>/login.jsp" >登出開發人員</a>
 </body>
 </html>

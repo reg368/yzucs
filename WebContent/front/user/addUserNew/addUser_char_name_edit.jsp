@@ -158,7 +158,7 @@ body {
 </head>
 <body>
   
-  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg" style="">
+  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/background/background_login.png" style="">
   <div class="gwd-div-ilnq" style=""></div>
   <form class="gwd-form-14az" method="post" action="<%=request.getContextPath()%>/front/user/User_controller_new.do">
     <input value="${charName}" class="gwd-input-gbnv" name="charName" style="" placeholder="角色名稱">

@@ -115,7 +115,7 @@
       position: absolute;
       height: 203px;
       left: 70%;
-      top: 300px;
+      top: 325px;
       width: 15%;
     }
     .gwd-img-13rr {
@@ -231,7 +231,7 @@
    
    
   <!-- layout --> 	
-  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/main_background.jpg">
+  <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/background/background_question.png">
   <form class="gwd-form-14az"></form>
   <div class="gwd-div-8yx7"></div> <!--題目背景 -->  
   
@@ -292,7 +292,7 @@
   <img class="gwd-img-1jva" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_pet_image}"> <!-- 寵物圖 -->
   <img class="gwd-img-13rr" src="<%=request.getContextPath()%>/images/question/manbearpig.jpg ">  <!-- 對手圖 -->
   
-  <a class="logout" href="<%= request.getContextPath() %>/login.jsp" >登出開發人員</a>
+  <a class="logout" href="<%= request.getContextPath() %>/login.jsp" style="color:white;" >登出開發人員</a>
   
 </body>
 </html>

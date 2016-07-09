@@ -39,7 +39,7 @@
     <div class="modal-body">
     		<table  border="0" class="table table-hover">
 				<c:forEach  var="answer" items="${answers}" varStatus="loop">
-					<tr onclick="onSelectionClick( '${answer.a_id}'  , '${loop.index+1}' )">
+					<tr class="warning" onclick="onSelectionClick( '${answer.a_id}'  , '${loop.index+1}' )">
 						<td>( ${loop.index+1} )</td>
 						<c:if test="${not empty answer.a_text}">
 							<td><c:out value="${answer.a_text}" /></td>
@@ -47,6 +47,14 @@
 						<c:if test="${not empty answer.a_pic}"> 
 							<td><img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=answer&a_id=${answer.a_id}"></td>
 						</c:if>
+						<c:choose>
+							<c:when test="${answer.a_is_correct == 1 }">
+								<td><font style="color:red;">我是答案</font></td>
+							</c:when>
+							<c:otherwise>
+								<td></td>
+							</c:otherwise>	
+						</c:choose>
 					</tr>
 				</c:forEach> 
 			</table>
