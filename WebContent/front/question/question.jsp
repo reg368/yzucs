@@ -111,18 +111,18 @@
       background-image: none;
       background-color: rgb(187, 201, 206);
     }
-    .gwd-img-k7xl {
+    .gwd-img-char {
       position: absolute;
-      height: 203px;
+      height: 40%;
       left: 70%;
-      top: 325px;
+      top: 52%;
       width: 15%;
     }
-    .gwd-img-13rr {
+    .gwd-img-rival {
       position: absolute;
-      height: 207px;
+      height: 40%;
       left: 10%;
-      top: 300px;
+      top: 52%;
       width: 18%;
     }
     .gwd-p-lgvv {
@@ -156,10 +156,10 @@
       background-image: none;
       background-color: rgb(225, 202, 202);
     }
-    .gwd-img-1jva {
+    .gwd-img-pet {
       position: absolute;
-      height: 104px;
-      top: 299px;
+      height: 18%;
+      top: 50%;
       left: 53%;
       width: 9%;
       transform-style: preserve-3d;
@@ -288,9 +288,9 @@
   	姓名  : ${UserVO.user_name}
   </div> <!-- 角色資訊欄位 -->
   
-  <img id="cimage" class="gwd-img-k7xl" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_character_image}" > <!-- 角色圖 -->
-  <img class="gwd-img-1jva" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_pet_image}"> <!-- 寵物圖 -->
-  <img class="gwd-img-13rr" src="<%=request.getContextPath()%>/images/question/manbearpig.jpg ">  <!-- 對手圖 -->
+  <img id="cimage" class="gwd-img-char" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_character_image}" > <!-- 角色圖 -->
+  <img class="gwd-img-pet" src="<%= request.getContextPath() %>/ShowImageServlet.do?fileName=${UserVO.user_pet_image}"> <!-- 寵物圖 -->
+  <img class="gwd-img-rival" src="<%=request.getContextPath()%>/images/question/manbearpig.jpg ">  <!-- 對手圖 -->
   
   <a class="logout" href="<%= request.getContextPath() %>/login.jsp" style="color:white;" >登出開發人員</a>
   
