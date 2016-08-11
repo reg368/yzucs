@@ -17,9 +17,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>
-	function onSelectionClick(id  , index){
+	function onSelectionClick(id  , index ){
 		$('#a_id').val(id);
-		$('#a_text').html('您選擇了第 '+index+' 個選項  ');
+		$('#a_text').html('您選擇了第 '+index+' 個選項:  ');
 		$('#question_detail').modal('hide')
 	}
 </script>
