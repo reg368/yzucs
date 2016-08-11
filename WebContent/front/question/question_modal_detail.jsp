@@ -18,9 +18,16 @@
 <title>Insert title here</title>
 <script>
 	function onSelectionClick(id  , index ){
-		$('#a_id').val(id);
-		$('#a_text').html('您選擇了第 '+index+' 個選項:  ');
-		$('#question_detail').modal('hide')
+		$.ajax({
+			type : "GET",
+			url : $("#url").val()+"/front/question/question_selected_info.jsp?a_id="+id,
+			dataType : "text",
+			success : function(data) {
+				$("#question_info").html(decodeURI(data));
+				$('#question_detail').modal('hide');
+				$('#a_id').val(id);
+				}
+			});
 	}
 </script>
 </head>
@@ -59,5 +66,7 @@
 				</c:forEach> 
 			</table>
 	</div>
+	<!--讓script 抓到路徑-->
+	<input type="hidden" id="url" value="<%=request.getContextPath()%>">
 </body>
 </html>

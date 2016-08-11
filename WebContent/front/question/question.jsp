@@ -268,7 +268,7 @@
   		 href="<%=request.getContextPath()%>/front/question/question_modal_detail.jsp"
   		 data-target="#question_detail" 
   		 >
-  <div class="gwd-p-esc7" id="a_text">
+  <div class="gwd-p-esc7" id="question_info">
    		 尚未選擇任何選項
   </div>
   
