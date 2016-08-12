@@ -209,6 +209,15 @@
 	 left: 50%;
 	 top: 90%;
 	}
+	 .gwd-div-1mcl {
+      position: absolute;
+      width: 15%;
+      height: 10%;
+      left: 53%;
+      top: 68%;
+      background-image: none;
+      background-color: rgb(223, 232, 88);
+    }
   </style>	
 	
 
@@ -220,6 +229,9 @@
       }, 2000
     )
     */
+    $(document).ready(function(){
+    	$( "#petDialog" ).hide();	
+    });
   </script>
 </head>
 <body>
@@ -294,5 +306,6 @@
   
   <a class="logout" href="<%= request.getContextPath() %>/login.jsp" style="color:white;" >登出開發人員</a>
   
+  <div class="gwd-div-1mcl" id="petDialog"></div><!-- 寵物對話框 -->
 </body>
 </html>
