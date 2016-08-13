@@ -18,7 +18,7 @@
 			<property name="user_pet_name" column="user_pet_name" />
 			<property name="user_login_id" column="user_login_id" />
 			<property name="user_password" column="user_password" />
-			<property name="user_joindate" column="user_joindate" insert="false"/>
+			<property name="user_joindate" column="user_joindate" insert="false" update="false"/>
 			<property name="user_cImage_type" column="user_cImage_type" />
 			<property name="user_pImage_type" column="user_pImage_type" />
 			<property name="user_login_count" column="user_login_count" />
