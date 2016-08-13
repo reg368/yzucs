@@ -211,8 +211,8 @@
 	}
 	 .gwd-div-1mcl {
       position: absolute;
-      width: 15%;
-      height: 10%;
+      width: 8%;
+      height: 5%;
       left: 53%;
       top: 68%;
       background-image: none;
@@ -230,7 +230,41 @@
     )
     */
     $(document).ready(function(){
-    	$( "#petDialog" ).hide();	
+    	$( "#petDialog" ).hide();
+    	$("#submit_btn").attr("disabled", false);
+    	
+    	$("#submit_btn").click(function(){
+    		
+    		$("#submit_btn").attr("disabled", true);
+    		var a_id = $("#a_id").val();
+    		
+    		if(a_id == "")
+    			alert('請選擇答案');
+    		else{
+    			$.ajax({
+    				type : "GET",
+    				url : $("#url").val()+"/front/question/question_check_answer.jsp?a_id="+a_id,
+    				dataType : "text",
+    				success : function(data) {
+    						var correct = $.trim(data);
+    						if(correct == '1'){
+    							$( "#petDialog" ).html("<p>好棒!答對了</p>");
+    							$( "#petDialog" ).show();
+    							
+    						}else{
+    							$( "#petDialog" ).html("<p>糟糕!答錯了</p>");
+    							$( "#petDialog" ).show();
+    						}
+    						
+    						 setInterval(
+    							      function() {
+    							    	  $( "#question_form" ).submit();
+    							      }, 1000
+    							)	
+    				  }
+    				});
+    		}
+    	});
     });
   </script>
 </head>
@@ -249,11 +283,11 @@
   
   
   <!-- 答題form表單 -->
-  <form mehtod="post" action="<%= request.getContextPath()%>/front/question/QuestionServlet.do">
+  <form id="question_form" mehtod="post" action="<%= request.getContextPath()%>/front/question/QuestionServlet.do">
   	 <input type="hidden" name="answer_id" id="a_id">
   	 <input type="hidden" name="action" value="answer_submit">
   	 <input type="hidden" name="qindex" value="${qindex}"> 
-  	 <button type="submit" class="gwd-button-eu7f" style="" >送出</button>
+  	 <button type="button" id="submit_btn" class="gwd-button-eu7f" style="" >送出</button>
   </form>
   
   
@@ -307,5 +341,8 @@
   <a class="logout" href="<%= request.getContextPath() %>/login.jsp" style="color:white;" >登出開發人員</a>
   
   <div class="gwd-div-1mcl" id="petDialog"></div><!-- 寵物對話框 -->
+  <!--讓script 抓到路徑-->
+  <input type="hidden" id="url" value="<%=request.getContextPath()%>">
+  
 </body>
 </html>
