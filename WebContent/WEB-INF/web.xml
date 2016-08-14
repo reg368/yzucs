@@ -88,7 +88,18 @@
     <dispatcher>ERROR</dispatcher>
   </filter-mapping>
   
-
+	    <filter>
+  <filter-name>Back_login</filter-name>
+    <filter-class>com.filter.BackLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Back_login</filter-name>
+    <url-pattern>/back/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+  </filter-mapping>
 
   
 </web-app>
