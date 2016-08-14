@@ -81,10 +81,14 @@
   <filter-mapping>
     <filter-name>Developer_login</filter-name>
     <url-pattern>/front/*</url-pattern>
-    <url-pattern>/back/*</url-pattern>
+    <url-pattern>/back/*</url-pattern> 
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
   </filter-mapping>
+  
+
+
+  
 </web-app>
