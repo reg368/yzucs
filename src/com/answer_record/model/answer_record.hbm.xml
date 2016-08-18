@@ -16,5 +16,6 @@
 			<property name="r_incorrect_count" column="r_incorrect_count" />
 			<property name="r_user_joindate" column="r_uesr_joindate" insert="false" update="false"/>
 			<property name="r_user_update_date" column="r_user_update_date" />	
+			<property name="r_group_id" column="r_group_id" />	
 	</class>
 </hibernate-mapping>

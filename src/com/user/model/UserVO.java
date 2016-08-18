@@ -19,6 +19,8 @@ public class UserVO implements Serializable{
 	private String user_cImage_type;
 	private String user_pImage_type;
 	private Integer user_login_count;
+	private Integer user_group_id;
+	private String  user_teacher_id;
 	
 	
 	public String getUser_id() {
@@ -104,6 +106,18 @@ public class UserVO implements Serializable{
 	}
 	public void setUser_joindate(Timestamp user_joindate) {
 		this.user_joindate = user_joindate;
+	}
+	public Integer getUser_group_id() {
+		return user_group_id;
+	}
+	public void setUser_group_id(Integer user_group_id) {
+		this.user_group_id = user_group_id;
+	}
+	public String getUser_teacher_id() {
+		return user_teacher_id;
+	}
+	public void setUser_teacher_id(String user_teacher_id) {
+		this.user_teacher_id = user_teacher_id;
 	}
 	
 	

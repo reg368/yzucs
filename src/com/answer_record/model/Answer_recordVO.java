@@ -13,6 +13,7 @@ public class Answer_recordVO implements Serializable {
 	Integer r_incorrect_count;
 	Timestamp r_user_joindate;
 	Timestamp r_user_update_date;
+	Integer r_group_id;
 	
 	
 	public Integer getR_id() {

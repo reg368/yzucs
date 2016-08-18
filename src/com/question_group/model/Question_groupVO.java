@@ -3,9 +3,10 @@ package com.question_group.model;
 import java.io.Serializable;
 
 public class Question_groupVO implements Serializable {
-	Integer g_id;
-	String g_name;
-	String g_joindate;
+	private Integer g_id;
+	private String g_name;
+	private String g_joindate;
+	private String g_user_id;
 	
 	public Integer getG_id() {
 		return g_id;
@@ -25,6 +26,14 @@ public class Question_groupVO implements Serializable {
 	public void setG_joindate(String g_joindate) {
 		this.g_joindate = g_joindate;
 	}
+	public String getG_user_id() {
+		return g_user_id;
+	}
+	public void setG_user_id(String g_user_id) {
+		this.g_user_id = g_user_id;
+	}
+	
+	
 	
 	
 }

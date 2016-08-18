@@ -22,6 +22,8 @@
 			<property name="user_cImage_type" column="user_cImage_type" />
 			<property name="user_pImage_type" column="user_pImage_type" />
 			<property name="user_login_count" column="user_login_count" />
+			<property name="user_group_id" column="user_group_id" />
+			<property name="user_teacher_id" column="user_teacher_id" />
 			
 	</class>
 </hibernate-mapping>

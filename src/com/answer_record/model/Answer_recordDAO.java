@@ -30,7 +30,7 @@ public class Answer_recordDAO implements Answer_record_interface{
 		}
 	}
 	 
-	private static final String findAnswerVOResultByUserVO 
+	private final String findAnswerVOResultByUserVO 
 		= "SELECT  R_QUESTIONID , SUM(R_CORRECT_COUNT),SUM(R_INCORRECT_COUNT) FROM YZU_ANSWER_RECORD WHERE R_USERID = ?  GROUP BY R_QUESTIONID ";
 	
 	

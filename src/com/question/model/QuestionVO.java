@@ -10,6 +10,7 @@ public class QuestionVO implements Serializable {
 	String q_point;
 	String q_tip;
 	byte[] q_pic;
+	Integer q_level_id;
 	
 	public Integer getQ_id() {
 		return q_id;
@@ -53,7 +54,11 @@ public class QuestionVO implements Serializable {
 	public void setQ_pic(byte[] q_pic) {
 		this.q_pic = q_pic;
 	}
-	
-	
+	public Integer getQ_level_id() {
+		return q_level_id;
+	}
+	public void setQ_level_id(Integer q_level_id) {
+		this.q_level_id = q_level_id;
+	}
 	
 }
