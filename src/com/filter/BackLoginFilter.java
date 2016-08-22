@@ -49,7 +49,7 @@ public class BackLoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
 		HttpSession session = req.getSession();
-		Object userVO = session.getAttribute("UserVO");
+		Object userVO = session.getAttribute("UserBackVO");
 		
 		if(userVO == null){
 			

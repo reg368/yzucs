@@ -64,6 +64,12 @@ public class Answer_recordVO implements Serializable {
 	public void setR_user_update_date(Timestamp r_user_update_date) {
 		this.r_user_update_date = r_user_update_date;
 	}
+	public Integer getR_group_id() {
+		return r_group_id;
+	}
+	public void setR_group_id(Integer r_group_id) {
+		this.r_group_id = r_group_id;
+	}
 	
 	
 }

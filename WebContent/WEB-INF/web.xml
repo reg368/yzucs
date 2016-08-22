@@ -101,5 +101,15 @@
     <dispatcher>ERROR</dispatcher>
   </filter-mapping>
 
+
+  <servlet>
+    <servlet-name>UserServletBack</servlet-name>
+    <servlet-class>com.back.user.controller.User_controller_back</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServletBack</servlet-name>
+    <url-pattern>/UserServletBack.do</url-pattern>
+  </servlet-mapping>
+	
   
 </web-app>
