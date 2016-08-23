@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.user.model.UserVO" %>
+<%
+	UserVO uservo = (UserVO)session.getAttribute("UserBackVO");
+	pageContext.setAttribute("uservo", uservo);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +34,7 @@
 					使用者圖片
 				</li>
 				<li class="current_page_item"><a href="index.jsp" accesskey="1" title="">回首頁</a></li>
-				<li><a href="#" accesskey="4" title="">登出</a></li>
+				<li><a href="<%= request.getContextPath() %>/back_login.jsp" accesskey="4" title="">登出</a></li>
 				<!-- <li><a href="#" accesskey="5" title="">許願池</a></li> -->
 			</ul>
 		</div>
@@ -42,9 +47,12 @@
 	
 			<p>&nbsp;</p>
 			<ul class="style2">
-				<li><a href="<%= request.getContextPath() %>/back/character/addCharImage.jsp" target="iframe">新增角色圖片</a></li>
+			 <c:if test="${uservo.user_group_id == 1}">
+			 	<li><a href="<%= request.getContextPath() %>/back/character/addCharImage.jsp" target="iframe">新增角色圖片</a></li>
 				<li><a href="<%= request.getContextPath() %>/back/character/addCharInfo.jsp" target="iframe">新增角色圖片資訊</a></li>
 				<li><a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp" target="iframe">新增問題</a></li>
+			 </c:if>
+				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=view" target="iframe">課程管理</a></li>
 			</ul> 
 			
 		</div>		
