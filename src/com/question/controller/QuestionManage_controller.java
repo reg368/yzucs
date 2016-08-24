@@ -24,6 +24,8 @@ import com.question.model.QuestionDAO;
 import com.question.model.QuestionVO;
 import com.question_group.model.Question_groupDAO;
 import com.question_group.model.Question_groupVO;
+import com.question_level.model.Question_levelDAO;
+import com.question_level.model.Question_levelVO;
 import com.user.model.UserVO;
 
 import java.util.Collection;
@@ -63,10 +65,56 @@ public class QuestionManage_controller extends HttpServlet {
 					.getRequestDispatcher("/back/question/questionManage.jsp");
 			view.forward(req, res);	
 			return;
+    	}else if("question_group_insert".equals(action)){
+    		String g_name = req.getParameter("g_name");
+    		if(g_name == null || g_name.trim().length() == 0){
+    			errorMessage.add("請輸入課程名稱");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/question/addQuestion.jsp");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		
+    		Question_groupVO gvo = new Question_groupVO();
+    		gvo.setG_name(g_name);
+    		gvo.setG_user_id(uservo.getUser_id());
+    		int gid = new Question_groupDAO().insertGetPrimaryKey(gvo);
+    		
+    		try{
+    			int l_count = Integer.parseInt(req.getParameter("l_count"));
+    			
+    			for(int i = 0 ; i < l_count ; i ++){
+    				String l_level = req.getParameter("l_label"+i);
+    				if(l_level == null || l_level.trim().length() == 0)
+    					l_level = "第"+(i+1)+"關";
+    				
+    				Question_levelVO lvo = new Question_levelVO();
+    				lvo.setL_group_id(gid);
+    				lvo.setL_level(l_level);
+    				new Question_levelDAO().insertGetPrimaryKey(lvo);
+    			}
+    			
+    			
+    			errorMessage.add("新增成功");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=view");
+    			view.forward(req, res);	
+    			return;
+    			
+    		}catch(Exception e){
+    			errorMessage.add("新增關卡失敗,請聯絡系統管理員");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/question/addQuestion.jsp");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		
+    		
     	}
-    	
-    	
-    	
+    
     }
     
     private byte[] InputStreamConvertByteArray(InputStream in) {

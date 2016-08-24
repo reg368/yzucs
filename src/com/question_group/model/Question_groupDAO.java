@@ -15,9 +15,18 @@ public class Question_groupDAO implements Question_group_interface {
 	= "SELECT g.g_id , g.g_name , g.g_joindate , g.g_user_id FROM yzu_question_student_accesss a JOIN yzu_question_group g ON a.access_question_group_id = g.g_id WHERE a.access_user_id = ? ";
 	
 	@Override
-	public void insert(Question_groupVO vo) {
+	public Integer insertGetPrimaryKey(Question_groupVO vo) {
 		// TODO Auto-generated method stub
-		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			session.save(vo);
+			session.getTransaction().commit();
+			return vo.getG_id() ;
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+		return null;
 	}
 
 	@Override
