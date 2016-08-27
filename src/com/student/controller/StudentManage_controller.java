@@ -102,8 +102,11 @@ public class StudentManage_controller extends HttpServlet {
     		List<UserVO> students = new UserDAO().findStudentByClass(c_id);
     		req.setAttribute("students", students);
     		String className  = req.getParameter("className");
-    		String newName = new String(className.getBytes("ISO-8859-1"),"UTF-8");
-    		req.setAttribute("className", newName);
+    		if(className != null && className.trim().length() > 0){
+    			String newName = new String(className.getBytes("ISO-8859-1"),"UTF-8");
+        		req.setAttribute("className", newName);
+    		}
+    		req.setAttribute("classId", c_id);
 			RequestDispatcher view = req
 					.getRequestDispatcher("/back/student/viewStudent.jsp");
 			view.forward(req, res);	

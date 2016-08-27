@@ -26,7 +26,7 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	<form method="post" action="<%= request.getContextPath() %>/back/UserServletBack.do" >
+	<form method="post" action="<%= request.getContextPath() %>/UserServletBack.do" >
 		<h3>新增學生</h3>
 		<label for="c_name" >學號:</label><br>
 		<input type="text" name="user_login_id" >
@@ -36,10 +36,12 @@
 		<br>
 		
 		<input type="hidden" name="class_id" value="${classId}">
+		<input type="hidden" name="class_name" value="${className}">
 		<input type="hidden" name="action" value="insert">
 		<br>
 		<button type="submit">送出</button>
 	</form>
+	
 	<br>
 	<hr>
 	<c:if test="${not empty students}">
@@ -51,7 +53,7 @@
 			
 			<c:forEach var="student" items="${students}" varStatus="loop">
 				<tr>
-					<td>${student.user_id}</td>
+					<td>${student.user_login_id}</td>
 					<td>${student.user_name}</td>
 				</tr>	
 			</c:forEach>

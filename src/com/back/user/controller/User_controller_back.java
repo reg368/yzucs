@@ -16,6 +16,8 @@ import com.cImage_profession.model.CProfessionDAO;
 import com.cImage_profession.model.CProfessionVO;
 import com.character_image.model.CharImageDAO;
 import com.character_image.model.CharImageVO;
+import com.student_class_record.model.StudentCRDAO;
+import com.student_class_record.model.StudentCRVO;
 import com.user.model.UserDAO;
 import com.user.model.UserVO;
 
@@ -100,6 +102,52 @@ public class User_controller_back extends HttpServlet {
 					.getRequestDispatcher("/back/index/index.jsp");
 			view.forward(req, res);	
 			return;
+    	}else if("insert".equals(action)){
+    		String user_login_id = req.getParameter("user_login_id");
+    		String user_name = req.getParameter("user_name");
+    		Integer c_id = Integer.parseInt(req.getParameter("class_id"));
+    		String c_name = req.getParameter("class_name");
+    		req.setAttribute("className", c_name);
+    		
+    		if(user_login_id != null && user_login_id.trim().length() > 0){
+    			
+    			String user_id = "";
+    			UserVO vo = null;
+    			UserDAO udao = new UserDAO();
+    			vo = udao.findByUser_login_id(user_login_id);
+    			
+    			//此學生已經存在(被其他老師建立過了)
+    			if(vo != null && vo.getUser_id() != null && vo.getUser_id().trim().length() > 0){
+    				user_id = vo.getUser_id();
+    			}else{
+    				vo = new UserVO();
+    				vo.setUser_login_id(user_login_id);
+        			vo.setUser_password(user_login_id);
+        			vo.setUser_group_id(3);
+        			vo.setUser_name(user_name);
+        			user_id = udao.insertGetPrimaryKey(vo);
+    			}
+    			
+    			
+    			//開始新增班級群組table
+    			StudentCRVO cvo = new StudentCRVO();
+    			cvo.setCr_class_id(c_id);
+    			cvo.setCr_student_id(user_id);
+    			new StudentCRDAO().insert(cvo);
+    			
+    			//完成
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/StudentBackServlet.do?action=findStudentByClass&classId="+c_id);
+    			view.forward(req, res);	
+    			
+    		}else{
+    			errorMessage.add("請輸入同學學號");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/StudentBackServlet.do?action=findStudentByClass&classId="+c_id+"&className="+c_name);
+    			view.forward(req, res);	
+    			return;
+    		}
     	}
     	
     }
