@@ -16,11 +16,9 @@
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title></title>
-<script>
-</script>
 </head>
 <body>
-	<h2>學生管理</h2>
+	<h2>新增問題</h2>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -28,22 +26,14 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	<a href="<%= request.getContextPath() %>/back/student/addStudentClass.jsp">新增學生班級</a><br>
-	<c:if test="${not empty studentClass }">
-		<table  border="1">
-			<tr >
-				<td>班級</td>
-			</tr>
-			
-			<c:forEach var="sclass" items="${studentClass}" varStatus="loop">
-				<tr>
-					<td>${sclass.c_name}</td>
-				</tr>	
-			</c:forEach>
-	</table>
-	</c:if>
-
-	
-
+	<form method="post" action="<%= request.getContextPath() %>/back/StudentBackServlet.do" >
+		<label for="c_name" >請輸入班級名稱:</label><br>
+		<textarea rows="4" cols="50" name="c_name">${c_name}</textarea>
+		<br>
+		
+		<input type="hidden" name="action" value="insert">
+		<br>
+		<button type="submit">送出</button>
+	</form>
 </body>
 </html>

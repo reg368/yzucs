@@ -54,6 +54,36 @@ public class StudentManage_controller extends HttpServlet {
 					.getRequestDispatcher("/back/student/studentManage.jsp");
 			view.forward(req, res);	
 			return;
+    	}else if("insert".equals(action)){
+    		String c_name = req.getParameter("c_name");
+    		if(c_name != null && c_name.trim().length() > 0 ){
+    			StudentClassVO vo = new StudentClassVO();
+    			vo.setC_teacher_id(uservo.getUser_id());
+    			vo.setC_name(c_name);
+    			StudentClassDAO dao = new StudentClassDAO();
+    			int pk = dao.insertGetPrimaryKey(vo);
+    			if(pk == 0){
+    				errorMessage.add("新增失敗請聯絡系統管理員");
+        			req.setAttribute("errorMessage", errorMessage);
+        			req.setAttribute("c_name", c_name);
+        			RequestDispatcher view = req
+        					.getRequestDispatcher("/back/student/addStudentClass.jsp");
+        			view.forward(req, res);	
+        			return;
+    			}else{
+    				RequestDispatcher view = req
+        					.getRequestDispatcher("/back/StudentBackServlet.do?action=view");
+        			view.forward(req, res);	
+        			return;
+    			}
+    		}else{
+    			errorMessage.add("請輸入班級名稱");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/student/addStudentClass.jsp");
+    			view.forward(req, res);	
+    			return;
+    		}
     	}
     
     }
