@@ -53,6 +53,7 @@
 				<li><a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp" target="iframe">新增問題</a></li>
 			 </c:if>
 				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=view" target="iframe">課程管理</a></li>
+				<li><a href="<%= request.getContextPath() %>/back/StudentBackServlet.do?action=view" target="iframe">學生管理</a></li>
 			</ul> 
 			
 		</div>		

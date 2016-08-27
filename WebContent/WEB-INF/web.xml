@@ -110,13 +110,23 @@
     <servlet-name>UserServletBack</servlet-name>
     <url-pattern>/UserServletBack.do</url-pattern>
   </servlet-mapping>
-    <servlet>
+  
+  <servlet>
     <servlet-name>QuestionBackServlet</servlet-name>
     <servlet-class>com.question.controller.QuestionManage_controller</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>QuestionBackServlet</servlet-name>
     <url-pattern>/back/QuestionBackServlet.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>StudentBackServlet</servlet-name>
+    <servlet-class>com.student.controller.StudentManage_controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentBackServlet</servlet-name>
+    <url-pattern>/back/StudentBackServlet.do</url-pattern>
   </servlet-mapping>
 	
   
