@@ -16,11 +16,9 @@
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title></title>
-<script>
-</script>
 </head>
 <body>
-	<h2>學生管理</h2>
+	<h1>${className}</h1>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -28,22 +26,37 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	<a href="<%= request.getContextPath() %>/back/student/addStudentClass.jsp">新增學生班級</a><br>
-	<c:if test="${not empty studentClass }">
+	<form method="post" action="<%= request.getContextPath() %>/back/UserServletBack.do" >
+		<h3>新增學生</h3>
+		<label for="c_name" >學號:</label><br>
+		<input type="text" name="user_login_id" >
+		<br>
+		<label for="c_name" >姓名:</label><br>
+		<input type="text" name="user_name" >
+		<br>
+		
+		<input type="hidden" name="class_id" value="${classId}">
+		<input type="hidden" name="action" value="insert">
+		<br>
+		<button type="submit">送出</button>
+	</form>
+	<br>
+	<hr>
+	<c:if test="${not empty students}">
+		<label>本班學生</label>
 		<table  border="1">
 			<tr >
-				<td>班級</td>
+				<td>學號(登入帳號)</td><td>姓名</td>
 			</tr>
 			
-			<c:forEach var="sclass" items="${studentClass}" varStatus="loop">
+			<c:forEach var="student" items="${students}" varStatus="loop">
 				<tr>
-					<td>${sclass.c_name}  <a href="<%= request.getContextPath() %>/back/StudentBackServlet.do?action=findStudentByClass&classId=${sclass.c_id}&className=${sclass.c_name}">編輯</a></td>
+					<td>${student.user_id}</td>
+					<td>${student.user_name}</td>
 				</tr>	
 			</c:forEach>
 	</table>
 	</c:if>
-
 	
-
 </body>
 </html>

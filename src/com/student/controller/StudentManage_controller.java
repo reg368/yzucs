@@ -16,6 +16,7 @@ import javax.servlet.http.Part;
 
 import com.student_class.model.StudentClassDAO;
 import com.student_class.model.StudentClassVO;
+import com.user.model.UserDAO;
 import com.user.model.UserVO;
 
 
@@ -84,6 +85,30 @@ public class StudentManage_controller extends HttpServlet {
     			view.forward(req, res);	
     			return;
     		}
+    	}else if("findStudentByClass".equals(action)){
+    		
+    		int c_id;
+    		
+    		try{
+    			c_id = Integer.parseInt(req.getParameter("classId"));	
+    		}catch(Exception e){
+    			System.out.println("StudentManage_controller findStudentByClass exception :"+e.getMessage());
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/StudentBackServlet.do?action=view");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		
+    		List<UserVO> students = new UserDAO().findStudentByClass(c_id);
+    		req.setAttribute("students", students);
+    		String className  = req.getParameter("className");
+    		String newName = new String(className.getBytes("ISO-8859-1"),"UTF-8");
+    		req.setAttribute("className", newName);
+			RequestDispatcher view = req
+					.getRequestDispatcher("/back/student/viewStudent.jsp");
+			view.forward(req, res);	
+			return;
+    		
     	}
     
     }
