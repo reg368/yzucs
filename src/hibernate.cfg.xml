@@ -36,6 +36,8 @@
 		<mapping resource="com/cImage_profession/model/cprofession.hbm.xml" />
 		<mapping resource="com/question_student_access/model/q_student_access.hbm.xml" />
 		<mapping resource="com/question_level/model/question_level.hbm.xml" />
+		<mapping resource="com/student_class/model/student_class.hbm.xml" />
+		<mapping resource="com/student_class_record/model/studentcr.hbm.xml" />
 	</session-factory>
 	
 </hibernate-configuration>

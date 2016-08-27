@@ -32,7 +32,7 @@
 	<c:if test="${not empty question_groups }">
 		<table  border="1">
 			<tr >
-				<td>課程名稱</td>
+				<td>課程</td>
 			</tr>
 			
 			<c:forEach var="group" items="${question_groups}" varStatus="loop">
