@@ -16,11 +16,9 @@
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title></title>
-<script>
-</script>
 </head>
 <body>
-	<h2>課程管理</h2>
+	<h2>請選擇班級加入至  ${g_name} </h2>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -28,20 +26,18 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	<a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp">新增課程</a><br>
-	<c:if test="${not empty question_groups }">
-		<hr>
-		<label>課程</label>
-		<table  border="1">
-			<c:forEach var="group" items="${question_groups}" varStatus="loop">
-				<tr>
-					<td>${group.g_name} <a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=questionGroupDetail&g_id=${group.g_id}&g_name=${group.g_name}">編輯</a></td>
-				</tr>	
-			</c:forEach>
-	</table>
-	</c:if>
-
 	
-
+		<c:choose>
+		<c:when test="${not empty sclasss}">
+			<form method="post" action="<%= request.getContextPath() %>/back/QuestionBackServlet.do" >
+				<c:forEach var="classbean" items="${sclasss}" varStatus="loop">
+					 <input type="checkbox" name="c_id" value="${classbean.c_id}">${classbean.c_name} <br>
+				</c:forEach>
+			</form>	
+		</c:when>
+		<c:otherwise>
+			<font >目前沒有可選擇的班級</font>		
+		</c:otherwise>	
+	</c:choose>
 </body>
 </html>

@@ -20,7 +20,7 @@
 </script>
 </head>
 <body>
-	<h2>課程管理</h2>
+	<h2>${g_name}</h2>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -28,14 +28,31 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	<a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp">新增課程</a><br>
-	<c:if test="${not empty question_groups }">
-		<hr>
-		<label>課程</label>
+	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=addClassToQuestion&g_id=${g_id}&g_name=${g_name}">新增班級</a><br>
+	<label>參與課程的班級:</label><br>
+	<c:choose>
+		<c:when test="${not empty sclasss}">
+			<table  border="1">
+				<c:forEach var="classbean" items="${sclasss}" varStatus="loop">
+					<tr>
+						<td>${classbean.c_name} <a href="<%= request.getContextPath() %>">編輯</a></td>
+					</tr>	
+				</c:forEach>
+			</table>	
+		</c:when>
+		<c:otherwise>
+			<font >目前沒有班級參與</font>		
+		</c:otherwise>	
+	</c:choose>
+	
+	<hr>
+	
+	<label>課程關卡:</label><br>
+	<c:if test="${not empty levels }">
 		<table  border="1">
-			<c:forEach var="group" items="${question_groups}" varStatus="loop">
+			<c:forEach var="level" items="${levels}" varStatus="loop">
 				<tr>
-					<td>${group.g_name} <a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=questionGroupDetail&g_id=${group.g_id}">編輯</a></td>
+					<td>${level.l_level} <a href="<%= request.getContextPath() %>">編輯</a></td>
 				</tr>	
 			</c:forEach>
 	</table>

@@ -57,6 +57,8 @@ public class QuestionManage_controller extends HttpServlet {
     	List<String> errorMessage = new LinkedList<String>();
     	HttpSession session = req.getSession();
     	
+    	
+    	
     	UserVO uservo = (UserVO)session.getAttribute("UserBackVO");
     	
     	if("view".equals(action)){
@@ -117,6 +119,7 @@ public class QuestionManage_controller extends HttpServlet {
     		
     	}else if("questionGroupDetail".equals(action)){
     		
+    		
     		int g_id;
     		try{
     			g_id = Integer.parseInt(req.getParameter("g_id"));
@@ -137,9 +140,46 @@ public class QuestionManage_controller extends HttpServlet {
     		List<Question_levelVO> levels = new Question_levelDAO().findQustionLevelsByGid(g_id);
     		req.setAttribute("levels", levels);
     		
+    		//處理get傳送課程名稱字元亂碼問題
+    		String g_name  = req.getParameter("g_name");
+    		if(g_name != null && g_name.trim().length() > 0){
+    			String newName = new String(g_name.getBytes("ISO-8859-1"),"UTF-8");
+        		req.setAttribute("g_name", newName);
+    		}
     		
+    		req.setAttribute("g_id", g_id);
     		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/viewQuestion.jsp");
+			view.forward(req, res);
     		
+    	}else if("addClassToQuestion".equals(action)){
+    		
+    		int g_id;
+    		try{
+    			g_id = Integer.parseInt(req.getParameter("g_id"));
+    		}catch(Exception e){
+    			errorMessage.add("編輯課程失敗 , 請聯絡系統管理員");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=view");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		
+    		String g_name  = req.getParameter("g_name");
+    		if(g_name != null && g_name.trim().length() > 0){
+    			String newName = new String(g_name.getBytes("ISO-8859-1"),"UTF-8");
+        		req.setAttribute("g_name", newName);
+    		}
+    		
+    		//尚未被加入此課程的班級
+    		List<StudentClassVO> sclasss =  new StudentClassDAO().findStudentClassByTeacherIdAndNotInGroupId(uservo.getUser_id(), g_id);
+    		req.setAttribute("sclasss", sclasss);
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/addClassToQuestion.jsp");
+			view.forward(req, res);
     	}
     
     }

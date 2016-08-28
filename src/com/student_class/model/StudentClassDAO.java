@@ -12,6 +12,8 @@ public class StudentClassDAO implements StudentClass_interface {
 
 
 	private final String findStudentClassByQuestionGroupId = "select c.* from yzu_s_class_question s join yzu_student_class c on s.CLASS_ID = c.C_ID where s.GROUP_ID = ? ";
+	private final String findStudentClassByTeacherIdAndNotInGroupId = "select * from yzu_student_class where C_TEACHER_ID = ? and C_ID != NVL((select CLASS_ID from yzu_s_class_question where GROUP_ID = ?),0)";
+	
 	
 	@Override
 	public Integer insertGetPrimaryKey(StudentClassVO vo) {
@@ -55,6 +57,26 @@ public class StudentClassDAO implements StudentClass_interface {
 			SQLQuery query = session.createSQLQuery(findStudentClassByQuestionGroupId);
 			query.addEntity(StudentClassVO.class);
 			query.setParameter(0, g_id);
+			vo = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+		return vo;
+	}
+
+	@Override
+	public List<StudentClassVO> findStudentClassByTeacherIdAndNotInGroupId(
+			String teacherId, int g_id) {
+		// TODO Auto-generated method stub
+		List<StudentClassVO> vo = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			SQLQuery query = session.createSQLQuery(findStudentClassByTeacherIdAndNotInGroupId);
+			query.addEntity(StudentClassVO.class);
+			query.setParameter(0, teacherId);
+			query.setParameter(1, g_id);
 			vo = query.list();
 			session.getTransaction().commit();
 		}catch(RuntimeException ex){
