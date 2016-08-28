@@ -26,6 +26,8 @@ import com.question_group.model.Question_groupDAO;
 import com.question_group.model.Question_groupVO;
 import com.question_level.model.Question_levelDAO;
 import com.question_level.model.Question_levelVO;
+import com.sc_question.model.SCQuestionDAO;
+import com.sc_question.model.SCQuestionVO;
 import com.student_class.model.StudentClassDAO;
 import com.student_class.model.StudentClassVO;
 import com.user.model.UserVO;
@@ -172,6 +174,7 @@ public class QuestionManage_controller extends HttpServlet {
     			String newName = new String(g_name.getBytes("ISO-8859-1"),"UTF-8");
         		req.setAttribute("g_name", newName);
     		}
+    		req.setAttribute("g_id", g_id);
     		
     		//尚未被加入此課程的班級
     		List<StudentClassVO> sclasss =  new StudentClassDAO().findStudentClassByTeacherIdAndNotInGroupId(uservo.getUser_id(), g_id);
@@ -180,6 +183,38 @@ public class QuestionManage_controller extends HttpServlet {
     		RequestDispatcher view = req
 					.getRequestDispatcher("/back/question/addClassToQuestion.jsp");
 			view.forward(req, res);
+    	}else if("insertS_Class_Question".equals(action)){
+    		
+    		String[] classIds = req.getParameterValues("c_id");
+    		String g_id = req.getParameter("g_id");
+    		
+    		String g_name = req.getParameter("g_name");
+    		req.setAttribute("g_name", g_name);
+    		
+    		if(classIds == null || classIds.length == 0){
+    			errorMessage.add("請選擇班級");
+    			req.setAttribute("errorMessage", errorMessage);		
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=addClassToQuestion&g_id="+g_id+"&g_name=");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		
+    		
+    		
+    		for(String cid : classIds){
+    			SCQuestionVO scvo = new SCQuestionVO();
+    			scvo.setGroup_id(Integer.parseInt(g_id));
+    			scvo.setClass_id(Integer.parseInt(cid));
+    			new SCQuestionDAO().insertGerPrimaryKey(scvo);
+    		}
+    		
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+g_id+"&g_name=");
+			view.forward(req, res);	
+			return;
+    		
     	}
     
     }

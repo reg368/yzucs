@@ -33,6 +33,12 @@
 				<c:forEach var="classbean" items="${sclasss}" varStatus="loop">
 					 <input type="checkbox" name="c_id" value="${classbean.c_id}">${classbean.c_name} <br>
 				</c:forEach>
+				
+				<input type="hidden" name="action" value="insertS_Class_Question">
+				<input type="hidden" name="g_id" value="${g_id}">
+				<input type="hidden" name="g_name" value="${g_name}">
+				
+				<button type="submit">新增</button>
 			</form>	
 		</c:when>
 		<c:otherwise>
