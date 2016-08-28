@@ -30,10 +30,9 @@
 	</c:if>
 	<a href="<%= request.getContextPath() %>/back/student/addStudentClass.jsp">新增學生班級</a><br>
 	<c:if test="${not empty studentClass }">
+		<hr>
+		<label>班級</label>
 		<table  border="1">
-			<tr >
-				<td>班級</td>
-			</tr>
 			
 			<c:forEach var="sclass" items="${studentClass}" varStatus="loop">
 				<tr>

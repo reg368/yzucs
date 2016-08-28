@@ -26,6 +26,8 @@ import com.question_group.model.Question_groupDAO;
 import com.question_group.model.Question_groupVO;
 import com.question_level.model.Question_levelDAO;
 import com.question_level.model.Question_levelVO;
+import com.student_class.model.StudentClassDAO;
+import com.student_class.model.StudentClassVO;
 import com.user.model.UserVO;
 
 import java.util.Collection;
@@ -111,6 +113,31 @@ public class QuestionManage_controller extends HttpServlet {
     			view.forward(req, res);	
     			return;
     		}
+    		
+    		
+    	}else if("questionGroupDetail".equals(action)){
+    		
+    		int g_id;
+    		try{
+    			g_id = Integer.parseInt(req.getParameter("g_id"));
+    		}catch(Exception e){
+    			errorMessage.add("編輯課程失敗 , 請聯絡系統管理員");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=view");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		 
+    		//參與課程的班級
+    		List<StudentClassVO> sclasss = new StudentClassDAO().findStudentClassByQuestionGroupId(g_id);
+    		req.setAttribute("sclasss", sclasss);
+    		
+    		//課程關卡
+    		List<Question_levelVO> levels = new Question_levelDAO().findQustionLevelsByGid(g_id);
+    		req.setAttribute("levels", levels);
+    		
+    		
     		
     		
     	}

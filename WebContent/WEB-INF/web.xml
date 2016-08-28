@@ -74,6 +74,8 @@
         </exception-type>
     <location>/error_page/error.jsp</location>
   </error-page>
+  
+  <!--  
   <filter>
     <filter-name>Developer_login</filter-name>
     <filter-class>com.filter.DeveloperFilter</filter-class>
@@ -87,8 +89,9 @@
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
   </filter-mapping>
+  -->
   
-	    <filter>
+<filter>
   <filter-name>Back_login</filter-name>
     <filter-class>com.filter.BackLoginFilter</filter-class>
   </filter>
