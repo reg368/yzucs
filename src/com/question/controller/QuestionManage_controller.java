@@ -77,7 +77,7 @@ public class QuestionManage_controller extends HttpServlet {
     			errorMessage.add("請輸入課程名稱");
     			req.setAttribute("errorMessage", errorMessage);
     			RequestDispatcher view = req
-    					.getRequestDispatcher("/back/question/addQuestion.jsp");
+    					.getRequestDispatcher("/back/question/addQuestionGroup.jsp");
     			view.forward(req, res);	
     			return;
     		}
@@ -113,7 +113,7 @@ public class QuestionManage_controller extends HttpServlet {
     			errorMessage.add("新增關卡失敗,請聯絡系統管理員");
     			req.setAttribute("errorMessage", errorMessage);
     			RequestDispatcher view = req
-    					.getRequestDispatcher("/back/question/addQuestion.jsp");
+    					.getRequestDispatcher("/back/question/addQuestionGroup.jsp");
     			view.forward(req, res);	
     			return;
     		}
@@ -212,6 +212,45 @@ public class QuestionManage_controller extends HttpServlet {
     		
     		RequestDispatcher view = req
 					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+g_id+"&g_name=");
+			view.forward(req, res);	
+			return;
+    		
+    	}else if("viewQuestionOfLevel".equals(action)){
+    		String g_id = req.getParameter("g_id");
+    		String g_name = req.getParameter("g_name");
+    		String l_level = req.getParameter("l_level");
+    		
+    		if(g_name != null && g_name.trim().length() > 0){
+    			String newName = new String(g_name.getBytes("ISO-8859-1"),"UTF-8");
+        		req.setAttribute("g_name", newName);
+    		}
+    		req.setAttribute("g_id", g_id);
+    		
+    
+    		
+    		int l_id;
+    		try{
+    			l_id = Integer.parseInt(req.getParameter("l_id"));
+    		}catch(Exception e){
+    			errorMessage.add("編輯關卡題目失敗 , 請聯絡系統管理員");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+g_id+"&g_name=");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		
+    		if(l_level != null && l_level.trim().length() > 0){
+    			String newName = new String(l_level.getBytes("ISO-8859-1"),"UTF-8");
+        		req.setAttribute("l_level", newName);
+    		}
+    		req.setAttribute("l_id", l_id);
+    		
+    		List<QuestionVO> questions = new QuestionDAO().findByLevelId(l_id);
+    		req.setAttribute("questions", questions);
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/viewQuestionLevel.jsp");
 			view.forward(req, res);	
 			return;
     		

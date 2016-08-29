@@ -56,4 +56,21 @@ public class QuestionDAO implements Question_interface {
 		return vo;
 	}
 
+	@Override
+	public List<QuestionVO> findByLevelId(Integer lid) {
+		// TODO Auto-generated method stub
+		List<QuestionVO> vo = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery("from QuestionVO where q_level_id = ? ");
+			query.setParameter(0, lid);
+			vo = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+		return vo;
+	}
+
 }

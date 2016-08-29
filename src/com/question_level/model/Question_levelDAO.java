@@ -31,7 +31,7 @@ public class Question_levelDAO implements Question_level_interface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
-			Query query = session.createQuery("from Question_levelVO where l_group_id = ? ");
+			Query query = session.createQuery("from Question_levelVO where l_group_id = ? order by l_id");
 			query.setParameter(0, gid);
 			vo = query.list();
 			session.getTransaction().commit();

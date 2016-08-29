@@ -28,7 +28,7 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	<a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp">新增課程</a><br>
+	<a href="<%= request.getContextPath() %>/back/question/addQuestionGroup.jsp">新增課程</a><br>
 	<c:if test="${not empty question_groups }">
 		<hr>
 		<label>課程</label>
