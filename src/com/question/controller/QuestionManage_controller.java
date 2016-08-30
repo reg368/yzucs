@@ -216,6 +216,8 @@ public class QuestionManage_controller extends HttpServlet {
 			return;
     		
     	}else if("viewQuestionOfLevel".equals(action)){
+    		
+  
     		String g_id = req.getParameter("g_id");
     		String g_name = req.getParameter("g_name");
     		String l_level = req.getParameter("l_level");

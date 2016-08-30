@@ -2,6 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.*"%>
+<%
+	String g_name = request.getParameter("g_name");
+	if(g_name != null && g_name.trim().length() > 0){
+		String newName = new String(g_name.getBytes("ISO-8859-1"),"UTF-8");
+		pageContext.setAttribute("g_name", newName);
+	}
+
+	String l_level = request.getParameter("l_level");
+	if(l_level != null && l_level.trim().length() > 0){
+		String newName = new String(l_level.getBytes("ISO-8859-1"),"UTF-8");
+		pageContext.setAttribute("l_level", newName);
+	}
+	
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -121,7 +136,10 @@
 		
 		<div id="a_parentDiv"></div>
 		
-		
+		<input type="hidden" name="q_level_id" value="<%= request.getParameter("l_id") %>">
+		<input type="hidden" name="l_level" value="${l_level}">
+		<input type="hidden" name="g_id" value="<%= request.getParameter("g_id") %>">
+		<input type="hidden" name="g_name" value="${g_name}">
 		
 		<input type="hidden" name="action" value="question_insert">
 		<br>

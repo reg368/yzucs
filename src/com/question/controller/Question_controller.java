@@ -227,12 +227,23 @@ public class Question_controller extends HttpServlet {
 			
 			String q_text = req.getParameter("q_text");
 			String q_tip = req.getParameter("q_tip");
+			
+			String q_level_id = req.getParameter("q_level_id");
+			String g_id = req.getParameter("g_id");
+			
+			String l_level = req.getParameter("l_level");
+			req.setAttribute("l_level", l_level);
+			String g_name = req.getParameter("g_name");
+			req.setAttribute("g_name", g_name);
+			
 			QuestionVO question = new QuestionVO();
 			question.setQ_text(q_text);
 			question.setQ_tip(q_tip);
-			//先塞假資料
-			question.setQ_groupid(1);
+			question.setQ_groupid(Integer.parseInt(g_id));
+			question.setQ_level_id(Integer.parseInt(q_level_id));
 			question.setQ_point("1");
+			if(q_level_id != null && q_level_id.trim().length() > 0)
+				question.setQ_level_id(Integer.parseInt(q_level_id));
 			
 			byte[] image = null;
 			if (in != null){
@@ -254,10 +265,15 @@ public class Question_controller extends HttpServlet {
 				new AnswerDAO().insertGetPrimary(answer);
 			}
     		
+			
 			errorMessage.add("新增成功");
 			req.setAttribute("errorMessage", errorMessage);
+			
+			//要給viewQuestionLevel.jsp 顯示的資訊 (g_name,l_level) 為空白 , 
+			//表示QuestionBackServlet controller 取這2個參數值用req.getAttribute 取 ,
+			//直接寫在url 用 get 送中文會亂碼
     		RequestDispatcher view = req
-					.getRequestDispatcher("/back/question/addQuestion.jsp");
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id="+q_level_id+"&l_level=&g_id="+g_id+"&g_name=");
 			view.forward(req, res);	
 			return;
     	}
