@@ -177,12 +177,15 @@ body {
   	<!--   <button class="gwd-button-fujb"  style="" formaction="<%=request.getContextPath()%>/front/user/addUser.jsp" >創建帳號</button> -->
   </form>
    
+   
+   <!--  
   <form  method="post" action="<%= request.getContextPath()%>/front/user/User_controller_new.do" name="createForm">
   		<input type="button" class="gwd-button-fujb"  onclick="onCreateClick()" style="" value="創建帳號" >
   		<input type="hidden" name="action" value="create_user">
   		<input type="hidden" id="user_login_id" name="user_login_id" value="">
   		<input type="hidden" id="user_password" name="user_password" value="">
   </form>
+  -->
   
   <div class="gwd-div-14v4" style="">
   	<c:if test="${not empty errorMessage}"  >

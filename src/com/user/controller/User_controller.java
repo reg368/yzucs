@@ -142,18 +142,44 @@ public class User_controller extends HttpServlet {
     			view.forward(req, res);	
     			return;
     		}
-    	    
-    		uservo.setUser_login_count(uservo.getUser_login_count()+1);
-    		UserDAO udao = new UserDAO();
-    		udao.update(uservo);
-    		
-    		session.setAttribute("UserVO", uservo);
-    		RequestDispatcher view = req
-					.getRequestDispatcher("/front/user/user_info.jsp");
-			view.forward(req, res);	
-			return;
     		
     		
+    	    if(uservo.getUser_id() != null && uservo.getUser_id().trim().length()  > 0){
+    	    	//已創好角色
+    	    	if(uservo.getUser_gender() != null && uservo.getUser_gender().trim().length() > 0){
+    	    		uservo.setUser_login_count(uservo.getUser_login_count()+1);
+    	    		UserDAO udao = new UserDAO();
+    	    		udao.update(uservo);
+    	    		
+    	    		session.setAttribute("UserVO", uservo);
+    	    		RequestDispatcher view = req
+    						.getRequestDispatcher("/front/user/user_info.jsp");
+    				view.forward(req, res);	
+    				return;
+    				
+    	    	//尚未創建角色
+    	    	}else{
+    	    		session.setAttribute("UserVO", uservo);
+    				errorMessage.add("歡迎登入數位學習 , 現在請選擇您的性別");
+    				req.setAttribute("errorMessage", errorMessage);
+    				RequestDispatcher view = req
+        					.getRequestDispatcher("/front/user/addUserNew/addUser_select_gender.jsp");
+        			view.forward(req, res);	
+        			return;
+    	    	}
+    	   
+    	    	
+    	    }else{
+    	    	errorMessage.add("登入失敗");
+    			req.setAttribute("user_login_id", user_login_id);
+    			req.setAttribute("user_password", user_password);
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/front/index/index.jsp");
+    			view.forward(req, res);	
+    			return;
+    	    }
+    
     		
     	}else if("playAgain".equals(action)){
     		UserVO uservo = (UserVO)session.getAttribute("UserVO");
