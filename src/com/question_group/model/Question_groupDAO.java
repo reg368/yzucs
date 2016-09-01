@@ -11,8 +11,8 @@ import com.tool.HibernateUtil;
 public class Question_groupDAO implements Question_group_interface {
 
 	
-	private final String findQuestion_groupsByUserId 
-	= "SELECT g.g_id , g.g_name , g.g_joindate , g.g_user_id FROM yzu_question_student_accesss a JOIN yzu_question_group g ON a.access_question_group_id = g.g_id WHERE a.access_user_id = ? ";
+	private final String findQuestion_groupsByStudentUserId 
+	= "select g.* from yzu_student_class c join yzu_student_class_record r on c.C_ID = r.CR_CLASS_ID  JOIN YZU_S_CLASS_QUESTION q on q.CLASS_ID = c.C_ID JOIN yzu_question_group g on g.G_ID = q.GROUP_ID   where r.CR_STUDENT_ID = ? ";
 	
 	@Override
 	public Integer insertGetPrimaryKey(Question_groupVO vo) {
@@ -59,6 +59,13 @@ public class Question_groupDAO implements Question_group_interface {
 			session.getTransaction().rollback();
 		}
 		return vo;
+	}
+
+	@Override
+	public List<Question_groupVO> findQuestion_groupsByStudentUserId(
+			String userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

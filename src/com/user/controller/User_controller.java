@@ -152,6 +152,10 @@ public class User_controller extends HttpServlet {
     	    		udao.update(uservo);
     	    		
     	    		session.setAttribute("UserVO", uservo);
+    	    		
+    	    		//查詢角色擁有的課程
+    	    		
+    	    		
     	    		RequestDispatcher view = req
     						.getRequestDispatcher("/front/user/user_info.jsp");
     				view.forward(req, res);	
