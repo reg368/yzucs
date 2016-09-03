@@ -65,40 +65,80 @@ public class Question_controller extends HttpServlet {
     		
     		//有找到題目
     		if(vos != null && vos.size() > 0){
+    			
     			for(Question_levelVO vo : vos){
     				levels.add(vo);
     			}
     			
+    			session.setAttribute("gametotallevel", levels.size());
+    			session.setAttribute("game_levels", levels);
+    			res.sendRedirect("/YZUCS/front/question/QuestionServlet.do?action=nextLevel");
+	    		return;
+    			
+    			
+    		//沒找到題目回userInfo.jsp	
+    		}else{
+    			
+    			errorMessage.add("此課程尚未有任何題目");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+						.getRequestDispatcher("/front/user/UserServlet.do?action=loginForm");
+				view.forward(req, res);	
+				return;
+    			
+    			
+    		}
+    		
+    	}else if("nextLevel".equals(action)){
+    		
+    		LinkedList<Question_levelVO> levels = (LinkedList<Question_levelVO>)session.getAttribute("game_levels");
+    		if(levels != null){
+    			
     			//取得下一關
     			Question_levelVO currentLevel = levels.pollFirst();
+    			int totallevel = (int)session.getAttribute("gametotallevel");
     			
     			if(currentLevel != null){
+    				
+    				//給question_level.jsp 的參數
+    				int nowlevel = totallevel - levels.size();
+    				//目前在第幾關
+    				session.setAttribute("nowlevel", nowlevel);
+    				session.setAttribute("nowlevelname", currentLevel.getL_level());
+    				
+    				//給問題頁的參數
     				List<QuestionVO> questions = new QuestionDAO().findByLevelId(currentLevel.getL_id());
     				Collections.shuffle(questions);
     	    		session.setAttribute("questionList", questions);
-    				
     	    		session.setAttribute("qindex", 0);
     	    		session.setAttribute("question", questions.get(0));
     	    		List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(0).getQ_id());
     	    		session.setAttribute("answers", answer);
     	    		session.setAttribute("tip", null);
     	    		session.setAttribute("f_levels", levels);
-    	    		res.sendRedirect("/YZUCS/front/question/question.jsp");
+    	    		
+    	    		res.sendRedirect("/YZUCS/front/question/question_level.jsp");
     	    		return;
-    			
+
+    	    		
     	    		
     	    	//沒有下一關了遊戲結束	
     			}else{
     				
-    				
+    				res.sendRedirect("/YZUCS/front/question/result_info.jsp");
+    				return;
     			}
     			
-    		//沒找到題目	
-    		}else{
-    			
-    			
-    		}
     		
+    		}else{
+    			errorMessage.add("登入逾期 請重新登入");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/front/index/index.jsp");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		 
     	}else if("answer_submit".equals(action)){
     		List<QuestionVO> questions = (List<QuestionVO>)session.getAttribute("questionList");
     		String answer_id = req.getParameter("answer_id");
@@ -160,7 +200,7 @@ public class Question_controller extends HttpServlet {
     				return;	
     			//題目沒了	
     			}else{
-    				res.sendRedirect("/YZUCS/front/question/result_info.jsp");
+    				res.sendRedirect("/YZUCS/front/question/QuestionServlet.do?action=nextLevel");
     				return;
     			}
     		//答錯了
