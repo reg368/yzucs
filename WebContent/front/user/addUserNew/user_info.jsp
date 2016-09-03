@@ -268,10 +268,10 @@ body {
     <c:choose>
     	<c:when test="${not empty groups }">
    			<c:forEach var="group" items="${groups}" varStatus="loop">
-     			<form method="post" action="<%=request.getContextPath()%>">
+     			<form method="post" action="<%= request.getContextPath()%>/front/question/QuestionServlet.do">
      				<button  type="submit" class="gwd-button-r673 gwd-button-4l0e gwd-button-1k6i " style="left: 4%; top: ${ (loop.index * 35) + (loop.index * 10) + 129 }px;">${group.g_name}</button>
      				<input type="hidden" name="g_id" value="${group.g_id}">
-     				<input type="hidden" name="action" value="profession_change">
+     				<input type="hidden" name="action" value="startgame">
      			</form>
      		</c:forEach>	
     	</c:when>

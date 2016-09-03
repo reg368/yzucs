@@ -22,6 +22,8 @@ import com.answer_record.model.Answer_recordDAO;
 import com.answer_record.model.Answer_recordVO;
 import com.question.model.QuestionDAO;
 import com.question.model.QuestionVO;
+import com.question_level.model.Question_levelDAO;
+import com.question_level.model.Question_levelVO;
 import com.user.model.UserVO;
 
 import java.util.Collection;
@@ -54,18 +56,49 @@ public class Question_controller extends HttpServlet {
     	UserVO uservo = (UserVO)session.getAttribute("UserVO");
     	
     	if("startgame".equals(action)){
-    		List<QuestionVO> questions = new QuestionDAO().findByGroupId(1);
-    		Collections.shuffle(questions);
-    		session.setAttribute("questionList", questions);
-    		 
-    		session.setAttribute("qindex", 0);
-    		session.setAttribute("question", questions.get(0));
-    		List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(0).getQ_id());
-    		session.setAttribute("answers", answer);
-    		session.setAttribute("tip", null);
     		
-    		res.sendRedirect("/YZUCS/front/question/question.jsp");
-			return;
+    		int g_id = Integer.parseInt(req.getParameter("g_id"));
+    		
+    		List<Question_levelVO> vos = new Question_levelDAO().findQustionLevelsByGid(g_id);
+    		//用LinkedList 可以使用poll *Retrieves and removes the head (first element) of this list.
+    		LinkedList<Question_levelVO> levels = new LinkedList<Question_levelVO>();
+    		
+    		//有找到題目
+    		if(vos != null && vos.size() > 0){
+    			for(Question_levelVO vo : vos){
+    				levels.add(vo);
+    			}
+    			
+    			//取得下一關
+    			Question_levelVO currentLevel = levels.pollFirst();
+    			
+    			if(currentLevel != null){
+    				List<QuestionVO> questions = new QuestionDAO().findByLevelId(currentLevel.getL_id());
+    				Collections.shuffle(questions);
+    	    		session.setAttribute("questionList", questions);
+    				
+    	    		session.setAttribute("qindex", 0);
+    	    		session.setAttribute("question", questions.get(0));
+    	    		List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(0).getQ_id());
+    	    		session.setAttribute("answers", answer);
+    	    		session.setAttribute("tip", null);
+    	    		session.setAttribute("f_levels", levels);
+    	    		res.sendRedirect("/YZUCS/front/question/question.jsp");
+    	    		return;
+    			
+    	    		
+    	    	//沒有下一關了遊戲結束	
+    			}else{
+    				
+    				
+    			}
+    			
+    		//沒找到題目	
+    		}else{
+    			
+    			
+    		}
+    		
     	}else if("answer_submit".equals(action)){
     		List<QuestionVO> questions = (List<QuestionVO>)session.getAttribute("questionList");
     		String answer_id = req.getParameter("answer_id");
