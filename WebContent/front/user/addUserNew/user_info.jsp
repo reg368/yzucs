@@ -191,20 +191,20 @@ body {
 }
 .character_image {
     position: absolute;
-    top: 245px;
-    height: 283px;
-    left: 30%;
-    width: 323px;
+    top: 40%;
+    height: 50%;
+    left: 50%;
+    width: 20%;
     transform-origin: 161.5px 141.5px 0px;
     -webkit-transform-origin: 161.5px 141.5px 0px;
     -moz-transform-origin: 161.5px 141.5px 0px;
 	}
 .pet_image {
     position: absolute;
-    top: 245px;
-    height: 283px;
-    left: 60%;
-    width: 323px;
+    top: 40%;
+    height: 25%;
+    left: 80%;
+    width: 15%;
     transform-origin: 161.5px 141.5px 0px;
     -webkit-transform-origin: 161.5px 141.5px 0px;
     -moz-transform-origin: 161.5px 141.5px 0px;
@@ -259,20 +259,27 @@ body {
   <img class="gwd-img-1j4a" src="<%=request.getContextPath()%>/images/background/background_login.png" style="">
   <div class="gwd-div-ilnq" style=""></div>
   
-    <form method="post" action="<%=request.getContextPath()%>/front/user/User_controller_new.do">
-    	<button type="submit" class="gwd-button-r673" style="top: 450px;">完成送出</button>
+    <form method="post" action="<%=request.getContextPath()%>">
+    	<button type="submit" class="gwd-button-r673" style="top: 450px;">修改密碼</button>
     	<input type="hidden" name="action" value="character_selected">
     	<input type="hidden" name="char_index" id="char_index"  >
     </form> 
    
-    
-     <c:forEach var="pro" items="${professions}" varStatus="loop">
-     	<form method="post" action="<%=request.getContextPath()%>/front/user/User_controller_new.do">
-     		<button  type="submit" class="gwd-button-r673 gwd-button-4l0e gwd-button-1k6i " style="left: 4%; top: ${ (loop.index * 35) + (loop.index * 10) + 129 }px;">${pro.cprofession_title}</button>
-     		<input type="hidden" name="professionid" value="${pro.cprofession_id}">
-     		<input type="hidden" name="action" value="profession_change">
-     	</form>
-     </c:forEach>
+    <c:choose>
+    	<c:when test="${not empty groups }">
+   			<c:forEach var="group" items="${groups}" varStatus="loop">
+     			<form method="post" action="<%=request.getContextPath()%>">
+     				<button  type="submit" class="gwd-button-r673 gwd-button-4l0e gwd-button-1k6i " style="left: 4%; top: ${ (loop.index * 35) + (loop.index * 10) + 129 }px;">${group.g_name}</button>
+     				<input type="hidden" name="g_id" value="${group.g_id}">
+     				<input type="hidden" name="action" value="profession_change">
+     			</form>
+     		</c:forEach>	
+    	</c:when>
+    	<c:otherwise>
+    		<font color="red" class="gwd-button-r673 gwd-button-4l0e gwd-button-1k6i"  style="left:4%; top:30%;" >目前沒有課程 , 請聯絡您的課程導師</font>
+    	</c:otherwise>
+    </c:choose>
+   
   
   <p class="gwd-p-lswn" style="top:500px;">
   		<c:if test="${not empty errorMessage}"  >

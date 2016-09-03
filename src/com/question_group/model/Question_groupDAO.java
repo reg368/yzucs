@@ -3,8 +3,8 @@ package com.question_group.model;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-
 import com.tool.HibernateUtil;
 
 
@@ -64,8 +64,19 @@ public class Question_groupDAO implements Question_group_interface {
 	@Override
 	public List<Question_groupVO> findQuestion_groupsByStudentUserId(
 			String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Question_groupVO> vo = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			SQLQuery query = session.createSQLQuery(findQuestion_groupsByStudentUserId);
+			query.addEntity(Question_groupVO.class);
+			query.setParameter(0, userId);
+			vo = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+		return vo;
 	}
 
 }

@@ -290,11 +290,13 @@ public class User_controller_new extends HttpServlet {
     				
     				if(1== userdao.update(uservo)){
     	    			session.setAttribute("UserVO", uservo);
+    	    			
     	    			RequestDispatcher view = req
-    	    					.getRequestDispatcher("/front/user/user_info.jsp");
+    	    					.getRequestDispatcher("/front/user/UserServlet.do?action=loginForm");
     	    			view.forward(req, res);	
     	    			return;
-    	    		}else{
+    	    		
+    				}else{
     	    			errorMessage.add("·s¼W¥¢±Ñ");
     	    			req.setAttribute("UserVO", uservo);
     	    			req.setAttribute("errorMessage", errorMessage);

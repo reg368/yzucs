@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.question_group.model.Question_groupDAO;
+import com.question_group.model.Question_groupVO;
 import com.user.model.UserDAO;
 import com.user.model.UserVO;
 
@@ -103,47 +105,61 @@ public class User_controller extends HttpServlet {
     		}
     			
     	}else if("loginForm".equals(action)){
+    		
     		String user_login_id = req.getParameter("user_login_id");
     		String user_password = req.getParameter("user_password");
-    		if(user_login_id == null || user_login_id.length() == 0)
-    			errorMessage.add("請填入帳號");
-    		if(user_password == null || user_password.length() == 0)
-    			errorMessage.add("請填入密碼");
     		
-    		if(errorMessage.size() > 0){ 
-    			req.setAttribute("user_login_id", user_login_id);
-    			req.setAttribute("user_password", user_password);
-    			req.setAttribute("errorMessage", errorMessage);
-    			RequestDispatcher view = req
-    					.getRequestDispatcher("/front/index/index.jsp");
-    			view.forward(req, res);	
-    			return;
+    		UserVO uservo = null;
+
+    		//如果不是null 代表是從 index.jsp 送來的請求  
+    		if(user_login_id != null && user_password != null){
+        		
+        		if(user_login_id == null || user_login_id.length() == 0)
+        			errorMessage.add("請填入帳號");
+        		if(user_password == null || user_password.length() == 0)
+        			errorMessage.add("請填入密碼");
+        		
+        		if(errorMessage.size() > 0){ 
+        			req.setAttribute("user_login_id", user_login_id);
+        			req.setAttribute("user_password", user_password);
+        			req.setAttribute("errorMessage", errorMessage);
+        			RequestDispatcher view = req
+        					.getRequestDispatcher("/front/index/index.jsp");
+        			view.forward(req, res);	
+        			return;
+        		}
+        		
+        		uservo =  new UserDAO().findByUser_login_id(user_login_id);
+        		
+        		if(uservo == null){
+        			errorMessage.add("帳號錯誤");
+        			req.setAttribute("user_login_id", user_login_id);
+        			req.setAttribute("user_password", user_password);
+        			req.setAttribute("errorMessage", errorMessage);
+        			RequestDispatcher view = req
+        					.getRequestDispatcher("/front/index/index.jsp");
+        			view.forward(req, res);	
+        			return;
+        		}
+        		
+        		if(!user_password.equals(uservo.getUser_password())){
+        			errorMessage.add("密碼錯誤");
+        			req.setAttribute("user_login_id", user_login_id);
+        			req.setAttribute("user_password", user_password);
+        			req.setAttribute("errorMessage", errorMessage);
+        			RequestDispatcher view = req
+        					.getRequestDispatcher("/front/index/index.jsp");
+        			view.forward(req, res);	
+        			return;
+        		}
+    		
+        		
+        	//如果是 null 代表是從 User_controller_new - "char_name_insert".equals(action) 送來的	
+    		}else{
+    			uservo = (UserVO)session.getAttribute("UserVO");
     		}
     		
-    		UserVO uservo =  new UserDAO().findByUser_login_id(user_login_id);
-    		if(uservo == null){
-    			errorMessage.add("帳號錯誤");
-    			req.setAttribute("user_login_id", user_login_id);
-    			req.setAttribute("user_password", user_password);
-    			req.setAttribute("errorMessage", errorMessage);
-    			RequestDispatcher view = req
-    					.getRequestDispatcher("/front/index/index.jsp");
-    			view.forward(req, res);	
-    			return;
-    		}
-    		
-    		if(!user_password.equals(uservo.getUser_password())){
-    			errorMessage.add("密碼錯誤");
-    			req.setAttribute("user_login_id", user_login_id);
-    			req.setAttribute("user_password", user_password);
-    			req.setAttribute("errorMessage", errorMessage);
-    			RequestDispatcher view = req
-    					.getRequestDispatcher("/front/index/index.jsp");
-    			view.forward(req, res);	
-    			return;
-    		}
-    		
-    		
+    		    		
     	    if(uservo.getUser_id() != null && uservo.getUser_id().trim().length()  > 0){
     	    	//已創好角色
     	    	if(uservo.getUser_gender() != null && uservo.getUser_gender().trim().length() > 0){
@@ -154,10 +170,11 @@ public class User_controller extends HttpServlet {
     	    		session.setAttribute("UserVO", uservo);
     	    		
     	    		//查詢角色擁有的課程
-    	    		
+    	    		List<Question_groupVO> groups = new Question_groupDAO().findQuestion_groupsByStudentUserId(uservo.getUser_id());
+    	    		session.setAttribute("groups", groups);
     	    		
     	    		RequestDispatcher view = req
-    						.getRequestDispatcher("/front/user/user_info.jsp");
+    						.getRequestDispatcher("/front/user/addUserNew/user_info.jsp");
     				view.forward(req, res);	
     				return;
     				
@@ -175,8 +192,6 @@ public class User_controller extends HttpServlet {
     	    	
     	    }else{
     	    	errorMessage.add("登入失敗");
-    			req.setAttribute("user_login_id", user_login_id);
-    			req.setAttribute("user_password", user_password);
     			req.setAttribute("errorMessage", errorMessage);
     			RequestDispatcher view = req
     					.getRequestDispatcher("/front/index/index.jsp");
