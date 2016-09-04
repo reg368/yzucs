@@ -11,6 +11,8 @@
 		</id>
 			<property name="g_name" column="g_name" />
 			<property name="g_joindate" column="g_joindate" insert="false"  update="false"/>
-			<property name="g_user_id" column="g_user_id" />			
+			<property name="g_user_id" column="g_user_id" />
+			<property name="g_number" column="g_number" />
+			<property name="g_semester" column="g_semester" />			
 	</class>
 </hibernate-mapping>

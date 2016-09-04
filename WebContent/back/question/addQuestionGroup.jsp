@@ -13,6 +13,7 @@
 	label{
 		width:150px;
 	}
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title></title>
@@ -43,10 +44,11 @@
 				var br = document.createElement('br');
 				a_childDiv.appendChild(br);
 				
-				var input = document.createElement('textarea');
+				var input = document.createElement('input');
 				input.name = "l_label"+i;
-				input.cols = "50";
-				input.rows = "4";
+				input.type = "text";
+				//input.cols = "50";
+				//input.rows = "4";
 				a_childDiv.appendChild(input);
 				
 				var br = document.createElement('br');
@@ -76,10 +78,11 @@
 			var br = document.createElement('br');
 			a_childDiv.appendChild(br);
 			
-			var input = document.createElement('textarea');
+			var input = document.createElement('input');
 			input.name = "l_label"+i;
-			input.cols = "50";
-			input.rows = "4";
+			input.type = "text";
+	//		input.cols = "50";
+	//		input.rows = "4";
 			a_childDiv.appendChild(input);
 			
 			var br = document.createElement('br');
@@ -93,7 +96,7 @@
 </script>
 </head>
 <body>
-	<h2>新增問題</h2>
+	<h2>新增課程</h2>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -102,11 +105,16 @@
 		</ul>	
 	</c:if>
 	<form method="post" action="<%= request.getContextPath() %>/back/QuestionBackServlet.do" >
+		<label for="g_number" >請輸入課程編號:</label><br>
+		<input type="text" name="g_number"><br>
 		<label for="g_name" >請輸入課程名稱:</label><br>
-		<textarea rows="4" cols="50" name="g_name"></textarea>
+		<input type="text" name="g_name"><br>
+		<label for="g_semester" >請輸入課程學期:</label><br>
+		<input type="text" name="g_semester"><br>
 		<br>
 		<br>
 	
+		<hr>
 		 
 		<label for="l_count" >請選擇課程關卡數量:</label><br>
 		<select id="l_count" name="l_count"> 

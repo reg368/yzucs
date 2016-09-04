@@ -73,8 +73,24 @@ public class QuestionManage_controller extends HttpServlet {
 			return;
     	}else if("question_group_insert".equals(action)){
     		String g_name = req.getParameter("g_name");
+    		String g_number = req.getParameter("g_number");
+    		String g_semester = req.getParameter("g_semester");
     		if(g_name == null || g_name.trim().length() == 0){
     			errorMessage.add("請輸入課程名稱");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/question/addQuestionGroup.jsp");
+    			view.forward(req, res);	
+    			return;
+    		}else if(g_number == null || g_number.trim().length() == 0){
+    			errorMessage.add("請輸入課程編號");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/question/addQuestionGroup.jsp");
+    			view.forward(req, res);
+    			return;
+    		}else if(g_semester == null || g_semester.trim().length() == 0){
+    			errorMessage.add("請輸入課程學期");
     			req.setAttribute("errorMessage", errorMessage);
     			RequestDispatcher view = req
     					.getRequestDispatcher("/back/question/addQuestionGroup.jsp");
@@ -84,6 +100,8 @@ public class QuestionManage_controller extends HttpServlet {
     		
     		Question_groupVO gvo = new Question_groupVO();
     		gvo.setG_name(g_name);
+    		gvo.setG_number(g_number);
+    		gvo.setG_semester(g_semester);
     		gvo.setG_user_id(uservo.getUser_id());
     		int gid = new Question_groupDAO().insertGetPrimaryKey(gvo);
     		

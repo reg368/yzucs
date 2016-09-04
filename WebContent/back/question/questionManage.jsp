@@ -33,9 +33,18 @@
 		<hr>
 		<label>課程</label>
 		<table  border="1">
+			<tr bgcolor="#FFFF00">
+				<th>課程編號</th>
+				<th>課程名稱</th>
+				<th>學期</th>
+				<th></th>
+			</tr>
 			<c:forEach var="group" items="${question_groups}" varStatus="loop">
 				<tr>
-					<td>${group.g_name} <a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=questionGroupDetail&g_id=${group.g_id}&g_name=${group.g_name}">編輯</a></td>
+					<td>${group.g_number}</td>
+					<td>${group.g_name}</td>
+					<td>${group.g_semester}</td>
+					<td><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=questionGroupDetail&g_id=${group.g_id}&g_name=${group.g_name}">編輯</a></td>
 				</tr>	
 			</c:forEach>
 	</table>
