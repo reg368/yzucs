@@ -27,11 +27,11 @@
 		</ul>	
 	</c:if>
 	<form method="post" action="<%= request.getContextPath() %>/UserServletBack.do" >
-		<h3>新增學生</h3>
-		<label for="c_name" >學號:</label><br>
+		<label>新增學生</label><br><br>
+		學號:&nbsp
 		<input type="text" name="user_login_id" >
-		<br>
-		<label for="c_name" >姓名:</label><br>
+		&nbsp&nbsp
+		姓名:&nbsp
 		<input type="text" name="user_name" >
 		<br>
 		
@@ -40,6 +40,28 @@
 		<input type="hidden" name="action" value="insert">
 		<br>
 		<button type="submit">送出</button>
+	</form>
+	
+	<hr>
+	
+	<!--  
+		form action 的 url 帶參數(課程名稱 中文) = 用Get帶中文 (亂碼) 
+		然後用同一個request 到 finishUrl 的 StudentManageController , 會把 Get 帶的中文亂碼重新編過 utf-8 所以呈現不會亂碼 
+		
+		如果parameter參數是用input hidden 夾帶在 form post 送出的話 , 編碼會正確  . 
+		但是到了 StudentManageController 後因為判斷是 
+		className = request.getParameter("className")
+		if(className != null && className.trim().length() > 0) 
+		僅僅判斷有沒有值而已  , 所以會把正確的中文編碼值再去編譯一次而造成了亂碼 
+		
+	-->
+	<form method="post" action="<%= request.getContextPath() %>/XlsServlet.do?className=${className}&classId=${classId}" enctype="multipart/form-data">
+		<label for="q_pic" >xls匯入:</label><br><br>
+		<input type="file" name="student_xls">
+		<input type="hidden" name="action" value="studentImport">
+		<input type="hidden" name="finishUrl" value="/back/StudentBackServlet.do?action=findStudentByClass">
+		<br>
+		<button type="submit">送出</button>	
 	</form>
 	
 	<br>

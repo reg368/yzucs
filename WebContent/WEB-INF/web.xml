@@ -29,14 +29,6 @@
     <url-pattern>/back/character/CharacterImageServlet.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>ShowImageServlet</servlet-name>
-    <servlet-class>com.tool.ShowImageServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShowImageServlet</servlet-name>
-    <url-pattern>/ShowImageServlet.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>UserServletNew</servlet-name>
     <servlet-class>com.user.controller.User_controller_new</servlet-class>
   </servlet>
@@ -131,6 +123,23 @@
     <servlet-name>StudentBackServlet</servlet-name>
     <url-pattern>/back/StudentBackServlet.do</url-pattern>
   </servlet-mapping>
-	
+
+   <!-- tool  -->
+  <servlet>
+    <servlet-name>ShowImageServlet</servlet-name>
+    <servlet-class>com.tool.ShowImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowImageServlet</servlet-name>
+    <url-pattern>/ShowImageServlet.do</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>XlsServlet</servlet-name>
+    <servlet-class>com.tool.XlsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>XlsServlet</servlet-name>
+    <url-pattern>/XlsServlet.do</url-pattern>
+  </servlet-mapping>
   
 </web-app>
