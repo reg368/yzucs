@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +12,23 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.student_class_record.model.StudentCRDAO;
+import com.student_class_record.model.StudentCRVO;
+import com.user.model.UserDAO;
+import com.user.model.UserVO;
 
 
 /**
@@ -45,19 +57,24 @@ public class XlsServlet extends HttpServlet {
     	// 設定請求字元編碼
     	req.setCharacterEncoding("UTF-8");
     	String action = req.getParameter("action");
-    	//System.out.println("action: "+action);
     	List<String> errorMessage = new LinkedList<String>();
     	HttpSession session = req.getSession();
     	
     	
     	if("studentImport".equals(action)){
     		String finishUrl = req.getParameter("finishUrl");
+    		int c_id = Integer.parseInt(req.getParameter("classId"));
     		InputStream in = null;
 			Map<String,InputStream> picMap = new HashMap<>();
 			Collection<Part> parts = req.getParts();
+			String format = "";
 			for (Part part : parts) {
 				if ("student_xls".equals(part.getName())) {
-					if (getFileNameFromPart(part) != null && "xls".compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0) {
+					if (getFileNameFromPart(part) != null && (
+							"xls".compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0 ||
+							"xlsx".compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0 )    ) {
+					
+						format = getFileFormat(getFileNameFromPart(part));
 						in = part.getInputStream();
 					}
 				}
@@ -65,8 +82,112 @@ public class XlsServlet extends HttpServlet {
 			
 			if(in != null){
 				
+				Iterator<Row> rowIterator = null;
+				
+				//xls
+				if(format.compareToIgnoreCase("xls") == 0){
+					
+					HSSFWorkbook workbook = new HSSFWorkbook(in);
+					HSSFSheet sheet = workbook.getSheetAt(0);
+					rowIterator = sheet.iterator();
+					//Iterator<Cell> cellIterator = row.cellIterator();
+						
+				
+				//xlsx	
+				}else{
+					
+					XSSFWorkbook workbook = new XSSFWorkbook (in);
+					XSSFSheet sheet = workbook.getSheetAt(0);
+					rowIterator = sheet.iterator();
+
+				}
+				
+				if(rowIterator != null){
+					
+					UserDAO udao = new UserDAO();
+					int i = 0;	
+					
+				    while(rowIterator.hasNext()) {
+						//避掉第一列title
+						if(i != 0 ){
+							Row row = rowIterator.next();
+							Iterator<Cell> cellIterator = row.cellIterator();
+							
+							int cellIndex = 0;
+							UserVO vo = null;
+							String user_login_id = "";
+							String user_name = "";
+							
+							//開始讀取各條列欄位資料
+							while(cellIterator.hasNext()) {
+								
+								Cell cell = cellIterator.next();
+								String cellValue = "";
+								switch(cell.getCellType()) {
+									case Cell.CELL_TYPE_NUMERIC:
+										cellValue = String.valueOf(cell.getNumericCellValue());
+										break;
+									case Cell.CELL_TYPE_STRING:
+										cellValue = cell.getStringCellValue();
+										break;
+								}
+								
+								
+								//第一個欄位 學號
+								if(cellIndex == 0){
+									vo = udao.findByUser_login_id(cellValue);
+									user_login_id = cellValue;
+								//第二個欄位 姓名	
+								}else{
+									user_name = cellValue;
+								}
+								
+								cellIndex ++;
+							}
+							
+							//沒有此學生 要新增
+							if(vo == null){
+								vo = new UserVO();
+			    				vo.setUser_login_id(user_login_id);
+			        			vo.setUser_password(user_login_id);
+			        			vo.setUser_group_id(3);
+			        			vo.setUser_name(user_name);
+			        			String user_id = udao.insertGetPrimaryKey(vo);
+			        			vo.setUser_id(user_id);
+							}
+							
+							//開始新增到 StudentCRVO 記錄檔
+							StudentCRVO cvo = new StudentCRVO();
+			    			cvo.setCr_class_id(c_id);
+			    			cvo.setCr_student_id(vo.getUser_id());
+			    			new StudentCRDAO().insert(cvo);
+							
+						}
+						i++;
+					}
+				    
+				    errorMessage.add("匯入完成");
+					req.setAttribute("errorMessage", errorMessage);
+		    		RequestDispatcher view = req
+							.getRequestDispatcher(finishUrl);
+					view.forward(req, res);	
+					return;
+					
+				}else{
+					
+					errorMessage.add("檔案讀取失敗 , 請檢察檔案是否損毀");
+					req.setAttribute("errorMessage", errorMessage);
+		    		RequestDispatcher view = req
+							.getRequestDispatcher(finishUrl);
+					view.forward(req, res);	
+					return;
+					
+				}
+				
+				
+				
 			}else{
-				errorMessage.add("上傳格式錯誤 (僅支援附檔為 .xls 檔案)");
+				errorMessage.add("上傳格式錯誤 (僅支援附檔為 .xls 或 .xlsx 檔案)");
 				req.setAttribute("errorMessage", errorMessage);
 	    		RequestDispatcher view = req
 						.getRequestDispatcher(finishUrl);
