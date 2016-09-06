@@ -114,6 +114,7 @@ public class User_controller_back extends HttpServlet {
     			String user_id = "";
     			UserVO vo = null;
     			UserDAO udao = new UserDAO();
+    			StudentCRDAO sdao = new StudentCRDAO();
     			vo = udao.findByUser_login_id(user_login_id);
     			
     			//此學生已經存在(被其他老師建立過了)
@@ -128,12 +129,15 @@ public class User_controller_back extends HttpServlet {
         			user_id = udao.insertGetPrimaryKey(vo);
     			}
     			
+    			//檢查學生是否已經被加入至課程
+    			StudentCRVO cvo = sdao.findByStudentIdAndClassId(vo.getUser_id(), c_id);
+    			if(cvo == null){
+    				cvo = new StudentCRVO();
+        			cvo.setCr_class_id(c_id);
+        			cvo.setCr_student_id(user_id);
+        			sdao.insert(cvo);
+    			}
     			
-    			//開始新增班級群組table
-    			StudentCRVO cvo = new StudentCRVO();
-    			cvo.setCr_class_id(c_id);
-    			cvo.setCr_student_id(user_id);
-    			new StudentCRDAO().insert(cvo);
     			
     			//完成
     			RequestDispatcher view = req

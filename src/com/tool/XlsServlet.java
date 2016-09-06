@@ -105,12 +105,13 @@ public class XlsServlet extends HttpServlet {
 				if(rowIterator != null){
 					
 					UserDAO udao = new UserDAO();
+					StudentCRDAO sdao = new StudentCRDAO();
 					int i = 0;	
 					
 				    while(rowIterator.hasNext()) {
-						//避掉第一列title
+				    	Row row = rowIterator.next();
+				    	//避掉第一列title
 						if(i != 0 ){
-							Row row = rowIterator.next();
 							Iterator<Cell> cellIterator = row.cellIterator();
 							
 							int cellIndex = 0;
@@ -156,11 +157,14 @@ public class XlsServlet extends HttpServlet {
 			        			vo.setUser_id(user_id);
 							}
 							
-							//開始新增到 StudentCRVO 記錄檔
-							StudentCRVO cvo = new StudentCRVO();
-			    			cvo.setCr_class_id(c_id);
-			    			cvo.setCr_student_id(vo.getUser_id());
-			    			new StudentCRDAO().insert(cvo);
+							//檢查學生是否已經被加入至課程
+			    			StudentCRVO cvo = sdao.findByStudentIdAndClassId(vo.getUser_id(), c_id);
+			    			if(cvo == null){
+			    				cvo = new StudentCRVO();
+			        			cvo.setCr_class_id(c_id);
+			        			cvo.setCr_student_id(vo.getUser_id());
+			        			sdao.insert(cvo);
+			    			}
 							
 						}
 						i++;
