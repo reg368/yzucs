@@ -11,6 +11,7 @@ public class QuestionVO implements Serializable {
 	String q_tip;
 	byte[] q_pic;
 	Integer q_level_id;
+	Integer q_isMulti;
 	
 	public Integer getQ_id() {
 		return q_id;

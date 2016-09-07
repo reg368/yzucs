@@ -15,6 +15,7 @@
 			<property name="q_point" column="q_point" />	
 			<property name="q_tip" column="q_tip" />
 			<property name="q_pic" column="q_pic" />
-			<property name="q_level_id" column="q_level_id" />		
+			<property name="q_level_id" column="q_level_id" />
+			<property name="q_isMulti" column="q_isMulti" />		
 	</class>
 </hibernate-mapping>
