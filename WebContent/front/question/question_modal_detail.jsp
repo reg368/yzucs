@@ -38,6 +38,14 @@
         	<font size="5" color="blue">
         		<b>${question.q_text}</b>
         	</font>
+        		<c:choose>
+					<c:when test="${question.q_isMulti == 1 }">
+						<font>(複選)</font>	
+					</c:when>
+					<c:otherwise>
+						<font >(單選)</font>		
+					</c:otherwise>	
+				</c:choose>
         	<c:if	test="${not empty question.q_pic}">
         		<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=question&q_id=${question.q_id}" width="300">	
         	</c:if>

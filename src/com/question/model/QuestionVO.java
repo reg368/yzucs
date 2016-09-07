@@ -61,5 +61,12 @@ public class QuestionVO implements Serializable {
 	public void setQ_level_id(Integer q_level_id) {
 		this.q_level_id = q_level_id;
 	}
+	public Integer getQ_isMulti() {
+		return q_isMulti;
+	}
+	public void setQ_isMulti(Integer q_isMulti) {
+		this.q_isMulti = q_isMulti;
+	}
+	
 	
 }
