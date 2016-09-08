@@ -53,26 +53,56 @@
     </div>
     <div class="modal-body">
     		<table  border="0" class="table table-hover">
-				<c:forEach  var="answer" items="${answers}" varStatus="loop">
-					<tr class="warning" onclick="onSelectionClick( '${answer.a_id}'  , '${loop.index+1}' )">
-						<td>( ${loop.index+1} )</td>
-						<c:if test="${not empty answer.a_text}">
-							<td><c:out value="${answer.a_text}" /></td>
-						</c:if>
-						<c:if test="${not empty answer.a_pic}"> 
-							<td><img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=answer&a_id=${answer.a_id}"></td>
-						</c:if>
-						<c:choose>
-							<c:when test="${answer.a_is_correct == 1 }">
-								<td><font style="color:red;">我是答案</font></td>
-							</c:when>
-							<c:otherwise>
-								<td></td>
-							</c:otherwise>	
-						</c:choose>
-					</tr>
-				</c:forEach> 
+    			<c:choose>
+    				<c:when test="${question.q_isMulti == 1}">
+    					<c:forEach  var="answer" items="${answers}" varStatus="loop">	
+    						<tr class="warning" onclick="">
+    							<td> <input type="checkbox" name="multiAnswer" value="${answer.a_id}" /></td>
+								<td>( ${loop.index+1} )</td>
+									<c:if test="${not empty answer.a_text}">
+										<td><c:out value="${answer.a_text}" /></td>
+									</c:if>
+									<c:if test="${not empty answer.a_pic}"> 
+										<td><img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=answer&a_id=${answer.a_id}"></td>
+									</c:if>
+									<c:choose>
+										<c:when test="${answer.a_is_correct == 1 }">
+											<td><font style="color:red;">我是答案</font></td>
+										</c:when>
+										<c:otherwise>
+											<td></td>
+										</c:otherwise>	
+									</c:choose>
+							</tr>
+    					</c:forEach>
+    					<tr>
+    						<td> <button type="button" id="answer_btn" style="" >送出</button></td>
+    					</tr>
+    				</c:when>
+    				<c:otherwise>
+    					<c:forEach  var="answer" items="${answers}" varStatus="loop">	
+							<tr class="warning" onclick="onSelectionClick( '${answer.a_id}'  , '${loop.index+1}' )">
+								<td>( ${loop.index+1} )</td>
+									<c:if test="${not empty answer.a_text}">
+										<td><c:out value="${answer.a_text}" /></td>
+									</c:if>
+									<c:if test="${not empty answer.a_pic}"> 
+										<td><img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=answer&a_id=${answer.a_id}"></td>
+									</c:if>
+									<c:choose>
+										<c:when test="${answer.a_is_correct == 1 }">
+											<td><font style="color:red;">我是答案</font></td>
+										</c:when>
+										<c:otherwise>
+											<td></td>
+										</c:otherwise>	
+									</c:choose>
+							</tr>
+						</c:forEach> 
+    				</c:otherwise>
+    			</c:choose>
 			</table>
+			
 	</div>
 	<!--讓script 抓到路徑-->
 	<input type="hidden" id="url" value="<%=request.getContextPath()%>">
