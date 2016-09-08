@@ -17,7 +17,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>
-	function onSelectionClick(id  , index ){
+	function onSelectionClick(id){
 		$.ajax({
 			type : "GET",
 			url : $("#url").val()+"/front/question/question_selected_info.jsp?a_id="+id,
@@ -28,6 +28,18 @@
 				$('#a_id').val(id);
 				}
 			});
+	}
+	
+	function onMultiSubmit(){
+		var values = '';
+		$('input[name="multiAnswer"]:checked').each(function() {
+			   values = values + this.value + ':';
+			});
+		if(values == '')
+			alert('請選擇選項');
+		else{
+			 onSelectionClick(values);
+		}
 	}
 </script>
 </head>
@@ -76,12 +88,12 @@
 							</tr>
     					</c:forEach>
     					<tr>
-    						<td> <button type="button" id="answer_btn" style="" >送出</button></td>
+    						<td> <button type="button" id="answer_btn" style="" onclick="onMultiSubmit()">送出</button></td>
     					</tr>
     				</c:when>
     				<c:otherwise>
     					<c:forEach  var="answer" items="${answers}" varStatus="loop">	
-							<tr class="warning" onclick="onSelectionClick( '${answer.a_id}'  , '${loop.index+1}' )">
+							<tr class="warning" onclick="onSelectionClick( '${answer.a_id}')">
 								<td>( ${loop.index+1} )</td>
 									<c:if test="${not empty answer.a_text}">
 										<td><c:out value="${answer.a_text}" /></td>
