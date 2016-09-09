@@ -141,11 +141,11 @@ public class Question_controller extends HttpServlet {
     		 
     	}else if("answer_submit".equals(action)){
     		List<QuestionVO> questions = (List<QuestionVO>)session.getAttribute("questionList");
-    		String answer_id = req.getParameter("answer_id");
+    		String isCorrect = req.getParameter("isCorrect");
     		int qindex = Integer.parseInt(req.getParameter("qindex"));
     		
     		//如果沒有選擇任何選項
-    		if(answer_id == null || answer_id.length() <= 0){
+    		if(isCorrect == null || isCorrect.length() <= 0){
     			session.setAttribute("character_mood", "_sad");
     			session.setAttribute("qindex", qindex);
     			session.setAttribute("question", questions.get(qindex));
@@ -156,14 +156,15 @@ public class Question_controller extends HttpServlet {
 				res.sendRedirect("/YZUCS/front/question/question.jsp");
 				return;
     		}
-    		AnswerVO answervo = new AnswerDAO().findByAid(Integer.parseInt(answer_id));
+    	
+    		
     		Answer_recordDAO recordDAO = new Answer_recordDAO();
     		//處理回答紀錄
 			Answer_recordVO recordVO = recordDAO.findByUserVOAndQuestionid(uservo, questions.get(qindex).getQ_id());
     
 			
 			//答對了
-    		if(answervo != null && answervo.getA_is_correct() == 1){
+    		if(isCorrect != null && "1".equals(isCorrect)){
     			
     			session.setAttribute("tip", null);
     			
@@ -204,7 +205,7 @@ public class Question_controller extends HttpServlet {
     				return;
     			}
     		//答錯了
-    		}else if(answervo != null && answervo.getA_is_correct() == 0){
+    		}else if(isCorrect != null && "0".equals(isCorrect)){
     			
     			//第一次作答這題
     			if(recordVO == null){

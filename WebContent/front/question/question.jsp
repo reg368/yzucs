@@ -241,9 +241,10 @@
     		var is_multi = $("#q_isMulti").val();
     		var q_id = $("#q_id").val();
     		
-    		if(a_id == "")
+    		if(a_id == ""){
     			alert('請選擇答案');
-    		else{
+    			$("#submit_btn").attr("disabled", false);
+    		}else{
     			$.ajax({
     				type : "GET",
     				url : $("#url").val()+"/front/question/question_check_answer.jsp?a_id="+a_id+"&is_multi="+is_multi+"&q_id="+q_id,
@@ -253,15 +254,16 @@
     						if(correct == '1'){
     							$( "#petDialog" ).html("<p>好棒!答對了</p>");
     							$( "#petDialog" ).show();
-    							
+    							$("#isCorrect").val('1');
     						}else{
     							$( "#petDialog" ).html("<p>糟糕!答錯了</p>");
     							$( "#petDialog" ).show();
+    							$("#isCorrect").val('0');
     						}
     						
     						 setInterval(
     							      function() {
-    							    	 // $( "#question_form" ).submit();
+    							    	  $( "#question_form" ).submit();
     							      }, 1000
     							)	
     				  }
@@ -287,15 +289,17 @@
   
   <!-- 答題form表單 -->
   <form id="question_form" mehtod="post" action="<%= request.getContextPath()%>/front/question/QuestionServlet.do">
-  	 <input type="hidden" name="answer_id" id="a_id">
-  	 <input type="hidden" name="q_id" id="q_id" value="${question.q_id}">
   	 <input type="hidden" name="action" value="answer_submit">
   	 <input type="hidden" name="qindex" value="${qindex}"> 
-  	 <input type="hidden" name="q_isMulti" id="q_isMulti" value="${question.q_isMulti}"> 
+  	 <input type="hidden" name="isCorrect" id="isCorrect" > <!-- question_check_answer.jsp 會塞的參數判斷對或錯 -->
   	 <button type="button" id="submit_btn" class="gwd-button-eu7f" style="" >送出</button>
   </form>
   
-  
+  <!-- 頁面傳送的參數 -->
+  <input type="hidden" name="answer_id" id="a_id">
+  <input type="hidden" name="q_id" id="q_id" value="${question.q_id}">
+  <input type="hidden" name="q_isMulti" id="q_isMulti" value="${question.q_isMulti}"> 
+   
   
   <!-- 資訊顯示 -->
   <div class="gwd-p-lgvv"> <!--題目 -->
