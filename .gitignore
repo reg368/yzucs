@@ -12,7 +12,7 @@ hs_err_pid*
 
 *.svn
 
-*.settings
-*.metadata
-Servers.*
-RemoteSystemsTempFiles.*
+.settings/
+.metadata/
+Servers/
+RemoteSystemsTempFiles/
