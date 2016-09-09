@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.answer_record.model.Answer_recordVO;
 import com.tool.HibernateUtil;
 
 
@@ -48,6 +49,23 @@ public class AnswerDAO implements Answer_interface {
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery("from AnswerVO where a_qid = ?");
+			query.setParameter(0, qid);
+			vo = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+		return vo;
+	}
+
+	@Override
+	public List<AnswerVO> findCorrectAnswerVoByQid(int qid) {
+		// TODO Auto-generated method stub
+		List<AnswerVO> vo = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery("from AnswerVO where a_qid = ? and a_is_correct = 1");
 			query.setParameter(0, qid);
 			vo = query.list();
 			session.getTransaction().commit();
