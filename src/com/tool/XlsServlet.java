@@ -3,11 +3,9 @@ package com.tool;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +13,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -58,14 +55,44 @@ public class XlsServlet extends HttpServlet {
     	req.setCharacterEncoding("UTF-8");
     	String action = req.getParameter("action");
     	List<String> errorMessage = new LinkedList<String>();
-    	HttpSession session = req.getSession();
     	
-    	
-    	if("studentImport".equals(action)){
+    	if("questionImport".equals(action)){
+    		String finishUrl = req.getParameter("finishUrl");
+    		InputStream in = null;
+			Collection<Part> parts = req.getParts();
+			String format = "";
+			for (Part part : parts) {
+				if ("question_xls".equals(part.getName())) {
+					if (getFileNameFromPart(part) != null && (
+							"xls".compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0 ||
+							"xlsx".compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0 )    ) {
+					
+						format = getFileFormat(getFileNameFromPart(part));
+						in = part.getInputStream();
+					}
+				}
+			}
+			
+			if(in != null){
+				errorMessage.add("格式正確");
+				req.setAttribute("errorMessage", errorMessage);
+	    		RequestDispatcher view = req
+						.getRequestDispatcher(finishUrl);
+				view.forward(req, res);	
+				return;
+			}else{
+				errorMessage.add("上傳格式錯誤 (僅支援附檔為 .xls 或 .xlsx 檔案)");
+				req.setAttribute("errorMessage", errorMessage);
+	    		RequestDispatcher view = req
+						.getRequestDispatcher(finishUrl);
+				view.forward(req, res);	
+				return;
+			}
+			
+    	}else if("studentImport".equals(action)){
     		String finishUrl = req.getParameter("finishUrl");
     		int c_id = Integer.parseInt(req.getParameter("classId"));
     		InputStream in = null;
-			Map<String,InputStream> picMap = new HashMap<>();
 			Collection<Part> parts = req.getParts();
 			String format = "";
 			for (Part part : parts) {

@@ -31,6 +31,20 @@
 	
 	<a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp?l_id=${l_id}&l_level=${l_level}&g_id=${g_id}&g_name=${g_name}">新增題目</a><br>
 	<hr>
+	
+	<form method="post" action="<%= request.getContextPath() %>/XlsServlet.do?g_id=${g_id}&g_name=${g_name}" enctype="multipart/form-data">
+		<label  >xls匯入:</label><br><br>
+		<input type="file" name="question_xls">
+		<input type="hidden" name="action" value="questionImport">
+		<input type="hidden" name="finishUrl" value="/back/QuestionBackServlet.do?action=viewQuestionOfLevel">
+		
+		<input type="hidden" name="l_id" value="${l_id}">
+		<input type="hidden" name="l_level" value="${l_level}">
+		<br>
+		<button type="submit">送出</button>	
+	</form>
+	
+	<hr>
 	<label>此關卡的題目:</label><br>
 	<c:choose>
 		<c:when test="${not empty questions}">

@@ -56,7 +56,7 @@
 		
 	-->
 	<form method="post" action="<%= request.getContextPath() %>/XlsServlet.do?className=${className}&classId=${classId}" enctype="multipart/form-data">
-		<label for="q_pic" >xls匯入:</label><br><br>
+		<label  >xls匯入:</label><br><br>
 		<input type="file" name="student_xls">
 		<input type="hidden" name="action" value="studentImport">
 		<input type="hidden" name="finishUrl" value="/back/StudentBackServlet.do?action=findStudentByClass">

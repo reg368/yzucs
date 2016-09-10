@@ -313,8 +313,8 @@ public class Question_controller extends HttpServlet {
 			QuestionVO question = new QuestionVO();
 			question.setQ_text(q_text);
 			question.setQ_tip(q_tip);
-			question.setQ_groupid(Integer.parseInt(g_id));
-			question.setQ_level_id(Integer.parseInt(q_level_id));
+			question.setQ_groupid(Integer.parseInt(g_id)); //½Òµ{id
+			question.setQ_level_id(Integer.parseInt(q_level_id)); //Ãö¥did
 			question.setQ_point("1");
 			if(q_level_id != null && q_level_id.trim().length() > 0)
 				question.setQ_level_id(Integer.parseInt(q_level_id));

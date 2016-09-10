@@ -29,6 +29,7 @@
 		</ul>	
 	</c:if>
 	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=addClassToQuestion&g_id=${g_id}&g_name=${g_name}">新增班級</a><br>
+	<hr>
 	<label>參與課程的班級:</label><br>
 	<c:choose>
 		<c:when test="${not empty sclasss}">
