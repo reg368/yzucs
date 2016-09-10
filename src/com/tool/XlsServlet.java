@@ -149,7 +149,7 @@ public class XlsServlet extends HttpServlet {
 										cellValue = cell.getStringCellValue();
 										break;	
 								}
-								 System.out.println(cellIndex+"  cellValue : "+cellValue);
+								 //System.out.println(cellIndex+"  cellValue : "+cellValue);
 								 switch(cellIndex){
 								 	//µª®×
 								 	case 0 :{
