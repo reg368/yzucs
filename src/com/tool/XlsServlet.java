@@ -152,7 +152,13 @@ public class XlsServlet extends HttpServlet {
 								 System.out.println(cellIndex+"  cellValue : "+cellValue);
 								 switch(cellIndex){
 								 	//答案
-								 	case 0 :{ 		
+								 	case 0 :{
+								 		
+								 		if(cellValue == null || cellValue.trim().length() == 0){
+								 			//沒有答案 不儲存這一列的資料
+								 				break columnLoop;
+								 		}
+								 		
 								 		String[] ansValue = cellValue.split(";");
 								 		if(ansValue != null && ansValue.length > 0){
 								 			
@@ -166,7 +172,7 @@ public class XlsServlet extends HttpServlet {
 								 			}
 								 			
 								 		}else{
-								 			//沒有答案 不儲存這一列的資料
+								 			//取得答案值陣列有問題 不儲存這一列的資料
 								 			break columnLoop;
 								 		}
 								 	}
@@ -174,15 +180,26 @@ public class XlsServlet extends HttpServlet {
 								 	//題目
 								 	case 1 :{
 								 		QuestionVO question = new QuestionVO();
+								 		
+								 		if(cellValue == null || cellValue.trim().length() == 0){
+								 			//問題的描述空值 , 不儲存剩餘的選項 
+								 			break columnLoop;
+								 		}
+								 		
 								 		//img 代表題目只有圖片顯示 , 沒有文字
 								 		if("img".equals(cellValue))
-								 			question.setQ_text("");
+								 			question.setQ_text("img");
 								 		else
 								 			question.setQ_text(cellValue);
 								 		question.setQ_tip("");
 								 		question.setQ_groupid(g_id); //課程id
 								 		question.setQ_level_id(level_id);  //關卡id
 								 		question.setQ_point("1");
+								 		if(isMulti)
+								 			question.setQ_isMulti(1);
+								 		else
+								 			question.setQ_isMulti(0);
+								 		
 								 		questionPk = qdao.insertGetPrimaryKey(question);
 								 		if(questionPk == -1){
 								 			//問題的pk不正確 , 不儲存剩餘的選項 (會關聯不起來 = 贓資料)
@@ -192,14 +209,27 @@ public class XlsServlet extends HttpServlet {
 								 	break;
 								 	//選項
 								 	default : {
+								 		
+								 		if(cellIndex >= 6){
+								 			//超過有值的欄位 跳過到下一個row
+								 			break columnLoop;
+								 		}
+								 		
+								 		
 								 		if(ansMap == null){
 								 			//沒有記錄到答案 , 不儲存剩餘的選項
 								 			break columnLoop;
 								 		}
+								 		
+								 		if(cellValue == null || cellValue.trim().length() == 0){
+								 			//選項的值不正確 , 不儲存這一個欄位的選項
+								 			continue columnLoop;
+								 		}
+								 		
 								 		AnswerVO answer = new AnswerVO();
 								 		//img 代表題目只有圖片顯示 , 沒有文字
 								 		if("img".equals(cellValue))
-								 			answer.setA_text("");
+								 			answer.setA_text("img");
 								 		else
 								 			answer.setA_text(cellValue);
 								 		answer.setA_qid(questionPk);
@@ -222,8 +252,6 @@ public class XlsServlet extends HttpServlet {
 					                    && (cellCount == nullCount)) {        //If nullCount & cellCouont are same, Row is empty
 					                break rowLoop;
 					            }
-							 
-							 
 						 }
 						 rowIndex++;
 					 }
