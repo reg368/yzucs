@@ -109,46 +109,60 @@ public class XlsServlet extends HttpServlet {
 					AnswerDAO ansdao = new AnswerDAO();
 					int rowIndex = 0;
 					
-					 while(rowIterator.hasNext()) {
+					 rowLoop : while(rowIterator.hasNext()) {
+						 
+						 int cellCount = 0;
+				         int nullCount = 0;
+						 
 						 Row row = rowIterator.next();
 						 //避掉第一列 (標題列)
 						 if(rowIndex != 0){
-							 
+
 							 Iterator<Cell> cellIterator = row.cellIterator();
 							 int cellIndex = 0;
 							 
 							 /* 每一條列所需要的暫存資料 */
 							 //是否為複選題
 							 boolean isMulti = false;
-							 //第一個欄位的答案題號 key : 選項的cell index , value : 第一個欄位答案的值
-							 Map<Integer,String> ansMap = null;
+							 //第一個欄位的答案題號 key : 答案的value , value : 答案的value
+							 Map<String,String> ansMap = null;
 							//第二個欄位題目新增到db的id
 							 int questionPk = -1;
 							 
 							 
 							 //讀取個欄位的資料
 							 columnLoop: while(cellIterator.hasNext()) {
+								 cellCount++;
 								 Cell cell = cellIterator.next();
+								 if ((cell == null)
+				                            || ((cell != null) && (cell.getCellType() == Cell.CELL_TYPE_BLANK))) {
+				                        nullCount++;
+				                  }
+								 
+								 
 								 String cellValue = ""; 
+								 switch(cell.getCellType()) {
+									case Cell.CELL_TYPE_NUMERIC:
+										cellValue = String.valueOf(cell.getNumericCellValue());
+										break;
+									case Cell.CELL_TYPE_STRING:
+										cellValue = cell.getStringCellValue();
+										break;	
+								}
+								 System.out.println(cellIndex+"  cellValue : "+cellValue);
 								 switch(cellIndex){
 								 	//答案
-								 	case 0 :{
-								 		cellValue = cell.getStringCellValue();
-								 		String[] ansValue = cellValue.split(":");
+								 	case 0 :{ 		
+								 		String[] ansValue = cellValue.split(";");
 								 		if(ansValue != null && ansValue.length > 0){
 								 			
 								 			//判斷是否複選題
 								 			if(ansValue.length > 1)
 								 				isMulti = true;
 								 			
-								 			ansMap = new HashMap<Integer,String>();	
+								 			ansMap = new HashMap<String,String>();	
 								 			for(int i = 0 ; i < ansValue.length ; i ++){
-								 				/*
-								 				 * 選項的column index是從  2 開始 e.g 第一個選項 column index : 2 ... 
-								 				 * xls 的答案欄位紀錄的答案選項的值是 1,2,3,4 (第一個選項 , 第二個選項...)
-								 				 * 這邊讀出來的"值" 是 1,2,3,4 為了要對應到選項的 column index 所以把值 + 1
-								 				 */
-								 				ansMap.put(Integer.parseInt(ansValue[i])+1, ansValue[i]);
+								 				ansMap.put(ansValue[i], ansValue[i]);
 								 			}
 								 			
 								 		}else{
@@ -159,7 +173,6 @@ public class XlsServlet extends HttpServlet {
 								 	break;
 								 	//題目
 								 	case 1 :{
-								 		cellValue = cell.getStringCellValue();
 								 		QuestionVO question = new QuestionVO();
 								 		//img 代表題目只有圖片顯示 , 沒有文字
 								 		if("img".equals(cellValue))
@@ -183,7 +196,6 @@ public class XlsServlet extends HttpServlet {
 								 			//沒有記錄到答案 , 不儲存剩餘的選項
 								 			break columnLoop;
 								 		}
-								 		cellValue = cell.getStringCellValue();
 								 		AnswerVO answer = new AnswerVO();
 								 		//img 代表題目只有圖片顯示 , 沒有文字
 								 		if("img".equals(cellValue))
@@ -192,7 +204,7 @@ public class XlsServlet extends HttpServlet {
 								 			answer.setA_text(cellValue);
 								 		answer.setA_qid(questionPk);
 								 		
-								 		String ansValue = ansMap.get(cellIndex);
+								 		String ansValue = ansMap.get(ansIndexConvert(cellIndex));
 								 		if(ansValue == null)
 								 			answer.setA_is_correct(0);
 								 		else
@@ -205,6 +217,12 @@ public class XlsServlet extends HttpServlet {
 								 
 								 cellIndex++;
 							 }
+							 
+							 if ((cellCount != 0) && (nullCount != 0)
+					                    && (cellCount == nullCount)) {        //If nullCount & cellCouont are same, Row is empty
+					                break rowLoop;
+					            }
+							 
 							 
 						 }
 						 rowIndex++;
@@ -376,6 +394,20 @@ public class XlsServlet extends HttpServlet {
     	}
     }
 
+    private String ansIndexConvert(int index){
+    	switch (index){
+    		case 2:
+    			return "A";
+    		case 3:
+    			return "B";
+    		case 4:
+    			return "C";
+    		case 5:
+    			return "D";
+        	default:
+        		return null;
+    	}
+    }
     
     public String getFileNameFromPart(Part part) {
   		String header = part.getHeader("content-disposition"); // 從前面第一個範例(版本1-基本測試)可得知此head的值
