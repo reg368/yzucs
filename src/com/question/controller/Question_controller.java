@@ -314,10 +314,9 @@ public class Question_controller extends HttpServlet {
 			question.setQ_text(q_text);
 			question.setQ_tip(q_tip);
 			question.setQ_groupid(Integer.parseInt(g_id)); //課程id
-			question.setQ_level_id(Integer.parseInt(q_level_id)); //關卡id
 			question.setQ_point("1");
 			if(q_level_id != null && q_level_id.trim().length() > 0)
-				question.setQ_level_id(Integer.parseInt(q_level_id));
+				question.setQ_level_id(Integer.parseInt(q_level_id));//關卡id
 			
 			byte[] image = null;
 			if (in != null){
