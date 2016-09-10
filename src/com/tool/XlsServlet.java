@@ -329,8 +329,12 @@ public class XlsServlet extends HttpServlet {
 					StudentCRDAO sdao = new StudentCRDAO();
 					int rowIndex = 0;	
 					
-				    while(rowIterator.hasNext()) {
+					rowLoop : while(rowIterator.hasNext()) {
 				    	Row row = rowIterator.next();
+				    	
+				    	int cellCount = 0;
+				        int nullCount = 0;
+				    	
 				    	//避掉第一列title
 						if(rowIndex != 0 ){
 							Iterator<Cell> cellIterator = row.cellIterator();
@@ -341,9 +345,16 @@ public class XlsServlet extends HttpServlet {
 							String user_name = "";
 							
 							//開始讀取各條列欄位資料
-							while(cellIterator.hasNext()) {
+							columnLoop : while(cellIterator.hasNext()) {
 								
+								
+								cellCount++;
 								Cell cell = cellIterator.next();
+								 if ((cell == null)
+				                            || ((cell != null) && (cell.getCellType() == Cell.CELL_TYPE_BLANK))) {
+				                        nullCount++;
+				                  }
+								
 								String cellValue = "";
 								switch(cell.getCellType()) {
 									case Cell.CELL_TYPE_NUMERIC:
@@ -353,14 +364,25 @@ public class XlsServlet extends HttpServlet {
 										cellValue = cell.getStringCellValue();
 										break;
 								}
-								
+								//System.out.println(cellIndex+"  cellValue : "+cellValue);
 								
 								//第一個欄位 學號
 								if(cellIndex == 0){
+									if(cellValue.trim().length() == 0){
+										//學號空值不新增
+										break columnLoop ;
+									}
+										
 									vo = udao.findByUser_login_id(cellValue);
 									user_login_id = cellValue;
 								//第二個欄位 姓名	
 								}else{
+									
+									if(cellIndex >= 2){
+							 			//超過有值的欄位 跳過到下一個row
+							 			break columnLoop;
+							 		}
+									
 									user_name = cellValue;
 								}
 								
@@ -368,7 +390,7 @@ public class XlsServlet extends HttpServlet {
 							}
 							
 							//沒有此學生 要新增
-							if(vo == null){
+							if(vo == null && user_login_id.trim().length() > 0){
 								vo = new UserVO();
 			    				vo.setUser_login_id(user_login_id);
 			        			vo.setUser_password(user_login_id);
@@ -378,15 +400,23 @@ public class XlsServlet extends HttpServlet {
 			        			vo.setUser_id(user_id);
 							}
 							
-							//檢查學生是否已經被加入至課程
-			    			StudentCRVO cvo = sdao.findByStudentIdAndClassId(vo.getUser_id(), c_id);
-			    			if(cvo == null){
-			    				cvo = new StudentCRVO();
-			        			cvo.setCr_class_id(c_id);
-			        			cvo.setCr_student_id(vo.getUser_id());
-			        			sdao.insert(cvo);
-			    			}
+							if(vo != null){
+								//檢查學生是否已經被加入至班級
+				    			StudentCRVO cvo = sdao.findByStudentIdAndClassId(vo.getUser_id(), c_id);
+				    			if(cvo == null){
+				    				cvo = new StudentCRVO();
+				        			cvo.setCr_class_id(c_id);
+				        			cvo.setCr_student_id(vo.getUser_id());
+				        			sdao.insert(cvo);
+				    			}
+							}
 							
+							
+			    			if ((cellCount != 0) && (nullCount != 0)
+				                    && (cellCount == nullCount)) {        //If nullCount & cellCouont are same, Row is empty
+				                break rowLoop;
+				            }	
+			    			
 						}
 						rowIndex++;
 					}
