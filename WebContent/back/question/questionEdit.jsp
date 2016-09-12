@@ -26,23 +26,17 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	<form method="post" action="<%= request.getContextPath() %>" enctype="multipart/form-data">
+	<form method="post" action="<%= request.getContextPath() %>/back/QuestionBackServlet.do" enctype="multipart/form-data">
 		<table  border="1">
 			<tr bgcolor="#FFFF00">
 				<th>題目</th>
 				<th>圖片</th>
+				<th>新增/修改圖片</th>
 				<th>是否為複選題</th>
 			</tr>
 			<tr>
 				<td>
-					<c:choose>
-						<c:when test="${not empty question.q_text}">
-							${question.q_text}	
-						</c:when>
-						<c:otherwise>
-							無
-						</c:otherwise>
-					</c:choose>
+					<textarea rows="4" cols="30"  name="q_text">${question.q_text}</textarea>
 				</td>
 				<td>
 					<c:choose>
@@ -50,20 +44,27 @@
 							<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=question&q_id=${question.q_id}" height="150" width="150">	
 						</c:when>
 						<c:otherwise>
-							<label for="q_pic" >新增圖片:</label><br>
-							<input type="file" name="q_pic">
+							無
 						</c:otherwise>
 					</c:choose>
 				</td>
 				<td>
-					<c:choose>
-						<c:when test="${question.q_isMulti == 1}">
-							是
-						</c:when>
-						<c:otherwise>
-							否
-						</c:otherwise>
-					</c:choose>
+					<label for="q_pic" >圖片上傳:</label><br>
+					<input type="file" name="q_pic">
+				</td>
+				<td>
+					<select name="q_isMulti">
+						<c:choose>
+							<c:when test="${question.q_isMulti == 1}">
+								<option value="true" selected>是</option>
+								<option value="false">否</option>
+							</c:when>
+							<c:otherwise>
+								<option value="true">是</option>
+								<option value="false" selected>否</option>
+							</c:otherwise>
+						</c:choose>
+					</select>
 				</td>
 			</tr>
 		</table>
@@ -74,20 +75,14 @@
 			<tr bgcolor="#FFFF00">
 				<th>選項</th>
 				<th>圖片</th>
+				<th>新增/修改圖片</th>
 				<th>是否正確</th>
 			</tr>
 			
 			<c:forEach var="answer" items="${answers}" varStatus="loop">
 				<tr>
 					<td>
-						<c:choose>
-							<c:when test="${not empty answer.a_text}">
-								${answer.a_text}
-							</c:when>
-							<c:otherwise>
-								無
-							</c:otherwise>
-						</c:choose>
+						<textarea rows="4" cols="30"  name="a_text${loop.index}">${answer.a_text}</textarea>
 					</td>
 					<td>
 						<c:choose>
@@ -95,24 +90,36 @@
 								<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=answer&a_id=${answer.a_id}" height="150" width="150">
 							</c:when>
 							<c:otherwise>
-								<label for="a_pic" >新增圖片:</label><br>
-								<input type="file" name="a_pic">
+								無
 							</c:otherwise>
 						</c:choose>	
 					</td>
-					<c:choose>
-						<c:when test="${answer.a_is_correct == 1 }">
-							<td><font style="color:red;">是</font></td>
-						</c:when>
-						<c:otherwise>
-							<td>否</td>
-						</c:otherwise>	
-					</c:choose>
+					<td>
+						<label for="a_pic" >圖片上傳:</label><br>
+						<input type="file" name="a_pic${loop.index}">
+					</td>
+					<td>
+						<select name="a_is_correct${loop.index}">
+							<c:choose>
+								<c:when test="${answer.a_is_correct == 1 }">
+									<option value="true" selected>是</option>
+									<option value="false" >否</option>
+								</c:when>
+								<c:otherwise>
+									<option value="true">是</option>
+									<option value="false" selected>否</option>
+								</c:otherwise>
+							</c:choose>
+						</select>
+					</td>
 				</tr>	
 			</c:forEach>
 			
 			
 		</table>
+		<input type="hidden" name="q_id" value="${question.q_id}">
+		<input type="hidden" name="action" value="questionEdit">
+		<input type="hidden" name="finishUrl" value="/back/QuestionBackServlet.do?action=viewQuestion&q_id=${question.q_id}">
 		
 		<hr>
 		<button type="submit">送出</button>

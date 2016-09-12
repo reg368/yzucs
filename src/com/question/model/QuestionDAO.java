@@ -73,4 +73,17 @@ public class QuestionDAO implements Question_interface {
 		return vo;
 	}
 
+	@Override
+	public void insertOrUpdate(QuestionVO vo) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(vo);
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+	}
+
 }

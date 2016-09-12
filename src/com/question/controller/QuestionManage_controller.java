@@ -282,6 +282,7 @@ public class QuestionManage_controller extends HttpServlet {
     		
     		req.setAttribute("question", question);
     		req.setAttribute("answers", answers);
+    		req.setAttribute("answerCount", answers.size());
     		
     		RequestDispatcher view = req
 					.getRequestDispatcher("/back/question/questionEdit.jsp");
@@ -289,6 +290,111 @@ public class QuestionManage_controller extends HttpServlet {
 			return;
     		
     		
+    	}else if("questionEdit".equals(action)){
+    		
+    		String finishUrl = req.getParameter("finishUrl");
+    		InputStream in = null;
+			Map<String,InputStream> picMap = new HashMap<>();
+			Collection<Part> parts = req.getParts();
+			int picCount = 0;
+			
+			for (Part part : parts) {
+				if ("q_pic".equals(part.getName())) {
+					picCount++;
+					
+					if (getFileNameFromPart(part) != null) {
+						// 判斷主圖是否空直或不是圖檔
+						if (getFileNameFromPart(part) != null
+								&& ("jpg"
+										.compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0
+										|| "png".compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0 || "jpeg"
+										.compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0)) {
+							in = part.getInputStream();
+						} else if(part.getInputStream() != null){
+							errorMessage.add("題目圖片上傳格式不正確. 格式必須為 JPG , JPEG , PNG");
+						}
+					}
+				}else if ("a_pic0".equals(part.getName())
+						|| "a_pic1".equals(part.getName())
+						|| "a_pic2".equals(part.getName())
+						|| "a_pic3".equals(part.getName())) {
+
+					picCount++;
+					// 判斷附圖是否空直或不是圖檔
+					if (getFileNameFromPart(part) != null) {
+
+						if (getFileNameFromPart(part) != null
+								&& ("jpg"
+										.compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0
+										|| "png".compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0 || "jpeg"
+										.compareToIgnoreCase(getFileFormat(getFileNameFromPart(part))) == 0)) {
+							picMap.put(part.getName(),part.getInputStream());
+						} else
+							errorMessage.add("題目附圖" + (picCount - 1)
+									+ "上傳格式不正確. 格式必須為 JPG , JPEG , PNG");
+					}
+				}
+				
+				// 如果已經找了四張圖檔了,迴圈結束
+				if (picCount > 4)
+					break;
+			}
+    		
+    		
+			if (errorMessage.size() > 0) {
+				req.setAttribute("errorMessage", errorMessage);
+	    		RequestDispatcher view = req
+						.getRequestDispatcher(finishUrl);
+				view.forward(req, res);	
+				return;
+			}
+			
+			int q_id = Integer.parseInt(req.getParameter("q_id"));
+    		QuestionVO question = new QuestionDAO().findByQid(q_id);
+    		List<AnswerVO> answers = new AnswerDAO().findAnswersByQid(q_id);
+			
+    		String q_text = req.getParameter("q_text").trim();
+    		question.setQ_text(q_text);
+    		String q_isMulti = req.getParameter("q_isMulti");
+    		if("true".equals(q_isMulti))
+    			question.setQ_isMulti(1);
+    		else
+    			question.setQ_isMulti(0);
+    		
+    		byte[] image = null;
+    		if(in != null){
+    			image = InputStreamConvertByteArray(in);
+				question.setQ_pic(image);
+    		}
+    		
+    		new QuestionDAO().insertOrUpdate(question);
+    		
+    		AnswerDAO adao = new AnswerDAO();
+    		for(int i = 0 ; i < answers.size() ; i ++){
+    			String a_text = req.getParameter("a_text"+i).trim();
+    			answers.get(i).setA_text(a_text);
+    			InputStream pic = picMap.get("a_pic"+i);
+    			if(pic != null){
+    				answers.get(i).setA_pic(InputStreamConvertByteArray(pic));
+				}
+    			
+    			String a_is_correct = req.getParameter("a_is_correct"+i);
+    			
+    			if("true".equals(a_is_correct)){
+    				answers.get(i).setA_is_correct(1);
+    			}else{
+    				answers.get(i).setA_is_correct(0);
+    			}
+    			
+    			adao.insertOrUpdate(answers.get(i));
+    		}
+    		
+    		errorMessage.add("修改成功");
+			req.setAttribute("errorMessage", errorMessage);
+			RequestDispatcher view = req
+					.getRequestDispatcher(finishUrl);
+			view.forward(req, res);	
+			return;
     	}
     
     }
