@@ -51,7 +51,7 @@
 			<table  border="1">
 				<c:forEach var="question" items="${questions}" varStatus="loop">
 					<tr>
-						<td>${question.q_text} <!-- <a href="<%= request.getContextPath() %>">編輯</a>-->  </td>
+						<td>${question.q_text}  <a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestion&q_id=${question.q_id}">編輯</a> </td>
 					</tr>	
 				</c:forEach>
 			</table>	
@@ -60,10 +60,6 @@
 			<font >目前沒有題目</font>		
 		</c:otherwise>	
 	</c:choose>
-	
-
-
-	
 
 </body>
 </html>

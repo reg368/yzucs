@@ -274,6 +274,21 @@ public class QuestionManage_controller extends HttpServlet {
 			view.forward(req, res);	
 			return;
     		
+    	}else if("viewQuestion".equals(action)){
+    		
+    		int q_id = Integer.parseInt(req.getParameter("q_id"));
+    		QuestionVO question = new QuestionDAO().findByQid(q_id);
+    		List<AnswerVO> answers = new AnswerDAO().findAnswersByQid(q_id);
+    		
+    		req.setAttribute("question", question);
+    		req.setAttribute("answers", answers);
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/questionEdit.jsp");
+			view.forward(req, res);	
+			return;
+    		
+    		
     	}
     
     }
