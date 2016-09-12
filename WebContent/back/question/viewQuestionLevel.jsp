@@ -29,7 +29,7 @@
 		</ul>	
 	</c:if>
 	
-	<a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp?l_id=${l_id}&l_level=${l_level}&g_id=${g_id}&g_name=${g_name}">新增題目</a><br>
+	<a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp?l_id=${l_id}&g_id=${g_id}&g_name=${g_name}">新增題目</a><br>
 	<hr>
 	
 	<form method="post" action="<%= request.getContextPath() %>/XlsServlet.do?g_id=${g_id}&g_name=${g_name}" enctype="multipart/form-data">
