@@ -244,6 +244,11 @@ public class QuestionManage_controller extends HttpServlet {
     			String newName = new String(g_name.getBytes("ISO-8859-1"),"UTF-8");
         		req.setAttribute("g_name", newName);
     		}
+    		if(l_level != null && l_level.trim().length() > 0){
+    			String newName = new String(l_level.getBytes("ISO-8859-1"),"UTF-8");
+        		req.setAttribute("l_level", newName);
+    		}
+    		
     		req.setAttribute("g_id", g_id);
     		
     
@@ -260,10 +265,6 @@ public class QuestionManage_controller extends HttpServlet {
     			return;
     		}
     		
-    		if(l_level != null && l_level.trim().length() > 0){
-    			String newName = new String(l_level.getBytes("ISO-8859-1"),"UTF-8");
-        		req.setAttribute("l_level", newName);
-    		}
     		req.setAttribute("l_id", l_id);
     		
     		List<QuestionVO> questions = new QuestionDAO().findByLevelId(l_id);
