@@ -3,7 +3,6 @@ package com.question.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Timestamp;
 import java.util.*;
 
 import javax.servlet.RequestDispatcher;
@@ -18,8 +17,6 @@ import javax.servlet.http.Part;
 
 import com.answer.model.AnswerDAO;
 import com.answer.model.AnswerVO;
-import com.answer_record.model.Answer_recordDAO;
-import com.answer_record.model.Answer_recordVO;
 import com.question.model.QuestionDAO;
 import com.question.model.QuestionVO;
 import com.question_level.model.Question_levelDAO;
@@ -105,6 +102,7 @@ public class Question_controller extends HttpServlet {
     				//目前在第幾關
     				session.setAttribute("nowlevel", nowlevel);
     				session.setAttribute("nowlevelname", currentLevel.getL_level());
+    				session.setAttribute("currentlevelId", currentLevel.getL_id());
     				
     				//給問題頁的參數
     				List<QuestionVO> questions = new QuestionDAO().findByLevelId(currentLevel.getL_id());
@@ -157,37 +155,12 @@ public class Question_controller extends HttpServlet {
 				return;
     		}
     	
-    		
-    		Answer_recordDAO recordDAO = new Answer_recordDAO();
-    		//處理回答紀錄
-			Answer_recordVO recordVO = recordDAO.findByUserVOAndQuestionid(uservo, questions.get(qindex).getQ_id());
-    
-			
 			//答對了
     		if(isCorrect != null && "1".equals(isCorrect)){
     			
     			session.setAttribute("tip", null);
     			
-    			//第一次作答這題
-    			if(recordVO == null){
-    				recordVO = new Answer_recordVO();
-    				recordVO.setR_userId(uservo.getUser_id());
-    				recordVO.setR_questionId(questions.get(qindex).getQ_id());
-    				recordVO.setR_user_login_count(uservo.getUser_login_count());
-    				recordVO.setR_correct_count(1);
-    				recordVO.setR_incorrect_count(0);
-    				recordVO.setR_user_update_date(null);
-    				recordDAO.insert(recordVO);
-    			//已作答過
-    			}else{
-    				//答對問題只要記錄一次就好
-    				if(recordVO.getR_correct_count() != null && recordVO.getR_correct_count()== 0)
-    					recordVO.setR_correct_count(recordVO.getR_correct_count()+1);
-    				java.util.Date du = new java.util.Date();
-					Timestamp update_date = new Timestamp(du.getTime());
-    				recordVO.setR_user_update_date(update_date);
-    				recordDAO.update(recordVO);
-    			}
+    			
     			
     			//還有題目 , 下一題
     			if((qindex+1) < questions.size()){
@@ -206,25 +179,6 @@ public class Question_controller extends HttpServlet {
     			}
     		//答錯了
     		}else if(isCorrect != null && "0".equals(isCorrect)){
-    			
-    			//第一次作答這題
-    			if(recordVO == null){
-    				recordVO = new Answer_recordVO();
-    				recordVO.setR_userId(uservo.getUser_id());
-    				recordVO.setR_questionId(questions.get(qindex).getQ_id());
-    				recordVO.setR_user_login_count(uservo.getUser_login_count());
-    				recordVO.setR_correct_count(0);
-    				recordVO.setR_incorrect_count(1);
-    				recordVO.setR_user_update_date(null);
-    				recordDAO.insert(recordVO);
-    			//已作答過
-    			}else{
-    				recordVO.setR_incorrect_count(recordVO.getR_incorrect_count()+1);
-    				java.util.Date du = new java.util.Date();
-					Timestamp update_date = new Timestamp(du.getTime());
-    				recordVO.setR_user_update_date(update_date);
-    				recordDAO.update(recordVO);
-    			}
     			
     			
     			session.setAttribute("character_mood", "_sad");

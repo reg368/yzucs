@@ -50,14 +50,14 @@ public class Answer_recordDAO implements Answer_record_interface{
 	}
 
 	@Override
-	public int update(Answer_recordVO vo) {
+	public int insertOrUpdateGetPirmary(Answer_recordVO vo) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
 			session.saveOrUpdate(vo);
 			session.getTransaction().commit();
-			return 1 ;
+			return vo.getR_id() ;
 		}catch(RuntimeException ex){
 			session.getTransaction().rollback();
 		}
@@ -72,7 +72,7 @@ public class Answer_recordDAO implements Answer_record_interface{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
-			Query query = session.createQuery("from Answer_recordVO where r_userId = ? AND r_user_login_count = ? AND r_questionid = ? AND r_group_id = ? ");
+			Query query = session.createQuery("from Answer_recordVO where r_userId = ? AND r_user_login_count = ? AND r_questionid = ? ");
 			query.setParameter(0, uservo.getUser_id());
 			query.setParameter(1, uservo.getUser_login_count());
 			query.setParameter(2,questionId);

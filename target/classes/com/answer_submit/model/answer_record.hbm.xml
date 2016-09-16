@@ -10,7 +10,7 @@
 			</generator>
 		</id>
 			<property name="r_id" column="r_id" />
-			<property name="a_id" column="a_id" />	
+			<property name="a_ids" column="a_ids" />	
 			<property name="s_joindate" column="s_joindate" insert="false" />
 	</class>
 </hibernate-mapping>

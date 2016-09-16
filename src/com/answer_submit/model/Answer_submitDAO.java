@@ -14,7 +14,7 @@ public class Answer_submitDAO implements Answer_submit_interface {
 			session.beginTransaction();
 			session.save(vo);
 			session.getTransaction().commit();
-			return vo.getS_Id() ;
+			return vo.getS_id() ;
 		}catch(RuntimeException ex){
 			session.getTransaction().rollback();
 		}
