@@ -126,7 +126,7 @@ public class Question_controller extends HttpServlet {
 
     	    		
     	    		
-    	    	//沒有下一關了遊戲結束	
+    	    	//抓不到問題資料物件
     			}else{
     				
     				errorMessage.add("登入逾期 請重新登入");
@@ -138,9 +138,8 @@ public class Question_controller extends HttpServlet {
     			
     		//沒有下一關了遊戲結束	
     		}else{
-//				Map<Integer,Map<String , Object>> recordInfoMap = new HashMap<Integer,Map<String , Object>>();
+//				Map<Integer,Map<String , String>> recordInfoMap = new HashMap<Integer,Map<String , String>>();
 //				List<Question_levelVO> infolevels = (List<Question_levelVO>)session.getAttribute("levels");
-//				Answer_recordDAO adao = new Answer_recordDAO();
 //				for(Question_levelVO vo : infolevels){
 //					
 //				}
