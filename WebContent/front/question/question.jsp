@@ -255,17 +255,40 @@
     							$( "#petDialog" ).html("<p>好棒!答對了</p>");
     							$( "#petDialog" ).show();
     							$("#isCorrect").val('1');
+    							
+    							setTimeout(
+       							      function() {
+       							    	  $( "#question_form" ).submit();
+       							      }, 1000
+       							)	
+    							
     						}else{
+    							$("#submit_btn").attr("disabled", false);
     							$( "#petDialog" ).html("<p>糟糕!答錯了</p>");
     							$( "#petDialog" ).show();
+    							
+    							setTimeout(
+          							      function() {
+          							    	$( "#question_detail_body" ).load( $("#url").val()+"/front/question/question_modal_detail.jsp", function( response, status, xhr ) {          			
+          							    		if ( status == "error" ) {
+          							    		  
+          							    	    //error handle
+          							    		//var msg = "Sorry but there was an error: ";
+          							    	    //$( "#error" ).html( msg + xhr.status + " " + xhr.statusText );
+          							    	  }else{
+          							    		 
+          							    		  $('#question_incorrect_detail').modal({backdrop: 'static', keyboard: false})    
+          							    		  $("#question_incorrect_detail").modal('show');         							    		
+          							    	  }
+          							    	});
+          							    	  
+          							    	  
+          							      }, 1000
+          							)
+    							
     							$("#isCorrect").val('0');
     						}
-    						
-    						 setInterval(
-    							      function() {
-    							    	  $( "#question_form" ).submit();
-    							      }, 1000
-    							)	
+    					
     				  }
     				});
     		}
@@ -279,6 +302,8 @@
    <%@ include file="/front/question/report.file"  %>
    <%--  跳出答題狀況的內容 --%>
    <%@ include file="/front/question/question_detail.file"  %>
+    <%-- 跳出答題出錯的內容 --%>
+   <%@ include file="/front/question/question_incorrect_detail.file"  %>
    
    
   <!-- layout --> 	
