@@ -6,10 +6,7 @@
 <%@ page import="com.user.model.UserVO" %>
 <%
 	UserVO user = (UserVO)session.getAttribute("UserVO");
-	List<Answer_recordVO> records = new Answer_recordDAO().findAnswerVOByUserVO(user);
-	List<Answer_recordVO> totalRecords = new Answer_recordDAO().findAnswerVOSumResultByUserVO(user);
-	pageContext.setAttribute("records", records);
-	pageContext.setAttribute("totalRecords", totalRecords);
+    
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -131,42 +128,30 @@ body {
   	   -->
   	  <div class="gwd-div-62t3">
   	    	
-  	  	<c:if test="${not empty records}">
-  	  	<h2>本次答題記錄</h2>
-		<table  border="1" class="table table-hover">
-			<tr class="warning">
-				<td>題號</td><td>答對次數</td><td>答錯次數</td><td>答對率</td>
-			</tr>
-			
-			<c:forEach var="record" items="${records}" varStatus="loop">
-				<tr>
-					<td>${loop.index}</td>
-					<td>${record.r_correct_count}</td>
-					<td>${record.r_incorrect_count}</td>
-					<td>${ (record.r_correct_count / (record.r_correct_count + record.r_incorrect_count)) * 100 }%</td>
-				</tr>	
-			</c:forEach>
-		</table>
-		<br>
-		<table  border="1" class="table table-hover">
-			<tr class="warning">
-				<h2>總答題記錄</h2>
-				<td>題號</td><td>總答對次數</td><td>總答錯次數</td><td>總答對率</td>
-			</tr>
-			
-			<c:forEach var="record" items="${totalRecords}" varStatus="loop">
-				<tr>
-					<td>${loop.index}</td>
-					<td>${record.r_correct_count}</td>
-					<td>${record.r_incorrect_count}</td>
-					<td>${ (record.r_correct_count / (record.r_correct_count + record.r_incorrect_count)) * 100 }%</td>
-				</tr>	
-			</c:forEach>
-			
-		
-		</table>	
-		
-		</c:if>
+  	  	<c:if test="${not empty  levels}">
+  	  		<ul>
+  	  			<c:forEach var="level" items="${levels}" varStatus="loop">
+  	  				<li>
+  	  					${level.l_level}
+  	  					<ul>
+  	  						<li>
+  	  							<table>
+  	  								<tr>
+  	  									<th>題號</th><th>題目</th><th>答案</th><th>答對次數</th><th>答錯次數</th><th>答對率</th>
+  	  								</tr>
+  	  								<c:forEach var="level" items="${levels}" varStatus="loop">
+  	  								<tr>
+  	  									<td></td>
+  	  								</tr>	
+  	  								</c:forEach>
+  	  							</table>	
+  	  						</li>
+  	  					</ul>
+  	  				</li>
+  	  			</c:forEach>
+  	  		</ul>
+  	  	</c:if>
+  	  	
   	  	<table  border="0" >
   	  		<tr>
   	  			<td>

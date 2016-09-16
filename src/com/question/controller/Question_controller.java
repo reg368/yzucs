@@ -17,6 +17,8 @@ import javax.servlet.http.Part;
 
 import com.answer.model.AnswerDAO;
 import com.answer.model.AnswerVO;
+import com.answer_record.model.Answer_recordDAO;
+import com.answer_record.model.Answer_recordVO;
 import com.question.model.QuestionDAO;
 import com.question.model.QuestionVO;
 import com.question_level.model.Question_levelDAO;
@@ -69,6 +71,7 @@ public class Question_controller extends HttpServlet {
     			
     			session.setAttribute("gametotallevel", levels.size());
     			session.setAttribute("game_levels", levels);
+    			session.setAttribute("levels", vos);
     			res.sendRedirect("/YZUCS/front/question/QuestionServlet.do?action=nextLevel");
 	    		return;
     			
@@ -89,6 +92,7 @@ public class Question_controller extends HttpServlet {
     	}else if("nextLevel".equals(action)){
     		
     		LinkedList<Question_levelVO> levels = (LinkedList<Question_levelVO>)session.getAttribute("game_levels");
+    		
     		if(levels != null){
     			
     			//取得下一關
@@ -122,6 +126,13 @@ public class Question_controller extends HttpServlet {
     	    		
     	    	//沒有下一關了遊戲結束	
     			}else{
+    				
+//    				Map<Integer,Map<String , Object>> recordInfoMap = new HashMap<Integer,Map<String , Object>>();
+//    				List<Question_levelVO> infolevels = (List<Question_levelVO>)session.getAttribute("levels");
+//    				Answer_recordDAO adao = new Answer_recordDAO();
+//    				for(Question_levelVO vo : infolevels){
+//    					
+//    				}
     				
     				res.sendRedirect("/YZUCS/front/question/result_info.jsp");
     				return;

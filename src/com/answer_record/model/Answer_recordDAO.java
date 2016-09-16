@@ -156,6 +156,29 @@ public class Answer_recordDAO implements Answer_record_interface{
 		return recordvos;
 	}
 
+	@Override
+	public Answer_recordVO findByUserVOAndQuestionidAndLevelId(UserVO uservo,
+			int questionId, int levelId) {
+		// TODO Auto-generated method stub
+		Answer_recordVO recordvo = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery("from Answer_recordVO where r_userId = ? AND r_user_login_count = ? AND r_questionid = ? AND r_level_id = ? ");
+			query.setParameter(0, uservo.getUser_id());
+			query.setParameter(1, uservo.getUser_login_count());
+			query.setParameter(2,questionId);
+			query.setParameter(3, levelId);
+			if(query.list() != null)
+				recordvo = (Answer_recordVO)query.list().get(0);
+			
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+		return recordvo;
+	}
+
 	
 
 	
