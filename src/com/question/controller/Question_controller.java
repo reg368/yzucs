@@ -93,10 +93,12 @@ public class Question_controller extends HttpServlet {
     		
     		LinkedList<Question_levelVO> levels = (LinkedList<Question_levelVO>)session.getAttribute("game_levels");
     		
-    		if(levels != null){
+    		
+    		if(levels != null && levels.size() > 0){
     			
     			//取得下一關
     			Question_levelVO currentLevel = levels.pollFirst();
+    			session.setAttribute("game_levels", levels);
     			int totallevel = (int)session.getAttribute("gametotallevel");
     			
     			if(currentLevel != null){
@@ -127,25 +129,24 @@ public class Question_controller extends HttpServlet {
     	    	//沒有下一關了遊戲結束	
     			}else{
     				
-//    				Map<Integer,Map<String , Object>> recordInfoMap = new HashMap<Integer,Map<String , Object>>();
-//    				List<Question_levelVO> infolevels = (List<Question_levelVO>)session.getAttribute("levels");
-//    				Answer_recordDAO adao = new Answer_recordDAO();
-//    				for(Question_levelVO vo : infolevels){
-//    					
-//    				}
-    				
-    				res.sendRedirect("/YZUCS/front/question/result_info.jsp");
-    				return;
+    				errorMessage.add("登入逾期 請重新登入");
+        			req.setAttribute("errorMessage", errorMessage);
+        			RequestDispatcher view = req
+        					.getRequestDispatcher("/front/index/index.jsp");
+        			return;
     			}
     			
-    		
+    		//沒有下一關了遊戲結束	
     		}else{
-    			errorMessage.add("登入逾期 請重新登入");
-    			req.setAttribute("errorMessage", errorMessage);
-    			RequestDispatcher view = req
-    					.getRequestDispatcher("/front/index/index.jsp");
-    			view.forward(req, res);	
-    			return;
+//				Map<Integer,Map<String , Object>> recordInfoMap = new HashMap<Integer,Map<String , Object>>();
+//				List<Question_levelVO> infolevels = (List<Question_levelVO>)session.getAttribute("levels");
+//				Answer_recordDAO adao = new Answer_recordDAO();
+//				for(Question_levelVO vo : infolevels){
+//					
+//				}
+				
+    			res.sendRedirect("/YZUCS/front/question/result_info.jsp");
+				return;
     		}
     		 
     	}else if("answer_submit".equals(action)){
