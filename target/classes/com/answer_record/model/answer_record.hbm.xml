@@ -17,5 +17,6 @@
 			<property name="r_user_joindate" column="r_uesr_joindate" insert="false" update="false"/>
 			<property name="r_user_update_date" column="r_user_update_date" />	
 			<property name="r_group_id" column="r_group_id" />	
+			<property name="r_level_id" column="r_level_id" />	
 	</class>
 </hibernate-mapping>

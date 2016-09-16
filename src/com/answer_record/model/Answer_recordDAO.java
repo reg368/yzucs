@@ -72,7 +72,7 @@ public class Answer_recordDAO implements Answer_record_interface{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
-			Query query = session.createQuery("from Answer_recordVO where r_userId = ? AND r_user_login_count = ? AND r_questionid = ? ");
+			Query query = session.createQuery("from Answer_recordVO where r_userId = ? AND r_user_login_count = ? AND r_questionid = ? AND r_group_id = ? ");
 			query.setParameter(0, uservo.getUser_id());
 			query.setParameter(1, uservo.getUser_login_count());
 			query.setParameter(2,questionId);

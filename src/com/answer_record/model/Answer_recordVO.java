@@ -14,6 +14,7 @@ public class Answer_recordVO implements Serializable {
 	Timestamp r_user_joindate;
 	Timestamp r_user_update_date;
 	Integer r_group_id;
+	Integer r_level_id;
 	
 	
 	public Integer getR_id() {
@@ -69,6 +70,12 @@ public class Answer_recordVO implements Serializable {
 	}
 	public void setR_group_id(Integer r_group_id) {
 		this.r_group_id = r_group_id;
+	}
+	public Integer getR_level_id() {
+		return r_level_id;
+	}
+	public void setR_level_id(Integer r_level_id) {
+		this.r_level_id = r_level_id;
 	}
 	
 	
