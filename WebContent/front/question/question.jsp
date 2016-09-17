@@ -219,8 +219,8 @@
       background-color: rgb(223, 232, 88);
     }
   </style>	
-	
 
+</head>
  <script>
  /*
     setInterval(
@@ -269,21 +269,21 @@
     							
     							setTimeout(
           							      function() {
-          							    	$( "#question_detail_body" ).load( $("#url").val()+"/front/question/question_modal_detail.jsp", function( response, status, xhr ) {          			
+          							    	$( "#question_detail_body" ).load( $("#url").val()+"/front/question/question_modal_answerFail.jsp?a_id="+a_id , function( response, status, xhr ) {          			
           							    		if ( status == "error" ) {
           							    		  
           							    	    //error handle
           							    		//var msg = "Sorry but there was an error: ";
           							    	    //$( "#error" ).html( msg + xhr.status + " " + xhr.statusText );
           							    	  }else{
-          							    		 
+          							    		  //background 點擊關閉彈跳視窗取消
           							    		  $('#question_incorrect_detail').modal({backdrop: 'static', keyboard: false})    
           							    		  $("#question_incorrect_detail").modal('show');         							    		
           							    	  }
           							    	});
           							    	  
           							    	  
-          							      }, 1000
+          							      }, 600
           							)
     							
     							$("#isCorrect").val('0');
@@ -295,7 +295,6 @@
     	});
     });
   </script>
-</head>
 <body>
    
    <%--  跳出答題狀況的內容 --%>

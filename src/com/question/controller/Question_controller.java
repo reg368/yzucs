@@ -117,6 +117,7 @@ public class Question_controller extends HttpServlet {
     	    		session.setAttribute("qindex", 0);
     	    		session.setAttribute("question", questions.get(0));
     	    		List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(0).getQ_id());
+    	    		Collections.shuffle(answer);
     	    		session.setAttribute("answers", answer);
     	    		session.setAttribute("tip", null);
     	    		session.setAttribute("f_levels", levels);
@@ -159,6 +160,7 @@ public class Question_controller extends HttpServlet {
     			session.setAttribute("qindex", qindex);
     			session.setAttribute("question", questions.get(qindex));
 				List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(qindex).getQ_id());
+				Collections.shuffle(answer);
 				session.setAttribute("answers", answer);
 				session.setAttribute("tip", questions.get(qindex).getQ_tip());
 	    		
@@ -179,6 +181,7 @@ public class Question_controller extends HttpServlet {
     				session.setAttribute("qindex", qindex+1);
     				session.setAttribute("question", questions.get(qindex+1));
     				List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(qindex+1).getQ_id());
+    				Collections.shuffle(answer);
     				session.setAttribute("answers", answer);
     				
     				res.sendRedirect("/YZUCS/front/question/question.jsp");
@@ -196,6 +199,7 @@ public class Question_controller extends HttpServlet {
     			session.setAttribute("qindex", qindex);
     			session.setAttribute("question", questions.get(qindex));
 				List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(qindex).getQ_id());
+				Collections.shuffle(answer);
 				session.setAttribute("answers", answer);
 				session.setAttribute("tip", questions.get(qindex).getQ_tip());
 	    		

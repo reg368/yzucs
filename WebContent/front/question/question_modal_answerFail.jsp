@@ -4,24 +4,25 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.answer.model.AnswerVO" %>
 <%@ page import="java.util.Collection" %>
+<%
+		String a_id = request.getParameter("a_id");
+		if(a_id != null){
+			String[] a_ids = a_id.split(":");
+			Map<Integer,String> answerMap = new HashMap<Integer,String>();
+			for(int i = 0 ; i < a_ids.length ; i ++){
+				answerMap.put(Integer.parseInt(a_ids[i]),a_ids[i]);
+			}
+			
+			pageContext.setAttribute("answerMap", answerMap);
+		}
+		
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>
-	function onSelectionClick(id){
-		$.ajax({
-			type : "GET",
-			url : $("#url").val()+"/front/question/question_selected_info.jsp?a_id="+id,
-			dataType : "text",
-			success : function(data) {
-				$("#question_info").html(decodeURI(data));
-				$('#question_detail').modal('hide');
-				$('#a_id').val(id);
-				}
-			});
-	}
 	
 	function onMultiSubmit(){
 		var values = '';
@@ -38,7 +39,6 @@
 </head>
 <body>
 	<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">
         	<font size="5" color="blue">
         		<b>${question.q_text}</b>
@@ -62,7 +62,17 @@
     				<c:when test="${question.q_isMulti == 1}">
     					<c:forEach  var="answer" items="${answers}" varStatus="loop">	
     						<tr class="warning" onclick="">
-    							<td> <input type="checkbox" name="multiAnswer" value="${answer.a_id}" /></td>
+    							<td> 
+    								<c:choose>
+    									<c:when test="${ not empty  answerMap[answer.a_id]}">
+    										 <input type="checkbox" id="multiAnswer"  checked disabled/>
+    									</c:when>
+    									<c:otherwise>
+    										 <input type="checkbox" id="multiAnswer"  disabled/>
+    									</c:otherwise>
+    								</c:choose>
+    								 
+    							</td>
 								<td>( ${loop.index+1} )</td>
 									<c:if test="${not empty answer.a_text}">
 										<td><c:out value="${answer.a_text}" /></td>
@@ -80,13 +90,10 @@
 									</c:choose>
 							</tr>
     					</c:forEach>
-    					<tr>
-    						<td> <button type="button" id="answer_btn" style="" onclick="onMultiSubmit()">送出</button></td>
-    					</tr>
     				</c:when>
     				<c:otherwise>
     					<c:forEach  var="answer" items="${answers}" varStatus="loop">	
-							<tr class="warning" onclick="onSelectionClick( '${answer.a_id}')">
+							<tr class="warning" >
 								<td>( ${loop.index+1} )</td>
 									<c:if test="${not empty answer.a_text}">
 										<td><c:out value="${answer.a_text}" /></td>
@@ -106,6 +113,9 @@
 						</c:forEach> 
     				</c:otherwise>
     			</c:choose>
+    			<tr>
+    				<td> <button type="button" id="answer_btn" style="" onclick="onAnswer_submit()">下一題</button></td>
+    			</tr>
 			</table>
 			
 	</div>
