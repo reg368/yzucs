@@ -16,6 +16,6 @@
 			<property name="lr_correct_count" column="lr_correct_count" />
 			<property name="lr_incorrect_count" column="lr_incorrect_count" />
 			<property name="lr_joindate" column="lr_joindate" insert="false" update="false" />	
-
+			<property name="lr_qSize" column="lr_qSize"/>
 	</class>
 </hibernate-mapping>

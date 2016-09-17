@@ -247,7 +247,7 @@
     		}else{
     			$.ajax({
     				type : "GET",
-    				url : $("#url").val()+"/front/question/question_check_answer.jsp?a_id="+a_id+"&is_multi="+is_multi+"&q_id="+q_id,
+    				url : $("#url").val()+"/front/question/question_check_answer.jsp?a_id="+a_id+"&is_multi="+is_multi+"&q_id="+q_id+"&qsize=${questionList.size()}",
     				dataType : "text",
     				success : function(data) {
     						var correct = $.trim(data);

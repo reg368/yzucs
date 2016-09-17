@@ -13,6 +13,8 @@ public class Level_recordVO implements Serializable {
 	private Integer lr_correct_count;
 	private Integer lr_incorrect_count;
 	private Timestamp lr_joindate;
+	private Integer lr_qSize;
+	
 	public Integer getLr_id() {
 		return lr_id;
 	}
@@ -60,6 +62,12 @@ public class Level_recordVO implements Serializable {
 	}
 	public void setLr_joindate(Timestamp lr_joindate) {
 		this.lr_joindate = lr_joindate;
+	}
+	public Integer getLr_qSize() {
+		return lr_qSize;
+	}
+	public void setLr_qSize(Integer lr_qSize) {
+		this.lr_qSize = lr_qSize;
 	}
 	
 	
