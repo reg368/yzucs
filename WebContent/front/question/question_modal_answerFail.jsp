@@ -82,7 +82,7 @@
 									</c:if>
 									<c:choose>
 										<c:when test="${answer.a_is_correct == 1 }">
-											<td><font style="color:red;">我是答案</font></td>
+											<td><font style="color:red;">正確答案</font></td>
 										</c:when>
 										<c:otherwise>
 											<td></td>
@@ -93,17 +93,24 @@
     				</c:when>
     				<c:otherwise>
     					<c:forEach  var="answer" items="${answers}" varStatus="loop">	
-							<tr class="warning" >
+    						<c:choose>
+    									<c:when test="${ not empty  answerMap[answer.a_id]}">
+    										 <tr bgcolor="#7B7B7B">
+    									</c:when>
+    									<c:otherwise>
+    										 <tr class="warning">
+    									</c:otherwise>
+    						</c:choose>
 								<td>( ${loop.index+1} )</td>
 									<c:if test="${not empty answer.a_text}">
 										<td><c:out value="${answer.a_text}" /></td>
 									</c:if>
 									<c:if test="${not empty answer.a_pic}"> 
-										<td><img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=answer&a_id=${answer.a_id}"></td>
+										<td><img  src="<%= request.getContextPath() %>/ShowImageServlet.do?action=answer&a_id=${answer.a_id}"></td>
 									</c:if>
 									<c:choose>
 										<c:when test="${answer.a_is_correct == 1 }">
-											<td><font style="color:red;">我是答案</font></td>
+											<td><font style="color:red;">正確答案</font></td>
 										</c:when>
 										<c:otherwise>
 											<td></td>
@@ -114,7 +121,14 @@
     				</c:otherwise>
     			</c:choose>
     			<tr>
-    				<td> <button type="button" id="answer_btn" style="" onclick="onAnswer_submit()">下一題</button></td>
+    				<td> 
+    					 <!-- 答題form表單 -->
+  						<form  mehtod="post" action="<%= request.getContextPath()%>/front/question/QuestionServlet.do">
+  	 						<input type="hidden" name="action" value="answer_submit">
+  	 						<input type="hidden" name="qindex" value="${qindex}"> 
+  	 						<button type="submit"   style="" >下一題</button>
+  						</form>
+    				</td>
     			</tr>
 			</table>
 			

@@ -1,20 +1,20 @@
-package com.answer_submit.model;
+package com.level_record.model;
 
 import org.hibernate.Session;
 
 import com.tool.HibernateUtil;
 
-public class Answer_submitDAO implements Answer_submit_interface {
+public class Level_recordDAO implements Level_record_interface {
 
 	@Override
-	public int inserGerPrimaryKey(Answer_submitVO vo) {
+	public int insertOrUpdateGerPrimaryKey(Level_recordVO vo) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
-			session.save(vo);
+			session.saveOrUpdate(vo);
 			session.getTransaction().commit();
-			return vo.getS_id() ;
+			return vo.getLr_id();
 		}catch(RuntimeException ex){
 			session.getTransaction().rollback();
 		}

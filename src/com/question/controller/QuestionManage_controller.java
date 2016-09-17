@@ -18,8 +18,6 @@ import javax.servlet.http.Part;
 
 import com.answer.model.AnswerDAO;
 import com.answer.model.AnswerVO;
-import com.answer_record.model.Answer_recordDAO;
-import com.answer_record.model.Answer_recordVO;
 import com.question.model.QuestionDAO;
 import com.question.model.QuestionVO;
 import com.question_group.model.Question_groupDAO;

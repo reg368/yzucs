@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.level_record.model.Level_recordVO" table="YZU_LEVEL_RECORD" >
+			
+		<id name="lr_id" column="lr_id">
+			<generator class="sequence">
+				<param name="sequence">yzu_level_record_seq</param>
+			</generator>
+		</id>
+			<property name="lr_user_id" column="lr_user_id" />
+			<property name="lr_level_id" column="lr_level_id" />	
+			<property name="lr_group_id" column="lr_group_id" />
+			<property name="lr_user_login_count" column="lr_user_login_count" />
+			<property name="lr_correct_count" column="lr_correct_count" />
+			<property name="lr_incorrect_count" column="lr_incorrect_count" />
+			<property name="lr_joindate" column="lr_joindate" insert="false" update="false" />	
+
+	</class>
+</hibernate-mapping>

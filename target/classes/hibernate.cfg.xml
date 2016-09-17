@@ -38,7 +38,7 @@
 		<mapping resource="com/student_class/model/student_class.hbm.xml" />
 		<mapping resource="com/student_class_record/model/studentcr.hbm.xml" />
 		<mapping resource="com/sc_question/model/scquestion.hbm.xml" />
-		<mapping resource="com/answer_submit/model/answer_record.hbm.xml" />
+		<mapping resource="com/level_record/model/level_record.hbm.xml" />
 	</session-factory>
 	
 </hibernate-configuration>

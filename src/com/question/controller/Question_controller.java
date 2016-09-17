@@ -17,8 +17,6 @@ import javax.servlet.http.Part;
 
 import com.answer.model.AnswerDAO;
 import com.answer.model.AnswerVO;
-import com.answer_record.model.Answer_recordDAO;
-import com.answer_record.model.Answer_recordVO;
 import com.question.model.QuestionDAO;
 import com.question.model.QuestionVO;
 import com.question_level.model.Question_levelDAO;
@@ -151,30 +149,8 @@ public class Question_controller extends HttpServlet {
     		 
     	}else if("answer_submit".equals(action)){
     		List<QuestionVO> questions = (List<QuestionVO>)session.getAttribute("questionList");
-    		String isCorrect = req.getParameter("isCorrect");
     		int qindex = Integer.parseInt(req.getParameter("qindex"));
-    		
-    		//如果沒有選擇任何選項
-    		if(isCorrect == null || isCorrect.length() <= 0){
-    			session.setAttribute("character_mood", "_sad");
-    			session.setAttribute("qindex", qindex);
-    			session.setAttribute("question", questions.get(qindex));
-				List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(qindex).getQ_id());
-				Collections.shuffle(answer);
-				session.setAttribute("answers", answer);
-				session.setAttribute("tip", questions.get(qindex).getQ_tip());
-	    		
-				res.sendRedirect("/YZUCS/front/question/question.jsp");
-				return;
-    		}
-    	
-			//答對了
-    		if(isCorrect != null && "1".equals(isCorrect)){
-    			
-    			session.setAttribute("tip", null);
-    			
-    			
-    			
+
     			//還有題目 , 下一題
     			if((qindex+1) < questions.size()){
     				session.setAttribute("character_mood", "_happy");
@@ -191,24 +167,7 @@ public class Question_controller extends HttpServlet {
     				res.sendRedirect("/YZUCS/front/question/QuestionServlet.do?action=nextLevel");
     				return;
     			}
-    		//答錯了
-    		}else if(isCorrect != null && "0".equals(isCorrect)){
     			
-    			
-    			session.setAttribute("character_mood", "_sad");
-    			session.setAttribute("qindex", qindex);
-    			session.setAttribute("question", questions.get(qindex));
-				List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(qindex).getQ_id());
-				Collections.shuffle(answer);
-				session.setAttribute("answers", answer);
-				session.setAttribute("tip", questions.get(qindex).getQ_tip());
-	    		
-//	    		RequestDispatcher view = req
-//						.getRequestDispatcher("/front/question/question.jsp");
-//				view.forward(req, res);	
-				res.sendRedirect("/YZUCS/front/question/question.jsp");
-				return;
-    		}
     		
     	}else if("question_insert".equals(action)){
     		InputStream in = null;

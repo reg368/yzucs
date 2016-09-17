@@ -4,19 +4,25 @@
 <hibernate-mapping>
 	<class name="com.answer_record.model.Answer_recordVO" table="YZU_ANSWER_RECORD" >
 			
-		<id name="r_id" column="r_id">
+		<id name="ar_id" column="ar_id">
 			<generator class="sequence">
 				<param name="sequence">yzu_answer_record_seq</param>
 			</generator>
 		</id>
-			<property name="r_userId" column="r_userId" />
-			<property name="r_questionId" column="r_questionId" />	
-			<property name="r_user_login_count" column="r_user_login_count" />
-			<property name="r_correct_count" column="r_correct_count" />
-			<property name="r_incorrect_count" column="r_incorrect_count" />
-			<property name="r_user_joindate" column="r_uesr_joindate" insert="false" update="false"/>
-			<property name="r_user_update_date" column="r_user_update_date" />	
-			<property name="r_group_id" column="r_group_id" />	
-			<property name="r_level_id" column="r_level_id" />	
+			<property name="ar_lr_id" column="ar_lr_id" />
+			<property name="ar_q_id" column="ar_q_id" />	
+			<property name="ar_user_id" column="ar_user_id" />
+			<property name="ar_a_id1" column="ar_a_id1" />
+			<property name="ar_a_id2" column="ar_a_id2" />
+			<property name="ar_a_id3" column="ar_a_id3" />
+			<property name="ar_a_id4" column="ar_a_id4" />	
+			<property name="ar_correct_a_id1" column="ar_correct_a_id1" />	
+			<property name="ar_correct_a_id2" column="ar_correct_a_id2" />
+			<property name="ar_correct_a_id3" column="ar_correct_a_id3" />	
+			<property name="ar_correct_a_id4" column="ar_correct_a_id4" />
+			<property name="ar_joindate" column="ar_joindate" insert="false" update="false" />
+			<property name="ar_user_login_count" column="ar_user_login_count" />
+			<property name="ar_isCorrect" column="ar_isCorrect" />
+			<property name="ar_isMulti" column="ar_isMulti" />	
 	</class>
 </hibernate-mapping>

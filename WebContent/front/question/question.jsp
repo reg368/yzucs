@@ -253,9 +253,7 @@
     						var correct = $.trim(data);
     						if(correct == '1'){
     							$( "#petDialog" ).html("<p>好棒!答對了</p>");
-    							$( "#petDialog" ).show();
-    							$("#isCorrect").val('1');
-    							
+    							$( "#petDialog" ).show();			
     							setTimeout(
        							      function() {
        							    	  $( "#question_form" ).submit();
@@ -280,13 +278,9 @@
           							    		  $('#question_incorrect_detail').modal({backdrop: 'static', keyboard: false})    
           							    		  $("#question_incorrect_detail").modal('show');         							    		
           							    	  }
-          							    	});
-          							    	  
-          							    	  
-          							      }, 600
+          							    	});         							    	  
+          							      }, 500
           							)
-    							
-    							$("#isCorrect").val('0');
     						}
     					
     				  }
@@ -315,7 +309,6 @@
   <form id="question_form" mehtod="post" action="<%= request.getContextPath()%>/front/question/QuestionServlet.do">
   	 <input type="hidden" name="action" value="answer_submit">
   	 <input type="hidden" name="qindex" value="${qindex}"> 
-  	 <input type="hidden" name="isCorrect" id="isCorrect" > <!-- question_check_answer.jsp 會塞的參數判斷對或錯 -->
   	 <button type="button" id="submit_btn" class="gwd-button-eu7f" style="" >送出</button>
   </form>
   

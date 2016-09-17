@@ -5,78 +5,119 @@ import java.sql.Timestamp;
 
 public class Answer_recordVO implements Serializable {
 	
-	Integer r_id;
-	String r_userId;
-	Integer r_questionId;
-	Integer r_user_login_count;
-	Integer r_correct_count;
-	Integer r_incorrect_count;
-	Timestamp r_user_joindate;
-	Timestamp r_user_update_date;
-	Integer r_group_id;
-	Integer r_level_id;
+	private Integer ar_id;
+	private Integer ar_lr_id;
+	private Integer ar_q_id;
+	private String ar_user_id;
+	private Integer ar_a_id1;
+	private Integer ar_a_id2;
+	private Integer ar_a_id3;
+	private Integer ar_a_id4;
+	private Integer ar_correct_a_id1;
+	private Integer ar_correct_a_id2;
+	private Integer ar_correct_a_id3;
+	private Integer ar_correct_a_id4;
+	private Timestamp ar_joindate;
+	private Integer ar_user_login_count;
+	private Integer ar_isCorrect;
+	private Integer ar_isMulti;
+	public Integer getAr_id() {
+		return ar_id;
+	}
+	public void setAr_id(Integer ar_id) {
+		this.ar_id = ar_id;
+	}
+	public Integer getAr_lr_id() {
+		return ar_lr_id;
+	}
+	public void setAr_lr_id(Integer ar_lr_id) {
+		this.ar_lr_id = ar_lr_id;
+	}
+	public Integer getAr_q_id() {
+		return ar_q_id;
+	}
+	public void setAr_q_id(Integer ar_q_id) {
+		this.ar_q_id = ar_q_id;
+	}
+	public String getAr_user_id() {
+		return ar_user_id;
+	}
+	public void setAr_user_id(String ar_user_id) {
+		this.ar_user_id = ar_user_id;
+	}
+	public Integer getAr_a_id1() {
+		return ar_a_id1;
+	}
+	public void setAr_a_id1(Integer ar_a_id1) {
+		this.ar_a_id1 = ar_a_id1;
+	}
+	public Integer getAr_a_id2() {
+		return ar_a_id2;
+	}
+	public void setAr_a_id2(Integer ar_a_id2) {
+		this.ar_a_id2 = ar_a_id2;
+	}
+	public Integer getAr_a_id3() {
+		return ar_a_id3;
+	}
+	public void setAr_a_id3(Integer ar_a_id3) {
+		this.ar_a_id3 = ar_a_id3;
+	}
+	public Integer getAr_a_id4() {
+		return ar_a_id4;
+	}
+	public void setAr_a_id4(Integer ar_a_id4) {
+		this.ar_a_id4 = ar_a_id4;
+	}
+	public Integer getAr_correct_a_id1() {
+		return ar_correct_a_id1;
+	}
+	public void setAr_correct_a_id1(Integer ar_correct_a_id1) {
+		this.ar_correct_a_id1 = ar_correct_a_id1;
+	}
+	public Integer getAr_correct_a_id2() {
+		return ar_correct_a_id2;
+	}
+	public void setAr_correct_a_id2(Integer ar_correct_a_id2) {
+		this.ar_correct_a_id2 = ar_correct_a_id2;
+	}
+	public Integer getAr_correct_a_id3() {
+		return ar_correct_a_id3;
+	}
+	public void setAr_correct_a_id3(Integer ar_correct_a_id3) {
+		this.ar_correct_a_id3 = ar_correct_a_id3;
+	}
+	public Integer getAr_correct_a_id4() {
+		return ar_correct_a_id4;
+	}
+	public void setAr_correct_a_id4(Integer ar_correct_a_id4) {
+		this.ar_correct_a_id4 = ar_correct_a_id4;
+	}
+	public Timestamp getAr_joindate() {
+		return ar_joindate;
+	}
+	public void setAr_joindate(Timestamp ar_joindate) {
+		this.ar_joindate = ar_joindate;
+	}
+	public Integer getAr_user_login_count() {
+		return ar_user_login_count;
+	}
+	public void setAr_user_login_count(Integer ar_user_login_count) {
+		this.ar_user_login_count = ar_user_login_count;
+	}
+	public Integer getAr_isCorrect() {
+		return ar_isCorrect;
+	}
+	public void setAr_isCorrect(Integer ar_isCorrect) {
+		this.ar_isCorrect = ar_isCorrect;
+	}
+	public Integer getAr_isMulti() {
+		return ar_isMulti;
+	}
+	public void setAr_isMulti(Integer ar_isMulti) {
+		this.ar_isMulti = ar_isMulti;
+	}
 	
-	
-	public Integer getR_id() {
-		return r_id;
-	}
-	public void setR_id(Integer r_id) {
-		this.r_id = r_id;
-	}
-	public String getR_userId() {
-		return r_userId;
-	}
-	public void setR_userId(String r_userId) {
-		this.r_userId = r_userId;
-	}
-	public Integer getR_questionId() {
-		return r_questionId;
-	}
-	public void setR_questionId(Integer r_questionId) {
-		this.r_questionId = r_questionId;
-	}
-	public Integer getR_user_login_count() {
-		return r_user_login_count;
-	}
-	public void setR_user_login_count(Integer r_user_login_count) {
-		this.r_user_login_count = r_user_login_count;
-	}
-	public Integer getR_correct_count() {
-		return r_correct_count;
-	}
-	public void setR_correct_count(Integer r_correct_count) {
-		this.r_correct_count = r_correct_count;
-	}
-	public Integer getR_incorrect_count() {
-		return r_incorrect_count;
-	}
-	public void setR_incorrect_count(Integer r_incorrect_count) {
-		this.r_incorrect_count = r_incorrect_count;
-	}
-	public Timestamp getR_user_joindate() {
-		return r_user_joindate;
-	}
-	public void setR_user_joindate(Timestamp r_user_joindate) {
-		this.r_user_joindate = r_user_joindate;
-	}
-	public Timestamp getR_user_update_date() {
-		return r_user_update_date;
-	}
-	public void setR_user_update_date(Timestamp r_user_update_date) {
-		this.r_user_update_date = r_user_update_date;
-	}
-	public Integer getR_group_id() {
-		return r_group_id;
-	}
-	public void setR_group_id(Integer r_group_id) {
-		this.r_group_id = r_group_id;
-	}
-	public Integer getR_level_id() {
-		return r_level_id;
-	}
-	public void setR_level_id(Integer r_level_id) {
-		this.r_level_id = r_level_id;
-	}
 	
 	
 }
