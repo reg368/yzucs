@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.answer_record.model.*" %>
 <%@ page import="com.user.model.UserVO" %>
@@ -135,15 +136,19 @@ body {
   	  					${level.l_level}
   	  					<ul>
   	  						<li>
-  	  							<table>
-  	  								<tr>
-  	  									<th>題號</th><th>題目</th><th>答案</th><th>答對次數</th><th>答錯次數</th><th>答對率</th>
+  	  							<table border="1">
+  	  								<tr bgcolor="#FFFF00">
+  	  									<th>總題數</th><th>答對次數</th><th>答錯次數</th><th>答對率</th>
   	  								</tr>
-  	  								<c:forEach var="level" items="${levels}" varStatus="loop">
-  	  								<tr>
-  	  									<td></td>
+  	  								
+  	  								<tr bgcolor="#FFFFFF">
+  	  									<td>${( lrecordMap[level.l_id].lr_qSize == null ) ? 0 : lrecordMap[level.l_id].lr_qSize}</td>
+  	  									<td>${( lrecordMap[level.l_id].lr_correct_count == null ) ? 0 : lrecordMap[level.l_id].lr_correct_count}</td>
+  	  									<td>${(lrecordMap[level.l_id].lr_incorrect_count == null) ? 0 : lrecordMap[level.l_id].lr_incorrect_count}</td>
+  	  									<fmt:formatNumber type="number" value="${( lrecordMap[level.l_id].lr_correct_count / lrecordMap[level.l_id].lr_qSize ) * 100 }" maxFractionDigits="0" var="correctRate" /> 
+  	  									<td>${correctRate}%</td>
   	  								</tr>	
-  	  								</c:forEach>
+  	  								
   	  							</table>	
   	  						</li>
   	  					</ul>
@@ -151,7 +156,9 @@ body {
   	  			</c:forEach>
   	  		</ul>
   	  	</c:if>
-  	  	
+  	  	<hr>
+  	  	<hr>
+  	  	<hr>
   	  	<table  border="0" >
   	  		<tr>
   	  			<td>
