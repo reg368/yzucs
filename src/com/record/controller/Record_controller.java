@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.answer.model.AnswerVO;
 import com.answer_record.model.Answer_recordDAO;
 import com.answer_record.model.Answer_recordVO;
 import com.user.model.UserVO;
@@ -46,8 +47,37 @@ public class Record_controller extends HttpServlet {
     	if("frontViewDetail".equals(action)){
     		
     		int ar_lr_id = Integer.parseInt(req.getParameter("ar_lr_id"));
+    		
+    		String l_level = req.getParameter("l_level");
+    		if(l_level != null && l_level.trim().length() > 0){
+    			String newName = new String(l_level.getBytes("ISO-8859-1"),"UTF-8");
+        		req.setAttribute("l_level", newName);
+    		}
+    		
+    		Map<Integer,List<AnswerVO>> chooseAnswerMap = new HashMap<Integer,List<AnswerVO>>();
+    		Map<Integer,List<AnswerVO>> correctAnswerMap = new HashMap<Integer,List<AnswerVO>>();
+    		
     		List<Answer_recordVO> records = new Answer_recordDAO().findByAr_lr_id(ar_lr_id);
-    		req.setAttribute("records", records);
+    		if(records != null){
+    			for(Answer_recordVO record : records){
+    				List<AnswerVO> answers = new ArrayList<AnswerVO>();
+    				answers.add(record.getAnswerVO1());
+    				answers.add(record.getAnswerVO2());
+    				answers.add(record.getAnswerVO3());
+    				answers.add(record.getAnswerVO4());
+    				chooseAnswerMap.put(record.getAr_id(), answers);
+    				List<AnswerVO> canswers = new ArrayList<AnswerVO>();
+    				canswers.add(record.getCanswerVO1());
+    				canswers.add(record.getCanswerVO2());
+    				canswers.add(record.getCanswerVO3());
+    				canswers.add(record.getCanswerVO4());
+    				correctAnswerMap.put(record.getAr_id(), canswers);
+    			}
+    		}
+    		
+    		req.setAttribute("chooseAnswerMap", records);
+    		req.setAttribute("correctAnswerMap", records);
+    		req.setAttribute("answer_records", records);
 			RequestDispatcher view = req
 					.getRequestDispatcher("/front/result/result_detail.jsp");
 			view.forward(req, res);	

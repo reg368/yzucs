@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import com.answer.model.AnswerVO;
+import com.question.model.QuestionVO;
 
 public class Answer_recordVO implements Serializable {
 	
@@ -25,6 +26,7 @@ public class Answer_recordVO implements Serializable {
 	private Integer ar_isMulti;
 	
 	/* Associations mapping object */
+	private QuestionVO questionVO;
 	private AnswerVO answerVO1;
 	private AnswerVO answerVO2;
 	private AnswerVO answerVO3;
@@ -135,8 +137,16 @@ public class Answer_recordVO implements Serializable {
 	
 	/* Associations mapping object */
 	
+	
+	
 	public AnswerVO getAnswerVO1() {
 		return answerVO1;
+	}
+	public QuestionVO getQuestionVO() {
+		return questionVO;
+	}
+	public void setQuestionVO(QuestionVO questionVO) {
+		this.questionVO = questionVO;
 	}
 	public void setAnswerVO1(AnswerVO answerVO1) {
 		this.answerVO1 = answerVO1;

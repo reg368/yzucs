@@ -5,10 +5,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.answer_record.model.*" %>
 <%@ page import="com.user.model.UserVO" %>
-<%
-	UserVO user = (UserVO)session.getAttribute("UserVO");
-    
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -127,35 +123,79 @@ body {
     	<button class="gwd-button-fujb" type="submit" style="">再玩一次</button>
   	  </form>
   	   -->
+  	  <h2>${l_level}</h2>
+  	   
   	  <div class="gwd-div-62t3">
   	    	
-  	  	<c:if test="${not empty  levels}">
-  	  		<ul>
-  	  			<c:forEach var="level" items="${levels}" varStatus="loop">
-  	  				<li>
-  	  					${level.l_level}
-  	  					<ul>
-  	  						<li>
-  	  							<table border="1">
-  	  								<tr bgcolor="#FFFF00">
-  	  									<th>總題數</th><th>答對次數</th><th>答錯次數</th><th>答對率</th><th></th>
-  	  								</tr>
-  	  								
-  	  								<tr bgcolor="#FFFFFF">
-  	  									<td>${( lrecordMap[level.l_id].lr_qSize == null ) ? 0 : lrecordMap[level.l_id].lr_qSize}</td>
-  	  									<td>${( lrecordMap[level.l_id].lr_correct_count == null ) ? 0 : lrecordMap[level.l_id].lr_correct_count}</td>
-  	  									<td>${(lrecordMap[level.l_id].lr_incorrect_count == null) ? 0 : lrecordMap[level.l_id].lr_incorrect_count}</td>
-  	  									<fmt:formatNumber type="number" value="${( lrecordMap[level.l_id].lr_correct_count / lrecordMap[level.l_id].lr_qSize ) * 100 }" maxFractionDigits="0" var="correctRate" /> 
-  	  									<td>${correctRate}%</td>
-  	  									<td><a href="<%= request.getContextPath() %>/RecordServlet.do?action=frontViewDetail&ar_lr_id=${lrecordMap[level.l_id].lr_id}">詳細資訊</a></td>
-  	  								</tr>	
-  	  								
-  	  							</table>	
-  	  						</li>
-  	  					</ul>
-  	  				</li>
+  	  	<c:if test="${not empty  answer_records}">
+  	  		<table border="1">
+  	  			<tr bgcolor="#FFFF00">
+  	  				<th>題號</th>
+  	  				<th>題目</th>
+  	  				<th>正確選項</th>
+  	  				<th>選擇選項</th>
+  	  				<th>是否正確</th>
+  	  				<th>是否複選</th>
+  	  			</tr>
+  	  			<c:forEach var="answer_record" items="${answer_records}" varStatus="loop">
+  	  				<tr>
+  	  					<td>${loop.index + 1}</td> <!-- 題號 -->
+  	  					<td>${answer_record.questionVO.q_text}</td><!-- 題目 -->
+  	  					<td>
+  	  					<c:if test="${not empty  ${correctAnswerMap[answer_record.ar_id]}}">
+  	  						<ul>
+  	  							<c:forEach var="correctAnswer" items="${correctAnswerMap[answer_record.ar_id]}" varStatus="loop">
+  	  								<li>
+  	  									<c:if	test="${not empty correctAnswer.q_text}">
+        									${correctAnswer.q_text}	
+        								</c:if>
+  	  									<c:if	test="${not empty correctAnswer.q_pic}">
+        									<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=question&q_id=${correctAnswer.q_id}" width="100" height="100">	
+        								</c:if>
+  	  								</li>
+  	  							</c:forEach>
+  	  						</ul>
+  	  					</c:if>
+  	  					</td><!-- 正確選項 -->
+  	  					<td>
+  	  					<c:if test="${not empty  ${chooseAnswerMap[answer_record.ar_id]}}">
+  	  						<ul>
+  	  							<c:forEach var="chooesAnswer" items="${chooseAnswerMap[answer_record.ar_id]}" varStatus="loop">
+  	  								<li>
+  	  									<c:if	test="${not empty chooesAnswer.q_text}">
+        									${chooesAnswer.q_text}	
+        								</c:if>
+  	  									<c:if	test="${not empty chooesAnswer.q_pic}">
+        									<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=question&q_id=${answer_record.q_id}" width="100" height="100">	
+        								</c:if>
+  	  								</li>
+  	  							</c:forEach>
+  	  						</ul>
+  	  					</c:if>
+  	  					</td><!-- 選擇選項 -->
+  	  					<td>
+  	  						<c:choose>
+  	  							<c:when test="${answer_record.ar_isCorrect == 1}">
+  	  								<font color="blue">正確</font>
+  	  							</c:when>
+  	  							<c:otherwise>
+  	  								<font color="red">錯誤</font>
+  	  							</c:otherwise>
+  	  						</c:choose>
+  	  					</td><!-- 是否正確 -->
+  	  					<td>
+  	  						<c:choose>
+  	  							<c:when test="${answer_record.ar_isMulti == 1}">
+  	  								<font color="blue">複選</font>
+  	  							</c:when>
+  	  							<c:otherwise>
+  	  								<font color="red">非複選</font>
+  	  							</c:otherwise>
+  	  						</c:choose>
+  	  					</td><!-- 是否複選 -->
+  	  				</tr>
   	  			</c:forEach>
-  	  		</ul>
+  	  		</table>
   	  	</c:if>
   	  	<hr>
   	  	<hr>

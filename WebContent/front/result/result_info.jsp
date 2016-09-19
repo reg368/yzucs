@@ -5,10 +5,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.answer_record.model.*" %>
 <%@ page import="com.user.model.UserVO" %>
-<%
-	UserVO user = (UserVO)session.getAttribute("UserVO");
-    
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -147,7 +143,7 @@ body {
   	  									<td>${(lrecordMap[level.l_id].lr_incorrect_count == null) ? 0 : lrecordMap[level.l_id].lr_incorrect_count}</td>
   	  									<fmt:formatNumber type="number" value="${( lrecordMap[level.l_id].lr_correct_count / lrecordMap[level.l_id].lr_qSize ) * 100 }" maxFractionDigits="0" var="correctRate" /> 
   	  									<td>${correctRate}%</td>
-  	  									<td><a href="<%= request.getContextPath() %>/RecordServlet.do?action=frontViewDetail&ar_lr_id=${lrecordMap[level.l_id].lr_id}">詳細資訊</a></td>
+  	  									<td><a href="<%= request.getContextPath() %>/RecordServlet.do?action=frontViewDetail&ar_lr_id=${lrecordMap[level.l_id].lr_id}&l_level=${level.l_level}">詳細資訊</a></td>
   	  								</tr>	
   	  								
   	  							</table>	
