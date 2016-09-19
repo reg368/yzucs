@@ -29,83 +29,92 @@
 				name="questionVO" 
 				class="com.question.model.QuestionVO"
             	column="ar_q_id" 
-           	 	lazy="no-proxy"
+           	 	lazy="false"
             	unique="true" 
             	not-null="false"
             	cascade="all" 
+            	insert="false" update="false"
             />
 			
 			<many-to-one 
 				name="answerVO1" 
 				class="com.answer.model.AnswerVO"
             	column="ar_a_id1" 
-           	 	lazy="no-proxy"
+           	 	lazy="false"
             	unique="true" 
             	not-null="false"
             	cascade="all" 
+            	insert="false" update="false"
             />
             <many-to-one 
 				name="answerVO2" 
 				class="com.answer.model.AnswerVO"
             	column="ar_a_id2" 
-           	 	lazy="no-proxy"
+           	 	lazy="false"
             	unique="true" 
             	not-null="false"
             	cascade="all" 
+            	insert="false" update="false"
             />
             <many-to-one 
 				name="answerVO3" 
 				class="com.answer.model.AnswerVO"
             	column="ar_a_id3" 
-           	 	lazy="no-proxy"
+           	 	lazy="false"
             	unique="true" 
             	not-null="false"
             	cascade="all" 
+            	insert="false" update="false"
             />
             <many-to-one 
 				name="answerVO4" 
 				class="com.answer.model.AnswerVO"
             	column="ar_a_id4" 
-           	 	lazy="no-proxy"
+           	 	lazy="false"
             	unique="true" 
             	not-null="false"
             	cascade="all" 
+            	insert="false" update="false"
             />
             <many-to-one 
 				name="canswerVO1" 
 				class="com.answer.model.AnswerVO"
             	column="ar_correct_a_id1" 
-           	 	lazy="no-proxy"
+           	 	lazy="false"
             	unique="true" 
             	not-null="false"
             	cascade="all" 
+            	insert="false" update="false"
             />
             <many-to-one 
 				name="canswerVO2" 
 				class="com.answer.model.AnswerVO"
             	column="ar_correct_a_id2" 
-           	 	lazy="no-proxy"
+           	 	lazy="false"
             	unique="true" 
             	not-null="false"
             	cascade="all" 
+            	insert="false" update="false"
             />
             <many-to-one 
 				name="canswerVO3" 
 				class="com.answer.model.AnswerVO"
             	column="ar_correct_a_id3" 
-           	 	lazy="no-proxy"
+           	 	lazy="false"
             	unique="true" 
             	not-null="false"
             	cascade="all" 
+            	insert="false" update="false"
             />
             <many-to-one 
 				name="canswerVO4" 
 				class="com.answer.model.AnswerVO"
             	column="ar_correct_a_id4" 
-           	 	lazy="no-proxy"
+           	 	lazy="false"
             	unique="true" 
             	not-null="false"
             	cascade="all" 
+            	insert="false" update="false"
             />
 			
 	</class>

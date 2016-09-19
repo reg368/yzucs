@@ -123,10 +123,12 @@ body {
     	<button class="gwd-button-fujb" type="submit" style="">再玩一次</button>
   	  </form>
   	   -->
-  	  <h2>${l_level}</h2>
+  	  
   	   
   	  <div class="gwd-div-62t3">
   	    	
+  	    <h2>${l_level}</h2>
+  	    <hr>	
   	  	<c:if test="${not empty  answer_records}">
   	  		<table border="1">
   	  			<tr bgcolor="#FFFF00">
@@ -140,17 +142,23 @@ body {
   	  			<c:forEach var="answer_record" items="${answer_records}" varStatus="loop">
   	  				<tr>
   	  					<td>${loop.index + 1}</td> <!-- 題號 -->
-  	  					<td>${answer_record.questionVO.q_text}</td><!-- 題目 -->
   	  					<td>
-  	  					<c:if test="${not empty  ${correctAnswerMap[answer_record.ar_id]}}">
+  	  						${answer_record.questionVO.q_text}
+  	  						<br>
+  	  						<c:if test="${not empty answer_record.questionVO.q_pic}"> 
+								<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=question&q_id=${answer_record.questionVO.q_id}" width="100" height="100">
+							</c:if>
+  	  					</td><!-- 題目 -->
+  	  					<td>
+  	  					<c:if test="${not empty  correctAnswerMap[answer_record.ar_id] }">
   	  						<ul>
   	  							<c:forEach var="correctAnswer" items="${correctAnswerMap[answer_record.ar_id]}" varStatus="loop">
   	  								<li>
-  	  									<c:if	test="${not empty correctAnswer.q_text}">
-        									${correctAnswer.q_text}	
+  	  									<c:if	test="${not empty correctAnswer.a_text}">
+        									${correctAnswer.a_text}	
         								</c:if>
-  	  									<c:if	test="${not empty correctAnswer.q_pic}">
-        									<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=question&q_id=${correctAnswer.q_id}" width="100" height="100">	
+  	  									<c:if	test="${not empty correctAnswer.a_pic}">
+        									<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=answer&a_id=${correctAnswer.a_id}" width="100" height="100">	
         								</c:if>
   	  								</li>
   	  							</c:forEach>
@@ -158,15 +166,15 @@ body {
   	  					</c:if>
   	  					</td><!-- 正確選項 -->
   	  					<td>
-  	  					<c:if test="${not empty  ${chooseAnswerMap[answer_record.ar_id]}}">
+  	  					<c:if test="${not empty  chooseAnswerMap[answer_record.ar_id]}">
   	  						<ul>
   	  							<c:forEach var="chooesAnswer" items="${chooseAnswerMap[answer_record.ar_id]}" varStatus="loop">
   	  								<li>
-  	  									<c:if	test="${not empty chooesAnswer.q_text}">
-        									${chooesAnswer.q_text}	
+  	  									<c:if	test="${not empty chooesAnswer.a_text}">
+        									${chooesAnswer.a_text}	
         								</c:if>
-  	  									<c:if	test="${not empty chooesAnswer.q_pic}">
-        									<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=question&q_id=${answer_record.q_id}" width="100" height="100">	
+  	  									<c:if	test="${not empty chooesAnswer.a_pic}">
+        									<img src="<%= request.getContextPath() %>/ShowImageServlet.do?action=answer&a_id=${chooesAnswer.a_id}" width="100" height="100">	
         								</c:if>
   	  								</li>
   	  							</c:forEach>
@@ -203,15 +211,11 @@ body {
   	  	<table  border="0" >
   	  		<tr>
   	  			<td>
-  	  				<form class="" method="post" action="<%= request.getContextPath()%>/front/user/UserServlet.do">
     					<input type="hidden" name="action" value="loginForm"> 
-    					<button class="gwd-button-fujb" type="submit" style="">再玩一次</button>
-  	 				 </form>
+    					<button class="gwd-button-fujb" onclick="window.history.back();" style="">回上一頁</button>
   	  			</td>
   	  		</tr>
-			<tr>
-  	  			<td><a class="" href="<%= request.getContextPath() %>/login.jsp" >登出開發人員</a></td>
-  	  		</tr>
+			
   	  	</table>
   	  </div>
 </body>

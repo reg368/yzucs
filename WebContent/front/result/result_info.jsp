@@ -124,7 +124,8 @@ body {
   	  </form>
   	   -->
   	  <div class="gwd-div-62t3">
-  	    	
+  	   <h2>答題記錄</h2>
+  	   <hr> 	
   	  	<c:if test="${not empty  levels}">
   	  		<ul>
   	  			<c:forEach var="level" items="${levels}" varStatus="loop">

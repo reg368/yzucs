@@ -61,22 +61,30 @@ public class Record_controller extends HttpServlet {
     		if(records != null){
     			for(Answer_recordVO record : records){
     				List<AnswerVO> answers = new ArrayList<AnswerVO>();
-    				answers.add(record.getAnswerVO1());
-    				answers.add(record.getAnswerVO2());
-    				answers.add(record.getAnswerVO3());
-    				answers.add(record.getAnswerVO4());
+    				if(record.getAnswerVO1() != null )
+    					answers.add(record.getAnswerVO1());
+    				if(record.getAnswerVO2() != null )
+    					answers.add(record.getAnswerVO2());
+    				if(record.getAnswerVO3() != null )
+    					answers.add(record.getAnswerVO3());
+    				if(record.getAnswerVO4() != null )
+    					answers.add(record.getAnswerVO4());
     				chooseAnswerMap.put(record.getAr_id(), answers);
     				List<AnswerVO> canswers = new ArrayList<AnswerVO>();
-    				canswers.add(record.getCanswerVO1());
-    				canswers.add(record.getCanswerVO2());
-    				canswers.add(record.getCanswerVO3());
-    				canswers.add(record.getCanswerVO4());
+    				if(record.getCanswerVO1() != null )
+    					canswers.add(record.getCanswerVO1());
+    				if(record.getCanswerVO2() != null )
+    					canswers.add(record.getCanswerVO2());
+    				if(record.getCanswerVO3() != null )
+    					canswers.add(record.getCanswerVO3());
+    				if(record.getCanswerVO4() != null )
+    					canswers.add(record.getCanswerVO4());
     				correctAnswerMap.put(record.getAr_id(), canswers);
     			}
     		}
     		
-    		req.setAttribute("chooseAnswerMap", records);
-    		req.setAttribute("correctAnswerMap", records);
+    		req.setAttribute("chooseAnswerMap", chooseAnswerMap);
+    		req.setAttribute("correctAnswerMap", correctAnswerMap);
     		req.setAttribute("answer_records", records);
 			RequestDispatcher view = req
 					.getRequestDispatcher("/front/result/result_detail.jsp");
