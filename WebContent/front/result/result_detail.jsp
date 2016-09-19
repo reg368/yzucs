@@ -138,7 +138,7 @@ body {
   	  						<li>
   	  							<table border="1">
   	  								<tr bgcolor="#FFFF00">
-  	  									<th>總題數</th><th>答對次數</th><th>答錯次數</th><th>答對率</th>
+  	  									<th>總題數</th><th>答對次數</th><th>答錯次數</th><th>答對率</th><th></th>
   	  								</tr>
   	  								
   	  								<tr bgcolor="#FFFFFF">
@@ -147,6 +147,7 @@ body {
   	  									<td>${(lrecordMap[level.l_id].lr_incorrect_count == null) ? 0 : lrecordMap[level.l_id].lr_incorrect_count}</td>
   	  									<fmt:formatNumber type="number" value="${( lrecordMap[level.l_id].lr_correct_count / lrecordMap[level.l_id].lr_qSize ) * 100 }" maxFractionDigits="0" var="correctRate" /> 
   	  									<td>${correctRate}%</td>
+  	  									<td><a href="<%= request.getContextPath() %>/RecordServlet.do?action=frontViewDetail&ar_lr_id=${lrecordMap[level.l_id].lr_id}">詳細資訊</a></td>
   	  								</tr>	
   	  								
   	  							</table>	
@@ -163,7 +164,7 @@ body {
   	  		<tr>
   	  			<td>
   	  				<form class="" method="post" action="<%= request.getContextPath()%>/front/user/UserServlet.do">
-    					<input type="hidden" name="action" value="playAgain"> 
+    					<input type="hidden" name="action" value="loginForm"> 
     					<button class="gwd-button-fujb" type="submit" style="">再玩一次</button>
   	 				 </form>
   	  			</td>

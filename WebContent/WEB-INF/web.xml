@@ -67,6 +67,15 @@
     <location>/error_page/error.jsp</location>
   </error-page>
   
+  <servlet>
+    <servlet-name>RecordServlet</servlet-name>
+    <servlet-class>com.record.controller.Record_controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecordServlet</servlet-name>
+    <url-pattern>/RecordServlet.do</url-pattern>
+  </servlet-mapping>
+  
   <!--  
   <filter>
     <filter-name>Developer_login</filter-name>
@@ -133,7 +142,7 @@
     <servlet-name>ShowImageServlet</servlet-name>
     <url-pattern>/ShowImageServlet.do</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>XlsServlet</servlet-name>
     <servlet-class>com.tool.XlsServlet</servlet-class>
   </servlet>

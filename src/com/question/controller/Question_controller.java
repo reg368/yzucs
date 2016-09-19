@@ -154,7 +154,7 @@ public class Question_controller extends HttpServlet {
     				session.setAttribute("lrecordMap", lrecordMap);
     			}
 				
-    			res.sendRedirect("/YZUCS/front/question/result_info.jsp");
+    			res.sendRedirect("/YZUCS/front/result/result_info.jsp");
 				return;
     		}
     		 

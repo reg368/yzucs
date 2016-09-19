@@ -3,6 +3,8 @@ package com.answer_record.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import com.answer.model.AnswerVO;
+
 public class Answer_recordVO implements Serializable {
 	
 	private Integer ar_id;
@@ -21,6 +23,19 @@ public class Answer_recordVO implements Serializable {
 	private Integer ar_user_login_count;
 	private Integer ar_isCorrect;
 	private Integer ar_isMulti;
+	
+	/* Associations mapping object */
+	private AnswerVO answerVO1;
+	private AnswerVO answerVO2;
+	private AnswerVO answerVO3;
+	private AnswerVO answerVO4;
+	private AnswerVO canswerVO1;
+	private AnswerVO canswerVO2;
+	private AnswerVO canswerVO3;
+	private AnswerVO canswerVO4;
+	
+	
+	
 	public Integer getAr_id() {
 		return ar_id;
 	}
@@ -118,6 +133,56 @@ public class Answer_recordVO implements Serializable {
 		this.ar_isMulti = ar_isMulti;
 	}
 	
+	/* Associations mapping object */
+	
+	public AnswerVO getAnswerVO1() {
+		return answerVO1;
+	}
+	public void setAnswerVO1(AnswerVO answerVO1) {
+		this.answerVO1 = answerVO1;
+	}
+	public AnswerVO getAnswerVO2() {
+		return answerVO2;
+	}
+	public void setAnswerVO2(AnswerVO answerVO2) {
+		this.answerVO2 = answerVO2;
+	}
+	public AnswerVO getAnswerVO3() {
+		return answerVO3;
+	}
+	public void setAnswerVO3(AnswerVO answerVO3) {
+		this.answerVO3 = answerVO3;
+	}
+	public AnswerVO getAnswerVO4() {
+		return answerVO4;
+	}
+	public void setAnswerVO4(AnswerVO answerVO4) {
+		this.answerVO4 = answerVO4;
+	}
+	public AnswerVO getCanswerVO1() {
+		return canswerVO1;
+	}
+	public void setCanswerVO1(AnswerVO canswerVO1) {
+		this.canswerVO1 = canswerVO1;
+	}
+	public AnswerVO getCanswerVO2() {
+		return canswerVO2;
+	}
+	public void setCanswerVO2(AnswerVO canswerVO2) {
+		this.canswerVO2 = canswerVO2;
+	}
+	public AnswerVO getCanswerVO3() {
+		return canswerVO3;
+	}
+	public void setCanswerVO3(AnswerVO canswerVO3) {
+		this.canswerVO3 = canswerVO3;
+	}
+	public AnswerVO getCanswerVO4() {
+		return canswerVO4;
+	}
+	public void setCanswerVO4(AnswerVO canswerVO4) {
+		this.canswerVO4 = canswerVO4;
+	}
 	
 	
 }
