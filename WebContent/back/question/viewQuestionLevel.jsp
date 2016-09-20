@@ -21,6 +21,8 @@
 </head>
 <body>
 	<h2>${l_level}</h2>
+	<br>
+	<a href="<%= request.getContextPath() %>/back/question/levelEdit.jsp?l_id=${l_id}&l_level=${l_level}">修改關卡名稱</a>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -28,8 +30,6 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	
-	<a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp?l_id=${l_id}&l_level=${l_level}&g_id=${g_id}&g_name=${g_name}">新增題目</a><br>
 	<hr>
 	
 	<form method="post" action="<%= request.getContextPath() %>/XlsServlet.do?g_id=${g_id}&g_name=${g_name}&l_level=${l_level}" enctype="multipart/form-data">
@@ -45,6 +45,8 @@
 	
 	<hr>
 	<label>此關卡的題目:</label><br>
+	<a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp?l_id=${l_id}&l_level=${l_level}&g_id=${g_id}&g_name=${g_name}">新增題目</a><br>
+	<br>
 	<c:choose>
 		<c:when test="${not empty questions}">
 			<table  border="1">

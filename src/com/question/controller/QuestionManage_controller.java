@@ -230,17 +230,10 @@ public class QuestionManage_controller extends HttpServlet {
     		
   
     		String g_id = req.getParameter("g_id");
-    		String g_name = req.getParameter("g_name");
-    		String l_level = req.getParameter("l_level");
+
     		
     		Question_groupVO question = new Question_groupDAO().findByGid(Integer.parseInt(g_id));
     		req.setAttribute("g_name", question.getG_name());
-    		
-    		
-    		if(l_level != null && l_level.trim().length() > 0){
-    			String newName = new String(l_level.getBytes("ISO-8859-1"),"UTF-8");
-        		req.setAttribute("l_level", newName);
-    		}
     		
     		req.setAttribute("g_id", g_id);
     		
@@ -259,6 +252,9 @@ public class QuestionManage_controller extends HttpServlet {
     		}
     		
     		req.setAttribute("l_id", l_id);
+
+    		Question_levelVO vo = new Question_levelDAO().findByL_id(l_id);
+    		req.setAttribute("l_level", vo.getL_level());
     		
     		List<QuestionVO> questions = new QuestionDAO().findByLevelId(l_id);
     		req.setAttribute("questions", questions);
@@ -417,6 +413,25 @@ public class QuestionManage_controller extends HttpServlet {
     		req.setAttribute("errorMessage", errorMessage);
     		RequestDispatcher view = req
 					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+groupVO.getG_id());
+			view.forward(req, res);	
+			
+			return;
+    		
+    	}else if("updateQuestionLevel".equals(action)){
+    		
+    		int l_id = Integer.parseInt(req.getParameter("l_id"));
+    		String l_level = req.getParameter("l_level");
+    		
+    		Question_levelDAO ldao = new Question_levelDAO();
+    		Question_levelVO vo = ldao.findByL_id(l_id);
+    		vo.setL_level(l_level);
+    		ldao.saveOrUpdateGerPrimaryKey(vo);
+    		
+    		
+    		errorMessage.add("н╫зяжие\");
+    		req.setAttribute("errorMessage", errorMessage);
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id="+l_id+"&g_id="+vo.getL_group_id());
 			view.forward(req, res);	
 			
 			return;
