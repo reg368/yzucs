@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+
 import com.tool.HibernateUtil;
 
 
@@ -21,6 +22,21 @@ public class Question_groupDAO implements Question_group_interface {
 		try{
 			session.beginTransaction();
 			session.save(vo);
+			session.getTransaction().commit();
+			return vo.getG_id() ;
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+		return null;
+	}
+	
+	@Override
+	public Integer saveOrUpdateGetPrimaryKey(Question_groupVO vo) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(vo);
 			session.getTransaction().commit();
 			return vo.getG_id() ;
 		}catch(RuntimeException ex){
@@ -78,5 +94,6 @@ public class Question_groupDAO implements Question_group_interface {
 		}
 		return vo;
 	}
+
 
 }

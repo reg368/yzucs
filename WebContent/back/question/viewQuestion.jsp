@@ -20,15 +20,20 @@
 </script>
 </head>
 <body>
-	<h2>${g_name}</h2>
+	<h2>${question.g_name}</h2>
+	<ul>
+		<li>課號 : ${question.g_number}</li>
+		<li>學期 : ${question.g_semester}</li>
+	</ul>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
 					<li style="color:red;">${message}</li>
 			</c:forEach>
 		</ul>	
-	</c:if>
-	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=addClassToQuestion&g_id=${g_id}&g_name=${g_name}">新增班級</a><br>
+	</c:if> 
+	<br>
+	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=editGroupDetail&g_id=${g_id}">修改課程資料</a>
 	<hr>
 	<label>參與課程的班級:</label><br>
 	<c:choose>
@@ -45,6 +50,8 @@
 			<font >目前沒有班級參與</font>		
 		</c:otherwise>	
 	</c:choose>
+	<br><br>
+	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=addClassToQuestion&g_id=${g_id}">新增班級</a>
 	
 	<hr>
 	
@@ -53,7 +60,7 @@
 		<table  border="1">
 			<c:forEach var="level" items="${levels}" varStatus="loop">
 				<tr>
-					<td>${level.l_level} <a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id=${level.l_id}&l_level=${level.l_level}&g_id=${g_id}&g_name=${g_name}">編輯</a></td>
+					<td>${level.l_level} <a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id=${level.l_id}&l_level=${level.l_level}&g_id=${g_id}">編輯</a></td>
 				</tr>	
 			</c:forEach>
 	</table>

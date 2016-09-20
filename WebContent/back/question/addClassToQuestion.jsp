@@ -26,7 +26,7 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	
+	<hr>
 		<c:choose>
 		<c:when test="${not empty sclasss}">
 			<form method="post" action="<%= request.getContextPath() %>/back/QuestionBackServlet.do" >
@@ -37,7 +37,7 @@
 				<input type="hidden" name="action" value="insertS_Class_Question">
 				<input type="hidden" name="g_id" value="${g_id}">
 				<input type="hidden" name="g_name" value="${g_name}">
-				
+				<hr>
 				<button type="submit">新增</button>
 			</form>	
 		</c:when>

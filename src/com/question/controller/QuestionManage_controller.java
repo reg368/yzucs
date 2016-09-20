@@ -158,12 +158,9 @@ public class QuestionManage_controller extends HttpServlet {
     		List<Question_levelVO> levels = new Question_levelDAO().findQustionLevelsByGid(g_id);
     		req.setAttribute("levels", levels);
     		
-    		//處理get傳送課程名稱字元亂碼問題
-    		String g_name  = req.getParameter("g_name");
-    		if(g_name != null && g_name.trim().length() > 0){
-    			String newName = new String(g_name.getBytes("ISO-8859-1"),"UTF-8");
-        		req.setAttribute("g_name", newName);
-    		}
+    		//課程資料
+    		Question_groupVO question = new Question_groupDAO().findByGid(g_id);
+    		req.setAttribute("question", question);
     		
     		req.setAttribute("g_id", g_id);
     		
@@ -185,11 +182,8 @@ public class QuestionManage_controller extends HttpServlet {
     			return;
     		}
     		
-    		String g_name  = req.getParameter("g_name");
-    		if(g_name != null && g_name.trim().length() > 0){
-    			String newName = new String(g_name.getBytes("ISO-8859-1"),"UTF-8");
-        		req.setAttribute("g_name", newName);
-    		}
+    		Question_groupVO question = new Question_groupDAO().findByGid(g_id);
+    		req.setAttribute("g_name", question.getG_name());
     		req.setAttribute("g_id", g_id);
     		
     		//尚未被加入此課程的班級
@@ -204,8 +198,9 @@ public class QuestionManage_controller extends HttpServlet {
     		String[] classIds = req.getParameterValues("c_id");
     		String g_id = req.getParameter("g_id");
     		
-    		String g_name = req.getParameter("g_name");
-    		req.setAttribute("g_name", g_name);
+    		//課程資料
+    		Question_groupVO question = new Question_groupDAO().findByGid(Integer.parseInt(g_id));
+    		req.setAttribute("g_name", question.getG_name());
     		
     		if(classIds == null || classIds.length == 0){
     			errorMessage.add("請選擇班級");
@@ -238,10 +233,10 @@ public class QuestionManage_controller extends HttpServlet {
     		String g_name = req.getParameter("g_name");
     		String l_level = req.getParameter("l_level");
     		
-    		if(g_name != null && g_name.trim().length() > 0){
-    			String newName = new String(g_name.getBytes("ISO-8859-1"),"UTF-8");
-        		req.setAttribute("g_name", newName);
-    		}
+    		Question_groupVO question = new Question_groupDAO().findByGid(Integer.parseInt(g_id));
+    		req.setAttribute("g_name", question.getG_name());
+    		
+    		
     		if(l_level != null && l_level.trim().length() > 0){
     			String newName = new String(l_level.getBytes("ISO-8859-1"),"UTF-8");
         		req.setAttribute("l_level", newName);
@@ -394,8 +389,39 @@ public class QuestionManage_controller extends HttpServlet {
 					.getRequestDispatcher(finishUrl);
 			view.forward(req, res);	
 			return;
+    	}else if ("editGroupDetail".equals(action)){
+    		
+    		int g_id = Integer.parseInt(req.getParameter("g_id"));
+    		Question_groupVO groupVO = new Question_groupDAO().findByGid(g_id);
+    		req.setAttribute("groupVO", groupVO);
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/groupEdit.jsp");
+			view.forward(req, res);	
+			return;
+    		
+    	}else if("updateGroupDetail".equals(action)){
+    		int g_id = Integer.parseInt(req.getParameter("g_id"));
+    		String g_name = req.getParameter("g_name");
+    		String g_number = req.getParameter("g_number");
+    		String g_semester = req.getParameter("g_semester");
+    		
+    		Question_groupDAO gdao = new Question_groupDAO();
+    		Question_groupVO groupVO = gdao.findByGid(g_id);
+    		groupVO.setG_name(g_name);
+    		groupVO.setG_number(g_number);
+    		groupVO.setG_semester(g_semester);
+    		gdao.saveOrUpdateGetPrimaryKey(groupVO);
+    		
+			//回課程編輯頁 (課程管理 -> 課程編輯)
+    		errorMessage.add("修改成功");
+    		req.setAttribute("errorMessage", errorMessage);
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+groupVO.getG_id());
+			view.forward(req, res);	
+			
+			return;
+    		
     	}
-    
     }
     
     private byte[] InputStreamConvertByteArray(InputStream in) {

@@ -19,6 +19,7 @@
 </head>
 <body>
 	<h1>${className}</h1>
+	<a href="<%= request.getContextPath() %>/back/student/classEdit.jsp?className=${className}&classId=${classId}">修改班級名稱</a>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -26,6 +27,7 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
+	<hr>
 	<form method="post" action="<%= request.getContextPath() %>/UserServletBack.do" >
 		<label>新增學生</label><br><br>
 		學號:&nbsp

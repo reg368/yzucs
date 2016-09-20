@@ -112,6 +112,18 @@ public class StudentManage_controller extends HttpServlet {
 			view.forward(req, res);	
 			return;
     		
+    	}else if("updateClassDetail".equals(action)){
+    		int c_id = Integer.parseInt(req.getParameter("classId"));
+    		String className = req.getParameter("className");
+    		
+    		StudentClassDAO sdao = new StudentClassDAO();
+    		StudentClassVO svo = sdao.findStudentClassByClassId(c_id);
+    		svo.setC_name(className);
+    		req.setAttribute("classId", c_id);
+			RequestDispatcher view = req
+					.getRequestDispatcher("/back/student/viewStudent.jsp");
+			view.forward(req, res);	
+			return;	
     	}
     
     }
