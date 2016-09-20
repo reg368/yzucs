@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+
 import com.tool.HibernateUtil;
 
 public class StudentClassDAO implements StudentClass_interface {
@@ -28,6 +29,22 @@ public class StudentClassDAO implements StudentClass_interface {
 		}
 		return null;
 	}
+	
+	@Override
+	public Integer saveOrUpdateGerPrimaryKey(StudentClassVO vo) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(vo);
+			session.getTransaction().commit();
+			return vo.getC_id();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+		return null;
+	}
+
 	
 	@Override
 	public StudentClassVO findStudentClassByClassId(int c_id) {
@@ -98,6 +115,5 @@ public class StudentClassDAO implements StudentClass_interface {
 		}
 		return vo;
 	}
-
 
 }

@@ -101,12 +101,11 @@ public class StudentManage_controller extends HttpServlet {
     		
     		List<UserVO> students = new UserDAO().findStudentByClass(c_id);
     		req.setAttribute("students", students);
-    		String className  = req.getParameter("className");
-    		if(className != null && className.trim().length() > 0){
-    			String newName = new String(className.getBytes("ISO-8859-1"),"UTF-8");
-        		req.setAttribute("className", newName);
-    		}
+    		
+    		StudentClassVO svo = new StudentClassDAO().findStudentClassByClassId(c_id);
+    		req.setAttribute("className", svo.getC_name());
     		req.setAttribute("classId", c_id);
+    		
 			RequestDispatcher view = req
 					.getRequestDispatcher("/back/student/viewStudent.jsp");
 			view.forward(req, res);	
@@ -119,9 +118,13 @@ public class StudentManage_controller extends HttpServlet {
     		StudentClassDAO sdao = new StudentClassDAO();
     		StudentClassVO svo = sdao.findStudentClassByClassId(c_id);
     		svo.setC_name(className);
-    		req.setAttribute("classId", c_id);
+    		sdao.saveOrUpdateGerPrimaryKey(svo);
+    		
+    		
+    		errorMessage.add("н╫зяжие\");
+    		req.setAttribute("errorMessage", errorMessage);
 			RequestDispatcher view = req
-					.getRequestDispatcher("/back/student/viewStudent.jsp");
+					.getRequestDispatcher("/back/StudentBackServlet.do?action=findStudentByClass&c_id="+c_id);
 			view.forward(req, res);	
 			return;	
     	}

@@ -5,8 +5,11 @@
 <%
 	String classId = request.getParameter("classId");
 	String className = request.getParameter("className");
+	if(className != null && className.trim().length() > 0){
+		String newName = new String(className.getBytes("ISO-8859-1"),"UTF-8");
+		pageContext.setAttribute("className", newName);
+	}
 	pageContext.setAttribute("classId", classId);
-	pageContext.setAttribute("className", className);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,7 +29,7 @@
 <body>
 	<form method="post" action="<%= request.getContextPath() %>/back/StudentBackServlet.do">
 	 	<label for="g_name">班級名稱:</label>
-		<input type="text" name="g_name"  value="${className}"><br>
+		<input type="text" name="className"  value="${className}"><br>
 		
 		
 		<hr>
