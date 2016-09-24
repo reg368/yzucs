@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
 import com.answer.model.AnswerDAO;
 import com.answer.model.AnswerVO;
 import com.question.model.QuestionDAO;
@@ -453,6 +456,60 @@ public class QuestionManage_controller extends HttpServlet {
 			
 			return;
     		
+    	}else if("viewQuestionLevelStatus".equals(action)){
+    		
+    		int g_id;
+    		try{
+    			g_id = Integer.parseInt(req.getParameter("g_id"));
+    		}catch(Exception e){
+    			errorMessage.add("編輯課程失敗 , 請聯絡系統管理員");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=view");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		 
+    		//課程
+    		Question_groupVO groupVO = new Question_groupDAO().findByGid(g_id);
+    		req.setAttribute("groupVO", groupVO);
+    		
+    		//課程關卡
+    		List<Question_levelVO> levels = new Question_levelDAO().findQustionLevelsByGid(g_id);
+    		req.setAttribute("levels", levels);
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/levelStateEdit.jsp");
+			view.forward(req, res);	
+			
+			return;	
+    	}else if("updateLevelStatus".equals(action)){
+    		
+    		Enumeration<String> parameterNames = req.getParameterNames(); //取得所有的parameter 參數
+    		Question_levelDAO ldao = new Question_levelDAO();
+    		
+    		
+    		while (parameterNames.hasMoreElements()) {
+    			String paramName = parameterNames.nextElement();
+    			
+    			if(paramName != null && paramName.trim().length() > 0){ //如果parameter 存在
+    				if(StringUtils.isNumeric(paramName)){ //如果是要修改的關卡狀態 parameter name 會是 level id (數字)
+    					int isVisible =NumberUtils.createInteger(req.getParameter(paramName));
+    					Question_levelVO vo = ldao.findByL_id(NumberUtils.createInteger(paramName));
+    					if(vo != null){
+    						vo.setIsVisible(isVisible);
+    						ldao.saveOrUpdateGerPrimaryKey(vo);
+    					}
+    				}
+    			}
+    		}
+    		
+    		errorMessage.add("修改關卡狀態成功");
+			req.setAttribute("errorMessage", errorMessage);
+			RequestDispatcher view = req
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+req.getParameter("g_id"));
+			view.forward(req, res);	
+			return;
     	}
     }
     

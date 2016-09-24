@@ -72,8 +72,9 @@
 			</c:forEach>
 	</table>
 	</c:if>
-	<br>
-	<a href="<%= request.getContextPath() %>/back/question/levelAdd.jsp?g_id=${g_id}">新增關卡</a>
+	<br> 
+		<a href="<%= request.getContextPath() %>/back/question/levelAdd.jsp?g_id=${g_id}">新增關卡</a>&nbsp;&nbsp;&nbsp;
+		<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestionLevelStatus&g_id=${g_id}">修改關卡狀態</a>
 	<hr>
 
 </body>
