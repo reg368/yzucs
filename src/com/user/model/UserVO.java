@@ -9,7 +9,7 @@ public class UserVO implements Serializable{
 	private String user_name;
 	private String user_gender;
 	private String user_age;
-	private String user_grade;
+	private String user_grade; //等級
 	private String user_character_image;
 	private String user_pet_image;
 	private String user_pet_name; 
@@ -21,6 +21,9 @@ public class UserVO implements Serializable{
 	private Integer user_login_count;
 	private Integer user_group_id;
 	private String  user_teacher_id;
+	private Integer user_money; //金錢
+	private Integer uesr_experience; //經驗值
+	private Integer user_hp; //體力
 	
 	
 	public String getUser_id() {
@@ -118,6 +121,24 @@ public class UserVO implements Serializable{
 	}
 	public void setUser_teacher_id(String user_teacher_id) {
 		this.user_teacher_id = user_teacher_id;
+	}
+	public Integer getUser_money() {
+		return user_money;
+	}
+	public void setUser_money(Integer user_money) {
+		this.user_money = user_money;
+	}
+	public Integer getUesr_experience() {
+		return uesr_experience;
+	}
+	public void setUesr_experience(Integer uesr_experience) {
+		this.uesr_experience = uesr_experience;
+	}
+	public Integer getUser_hp() {
+		return user_hp;
+	}
+	public void setUser_hp(Integer user_hp) {
+		this.user_hp = user_hp;
 	}
 	
 	

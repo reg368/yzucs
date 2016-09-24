@@ -24,6 +24,9 @@
 			<property name="user_login_count" column="user_login_count" />
 			<property name="user_group_id" column="user_group_id" />
 			<property name="user_teacher_id" column="user_teacher_id" />
+			<property name="user_money" column="user_money" />
+			<property name="uesr_experience" column="uesr_experience" />
+			<property name="user_hp" column="user_hp" />
 			
 	</class>
 </hibernate-mapping>

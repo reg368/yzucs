@@ -8,7 +8,12 @@ public class Question_levelVO implements Serializable {
 	String l_level;
 	Timestamp l_joindate;
 	Integer l_group_id;
-	Integer isVisible;
+	Integer isVisible; //是否開放 0:不開放 1:開放
+	Integer totalQNumber; //總共要考幾題
+	Integer isRandom; //出題順序是否隨機 0 : 不隨機  1: 隨機
+	Integer correctQNumber; //答對幾題過關
+	Integer awardMoney; //過關獲得的金幣
+	Integer awardExperience; //過關獲得的經驗值
 	
 	public Integer getL_id() {
 		return l_id;
@@ -39,6 +44,36 @@ public class Question_levelVO implements Serializable {
 	}
 	public void setIsVisible(Integer isVisible) {
 		this.isVisible = isVisible;
+	}
+	public Integer getTotalQNumber() {
+		return totalQNumber;
+	}
+	public void setTotalQNumber(Integer totalQNumber) {
+		this.totalQNumber = totalQNumber;
+	}
+	public Integer getIsRandom() {
+		return isRandom;
+	}
+	public void setIsRandom(Integer isRandom) {
+		this.isRandom = isRandom;
+	}
+	public Integer getCorrectQNumber() {
+		return correctQNumber;
+	}
+	public void setCorrectQNumber(Integer correctQNumber) {
+		this.correctQNumber = correctQNumber;
+	}
+	public Integer getAwardMoney() {
+		return awardMoney;
+	}
+	public void setAwardMoney(Integer awardMoney) {
+		this.awardMoney = awardMoney;
+	}
+	public Integer getAwardExperience() {
+		return awardExperience;
+	}
+	public void setAwardExperience(Integer awardExperience) {
+		this.awardExperience = awardExperience;
 	}
 	
 	

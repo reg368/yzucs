@@ -15,5 +15,10 @@
 			<property name="l_joindate" column="l_joindate" insert="false" update="false" />
 			<property name="l_group_id" column="l_group_id" />
 			<property name="isVisible" column="isVisible" insert="false" />
+			<property name="isRandom" column="isRandom" insert="false" />
+			<property name="totalQNumber" column="totalQNumber" />
+			<property name="correctQNumber" column="correctQNumber" />
+			<property name="awardMoney" column="awardMoney" />
+			<property name="awardExperience" column="awardExperience" />
 	</class>
 </hibernate-mapping>
