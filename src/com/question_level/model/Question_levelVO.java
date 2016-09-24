@@ -8,6 +8,8 @@ public class Question_levelVO implements Serializable {
 	String l_level;
 	Timestamp l_joindate;
 	Integer l_group_id;
+	Integer isVisible;
+	
 	public Integer getL_id() {
 		return l_id;
 	}
@@ -31,6 +33,12 @@ public class Question_levelVO implements Serializable {
 	}
 	public void setL_group_id(Integer l_group_id) {
 		this.l_group_id = l_group_id;
+	}
+	public Integer getIsVisible() {
+		return isVisible;
+	}
+	public void setIsVisible(Integer isVisible) {
+		this.isVisible = isVisible;
 	}
 	
 	

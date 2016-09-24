@@ -58,7 +58,7 @@ public class Question_controller extends HttpServlet {
     		
     		int g_id = Integer.parseInt(req.getParameter("g_id"));
     		
-    		List<Question_levelVO> vos = new Question_levelDAO().findQustionLevelsByGid(g_id);
+    		List<Question_levelVO> vos = new Question_levelDAO().findQustionLevelsByGidAndIsVisible(g_id, true);
     		//用LinkedList 可以使用poll *Retrieves and removes the head (first element) of this list.
     		LinkedList<Question_levelVO> levels = new LinkedList<Question_levelVO>();
     		
@@ -79,7 +79,7 @@ public class Question_controller extends HttpServlet {
     		//沒找到題目回userInfo.jsp	
     		}else{
     			
-    			errorMessage.add("此課程尚未有任何題目");
+    			errorMessage.add("此課程尚未有任何關卡");
     			req.setAttribute("errorMessage", errorMessage);
     			RequestDispatcher view = req
 						.getRequestDispatcher("/front/user/UserServlet.do?action=loginForm");

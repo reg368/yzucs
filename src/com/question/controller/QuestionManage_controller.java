@@ -135,6 +135,23 @@ public class QuestionManage_controller extends HttpServlet {
     		}
     		
     		
+    	}else if("question_level_insert".equals(action)){
+    		
+    		int g_id = Integer.parseInt(req.getParameter("g_id"));
+    		String l_level = req.getParameter("l_level");
+    		
+    		Question_levelVO lvo = new Question_levelVO();
+    		lvo.setL_group_id(g_id);
+			lvo.setL_level(l_level);
+			new Question_levelDAO().insertGetPrimaryKey(lvo);
+			
+			errorMessage.add("新增關卡成功");
+			req.setAttribute("errorMessage", errorMessage);
+			RequestDispatcher view = req
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+g_id);
+			view.forward(req, res);	
+			return;
+			
     	}else if("questionGroupDetail".equals(action)){
     		
     		

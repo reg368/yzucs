@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+
 import com.tool.HibernateUtil;
 
 public class Question_levelDAO implements Question_level_interface {
@@ -61,7 +62,28 @@ public class Question_levelDAO implements Question_level_interface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
-			Query query = session.createQuery("from Question_levelVO where l_group_id = ? order by l_id");
+			Query query = session.createQuery("from Question_levelVO where l_group_id = ?  order by l_id");
+			query.setParameter(0, gid);
+			vo = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException ex){
+			session.getTransaction().rollback();
+		}
+		return vo;
+	}
+
+	@Override
+	public List<Question_levelVO> findQustionLevelsByGidAndIsVisible(
+			Integer gid, boolean isVisible) {
+		// TODO Auto-generated method stub
+		List<Question_levelVO> vo = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			int value = 0;
+			if(isVisible)
+				value = 1;
+			Query query = session.createQuery("from Question_levelVO where l_group_id = ? and isVisible = "+value+" order by l_id");
 			query.setParameter(0, gid);
 			vo = query.list();
 			session.getTransaction().commit();
