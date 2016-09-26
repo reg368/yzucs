@@ -545,7 +545,6 @@ public class QuestionManage_controller extends HttpServlet {
     			int isVisible = NumberUtils.createInteger(req.getParameter("isVisible"));
     			int isRandom = NumberUtils.createInteger(req.getParameter("isRandom"));
     			String isDefaultCorrectNumber = req.getParameter("isDefaultCorrectNumber");
-    			System.out.println("isDefaultCorrectNumber : "+isDefaultCorrectNumber);
     			if(isDefaultCorrectNumber == null || isDefaultCorrectNumber.trim().length() == 0){
     				int correctQNumber = NumberUtils.createInteger(req.getParameter("correctQNumber"));
     				levelvo.setCorrectQNumber(correctQNumber);
