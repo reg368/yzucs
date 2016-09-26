@@ -483,7 +483,7 @@ public class QuestionManage_controller extends HttpServlet {
 			view.forward(req, res);	
 			
 			return;	
-    	}else if("updateLevelStatus".equals(action)){
+    	}else if("updateGroupLevelStatus".equals(action)){
     		
     		Enumeration<String> parameterNames = req.getParameterNames(); //取得所有的parameter 參數
     		Question_levelDAO ldao = new Question_levelDAO();
@@ -535,6 +535,47 @@ public class QuestionManage_controller extends HttpServlet {
     			view.forward(req, res);	
     			return;
     		}
+    	}else if("updateLevelStatus".equals(action)){
+    		
+    		int l_id = NumberUtils.createInteger(req.getParameter("l_id"));
+    		int g_id = NumberUtils.createInteger(req.getParameter("g_id"));
+    		Question_levelVO levelvo = new Question_levelDAO().findByL_id(l_id);
+    		if(levelvo != null ){
+    			
+    			int isVisible = NumberUtils.createInteger(req.getParameter("isVisible"));
+    			int isRandom = NumberUtils.createInteger(req.getParameter("isRandom"));
+    			String isDefaultCorrectNumber = req.getParameter("isDefaultCorrectNumber");
+    			System.out.println("isDefaultCorrectNumber : "+isDefaultCorrectNumber);
+    			if(isDefaultCorrectNumber == null || isDefaultCorrectNumber.trim().length() == 0){
+    				int correctQNumber = NumberUtils.createInteger(req.getParameter("correctQNumber"));
+    				levelvo.setCorrectQNumber(correctQNumber);
+    			}else{
+    				levelvo.setCorrectQNumber(null);
+    			}
+    			int awardMoney = NumberUtils.createInteger(req.getParameter("awardMoney"));
+    			int awardExperience = NumberUtils.createInteger(req.getParameter("awardExperience"));
+    			levelvo.setIsVisible(isVisible);
+    			levelvo.setIsRandom(isRandom);
+    			levelvo.setAwardMoney(awardMoney);
+    			levelvo.setAwardExperience(awardExperience);
+    			new Question_levelDAO().saveOrUpdateGerPrimaryKey(levelvo);
+    			
+    			errorMessage.add("修改成功");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewQuestionOfLevel&g_id="+g_id+"&l_id="+l_id);
+    			view.forward(req, res);	
+    			return;
+    			
+    		}else{
+    			errorMessage.add("修改失敗 , 讀取關卡資料錯誤");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewQuestionOfLevel&g_id="+g_id+"&l_id="+l_id);
+    			view.forward(req, res);	
+    			return;
+    		}
+    		
     	}
     }
     

@@ -33,7 +33,7 @@
 			</table>
 		
 			<input type="hidden" name="g_id" value="${groupVO.g_id}">
-			<input type="hidden" name="action" value="updateLevelStatus">
+			<input type="hidden" name="action" value="updateGroupLevelStatus">
 			<hr>
 			<button type="submit" >確定修改</button>	
 		</form>

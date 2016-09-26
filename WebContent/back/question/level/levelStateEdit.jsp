@@ -81,7 +81,7 @@
 <body>
 	<h2>修改關卡狀態 關卡 : ${level.l_level}</h2>
 	<hr>
-	<form method="post" action="*">
+	<form method="post" action="<%= request.getContextPath() %>/back/QuestionBackServlet.do">
 		<table>
 			<tr>
 				<td>開放狀態 &nbsp;&nbsp;</td>
@@ -95,7 +95,7 @@
 				<td>出題範圍 &nbsp;&nbsp;</td>
 				<td>
 					從第
-					 <select id="fromQuestion">
+					 <select id="fromQuestion" name="fromQuestion">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -108,7 +108,7 @@
 							<option value="10">10</option>
 					  </select>
 					題到第
-					  <select id="toQuestion">
+					  <select id="toQuestion" name="toQuestion">
 					  		<option value=""></option>
 					  </select>	
 					 題
@@ -129,7 +129,7 @@
 			<tr>
 				<td>答對幾題過關 &nbsp;&nbsp;</td>
 				<td><input type="number" name="correctQNumber" id="correctQNumber" value="${level.correctQNumber}" >&nbsp;&nbsp;</td>
-				<td><input type="checkbox" name="" id="isDefaultCorrectNumber" ${level.correctQNumber == null ? 'checked' : ''}>預設全部</td>
+				<td><input type="checkbox" name="isDefaultCorrectNumber" id="isDefaultCorrectNumber" ${level.correctQNumber == null ? 'checked' : ''}>預設全部</td>
 			</tr>
 			<tr>
 				<td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td>
@@ -146,6 +146,13 @@
 				<td><input type="number" name="awardExperience" value="${level.awardExperience}" ></td>
 			</tr>
 		</table> 
+		
+		<input type="hidden" name="action" value="updateLevelStatus">
+		<input type="hidden" name="g_id" value="${groupVO.g_id}">
+		<input type="hidden" name="l_id" value="${level.l_id}">
+		<hr>
+		<button type="submit" >確定修改</button>	
+		
 	</form>
 </body>
 </html>
