@@ -61,19 +61,19 @@
 			<tr bgcolor="#FFFF00">
 				<th>關卡名稱</th>
 				<th>關卡狀態</th>
-				<th>編輯關卡題目</th>
+				<th>關卡設定</th>
 			</tr>
 			<c:forEach var="level" items="${levels}" varStatus="loop">
 				<tr>
 					<td>${level.l_level}</td>
 					<td>${(level.isVisible == 0 )? '不開放' : '開放' }</td> 
-					<td><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id=${level.l_id}&l_level=${level.l_level}&g_id=${g_id}">編輯</a></td>
+					<td><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id=${level.l_id}&l_level=${level.l_level}&g_id=${g_id}">設定</a></td>
 				</tr>	
 			</c:forEach>
 	</table>
 	</c:if>
 	<br> 
-		<a href="<%= request.getContextPath() %>/back/question/levelAdd.jsp?g_id=${g_id}">新增關卡</a>&nbsp;&nbsp;&nbsp;
+		<a href="<%= request.getContextPath() %>/back/question/level/levelAdd.jsp?g_id=${g_id}">新增關卡</a>&nbsp;&nbsp;&nbsp;
 		<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestionLevelStatus&g_id=${g_id}">修改關卡狀態</a>
 	<hr>
 

@@ -273,14 +273,14 @@ public class QuestionManage_controller extends HttpServlet {
     		
     		req.setAttribute("l_id", l_id);
 
-    		Question_levelVO vo = new Question_levelDAO().findByL_id(l_id);
-    		req.setAttribute("l_level", vo.getL_level());
+    		Question_levelVO levelvo = new Question_levelDAO().findByL_id(l_id);
+    		req.setAttribute("level", levelvo);
     		
     		List<QuestionVO> questions = new QuestionDAO().findByLevelId(l_id);
     		req.setAttribute("questions", questions);
     		
     		RequestDispatcher view = req
-					.getRequestDispatcher("/back/question/viewQuestionLevel.jsp");
+					.getRequestDispatcher("/back/question/level/viewQuestionLevel.jsp");
 			view.forward(req, res);	
 			return;
     		
@@ -479,7 +479,7 @@ public class QuestionManage_controller extends HttpServlet {
     		req.setAttribute("levels", levels);
     		
     		RequestDispatcher view = req
-					.getRequestDispatcher("/back/question/levelStateEdit.jsp");
+					.getRequestDispatcher("/back/question/level/levelStateEdit.jsp");
 			view.forward(req, res);	
 			
 			return;	

@@ -26,8 +26,8 @@
 				<c:forEach var="level" items="${levels}" varStatus="loop">
 					<tr>
 						<td>${level.l_level} &nbsp;&nbsp;</td>
-						<td><input type="radio" name="${level.l_id}" value="1" ${(level.isVisible == 0 )? '' : 'checked' } >是&nbsp;</td>
-						<td><input type="radio" name="${level.l_id}" value="0" ${(level.isVisible == 0 )? 'checked' : '' } >否&nbsp;</td>			
+						<td><input type="radio" name="${level.l_id}" value="1" ${(level.isVisible == 0 )? '' : 'checked' } >開放&nbsp;</td>
+						<td><input type="radio" name="${level.l_id}" value="0" ${(level.isVisible == 0 )? 'checked' : '' } >不開放&nbsp;</td>			
 					</tr>	
 				</c:forEach>
 			</table>
