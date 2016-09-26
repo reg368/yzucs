@@ -513,12 +513,17 @@ public class QuestionManage_controller extends HttpServlet {
     	}else if ("viewLevelState".equals(action)){
     		
     		int l_id = NumberUtils.createInteger(req.getParameter("l_id"));
+    		int g_id = NumberUtils.createInteger(req.getParameter("g_id"));
+    		
     		Question_levelVO levelvo = new Question_levelDAO().findByL_id(l_id);
+    		
     		if(levelvo != null ){
     			
+    			Question_groupVO groupVO = new Question_groupDAO().findByGid(g_id);
+        		req.setAttribute("groupVO", groupVO);
     			req.setAttribute("level", levelvo);
     			RequestDispatcher view = req
-    					.getRequestDispatcher("/back/level/levelStateEdit.jsp");
+    					.getRequestDispatcher("/back/question/level/levelStateEdit.jsp");
     			view.forward(req, res);	
     			return;
     			
@@ -526,7 +531,7 @@ public class QuestionManage_controller extends HttpServlet {
     			errorMessage.add("修改失敗 , 讀取關卡資料錯誤");
     			req.setAttribute("errorMessage", errorMessage);
     			RequestDispatcher view = req
-    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewQuestionOfLevel&g_id="+req.getParameter("g_id")+"&l_id="+l_id);
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewQuestionOfLevel&g_id="+g_id+"&l_id="+l_id);
     			view.forward(req, res);	
     			return;
     		}
