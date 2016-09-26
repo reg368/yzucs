@@ -74,7 +74,7 @@
 	</c:if>
 	<br> 
 		<a href="<%= request.getContextPath() %>/back/question/level/levelAdd.jsp?g_id=${g_id}">新增關卡</a>&nbsp;&nbsp;&nbsp;
-		<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestionLevelStatus&g_id=${g_id}">修改關卡狀態</a>
+		<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewGroupLevelStatus&g_id=${g_id}">修改關卡狀態</a>
 	<hr>
 
 </body>

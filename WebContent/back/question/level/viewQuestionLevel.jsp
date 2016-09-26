@@ -31,7 +31,7 @@
 	</ul>
 	<br>
 	<a href="<%= request.getContextPath() %>/back/question/level/levelEdit.jsp?l_id=${level.l_id}&l_level=${level.l_level}">修改關卡名稱</a>
-	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewLevelState&l_id=${level.l_id}">修改關卡設定</a>
+	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewLevelState&l_id=${level.l_id}&g_id=${g_id}">修改關卡設定</a>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
