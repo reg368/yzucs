@@ -14,6 +14,9 @@ public class Question_levelVO implements Serializable {
 	Integer correctQNumber; //答對幾題過關
 	Integer awardMoney; //過關獲得的金幣
 	Integer awardExperience; //過關獲得的經驗值
+	Integer fromQuestion; //出題範圍從第 ..題
+	Integer toQuestion; //  出題範圍到第..題
+	
 	
 	public Integer getL_id() {
 		return l_id;
@@ -74,6 +77,18 @@ public class Question_levelVO implements Serializable {
 	}
 	public void setAwardExperience(Integer awardExperience) {
 		this.awardExperience = awardExperience;
+	}
+	public Integer getFromQuestion() {
+		return fromQuestion;
+	}
+	public void setFromQuestion(Integer fromQuestion) {
+		this.fromQuestion = fromQuestion;
+	}
+	public Integer getToQuestion() {
+		return toQuestion;
+	}
+	public void setToQuestion(Integer toQuestion) {
+		this.toQuestion = toQuestion;
 	}
 	
 	

@@ -20,5 +20,7 @@
 			<property name="correctQNumber" column="correctQNumber" />
 			<property name="awardMoney" column="awardMoney" />
 			<property name="awardExperience" column="awardExperience" />
+			<property name="fromQuestion" column="fromQuestion" />
+			<property name="toQuestion" column="toQuestion" />
 	</class>
 </hibernate-mapping>
