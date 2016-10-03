@@ -45,6 +45,9 @@
 		 
 		 
 		 $('#isQRangeDefault').change(function() {
+			 
+			 var qsize = '${questionSize}';
+			 
 		        if($(this).is(":checked")) {
 		        	$("#fromQuestion").prop('disabled', true);
 		   		 	$("#toQuestion").prop('disabled', true);
@@ -54,7 +57,7 @@
 		        	$("#fromQuestion").prop('disabled', false);
 		   		    $("#toQuestion").prop('disabled', false);
 		   		 	
-		   		    for(var i = 1 ; i <= 10 ; i ++){
+		   		    for(var i = 1 ; i <= qsize ; i ++){
 		   		 	 	$("#fromQuestion").append($("<option></option>").attr("value", i).text(i));
 		   		 		$("#toQuestion").append($("<option></option>").attr("value", i).text(i));
 		   		 	}
@@ -66,13 +69,15 @@
 		 $('#fromQuestion').change(function() {
 			 
 		       var from = $( "#fromQuestion" ).val();  
+		       var qsize = '${questionSize}';
 		       $("#toQuestion option").remove();
 		       
-		       for(var i = from ; i <= 10 ; i ++){
+		       
+		       for(var i = from ; i <= qsize ; i ++){
 		    	   $("#toQuestion").append($("<option></option>").attr("value", i).text(i));
 		       }
 		       
-		       $('#toQuestion').val(10); 
+		       $('#toQuestion').val(qsize); 
 		       
 		    });
 		 
@@ -96,20 +101,12 @@
 				<td>
 					從第
 					 <select id="fromQuestion" name="fromQuestion">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
+					   <!-- <c:forEach var="question" items="${questions}" varStatus="loop">
+								<option value="${loop.index+1}">${loop.index+1}</option>
+							</c:forEach> -->
 					  </select>
 					題到第
 					  <select id="toQuestion" name="toQuestion">
-					  		<option value=""></option>
 					  </select>	
 					 題
 				</td>

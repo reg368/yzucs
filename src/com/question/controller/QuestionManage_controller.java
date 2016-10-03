@@ -516,12 +516,15 @@ public class QuestionManage_controller extends HttpServlet {
     		int g_id = NumberUtils.createInteger(req.getParameter("g_id"));
     		
     		Question_levelVO levelvo = new Question_levelDAO().findByL_id(l_id);
-    		
+    	
     		if(levelvo != null ){
     			
+    			List<QuestionVO> questions = new QuestionDAO().findByLevelId(levelvo.getL_id());
     			Question_groupVO groupVO = new Question_groupDAO().findByGid(g_id);
         		req.setAttribute("groupVO", groupVO);
     			req.setAttribute("level", levelvo);
+    			req.setAttribute("questions", questions);
+    			req.setAttribute("questionSize", questions.size());
     			RequestDispatcher view = req
     					.getRequestDispatcher("/back/question/level/levelStateEdit.jsp");
     			view.forward(req, res);	
