@@ -110,9 +110,28 @@ public class Question_controller extends HttpServlet {
     				session.setAttribute("nowlevelname", currentLevel.getL_level());
     				session.setAttribute("currentlevelId", currentLevel.getL_id());
     				
-    				//給問題頁的參數
+    				//找出關卡的總題目數量
     				List<QuestionVO> questions = new QuestionDAO().findByLevelId(currentLevel.getL_id());
-    				Collections.shuffle(questions);
+    				
+    				//判斷是否有出題範圍
+    				if(currentLevel.getFromQuestion() != null && currentLevel.getFromQuestion() != 0 && 
+    						currentLevel.getToQuestion() != null && currentLevel.getToQuestion() != 0){
+    					//判斷出題範圍參數設定是否正確 
+    					if(questions != null && questions.size() >= currentLevel.getToQuestion()){
+    						questions = questions.subList(currentLevel.getFromQuestion() - 1, currentLevel.getToQuestion());
+    					}
+    					
+    				}
+    				
+    				
+    				
+    				//如果要隨機出題的話
+    				if(currentLevel.getIsRandom() != null && currentLevel.getIsRandom() == 1){
+    					Collections.shuffle(questions);
+    				}
+    				
+    				
+    				session.setAttribute("currentLevel", currentLevel);
     	    		session.setAttribute("questionList", questions);
     	    		session.setAttribute("qindex", 0);
     	    		session.setAttribute("question", questions.get(0));
@@ -159,11 +178,26 @@ public class Question_controller extends HttpServlet {
     		}
     		 
     	}else if("answer_submit".equals(action)){
+    		
+    		Level_recordDAO lrdao = new Level_recordDAO();
+    		
+    		Boolean isDoneCorrect = false;
+    		//判斷總答對題數是否達標
+    		Question_levelVO currentLevel = (Question_levelVO)session.getAttribute("currentLevel");
+    		if(currentLevel.getCorrectQNumber() != null && currentLevel.getCorrectQNumber() != 0){
+    			
+    			Level_recordVO lrvo = lrdao.findByUserVOAndLevelId(uservo, currentLevel.getL_id());
+    			if(currentLevel.getCorrectQNumber() >= lrvo.getLr_correct_count()){
+    				isDoneCorrect = true;
+    			}
+    		}
+    		
+    		
     		List<QuestionVO> questions = (List<QuestionVO>)session.getAttribute("questionList");
     		int qindex = Integer.parseInt(req.getParameter("qindex"));
 
     			//還有題目 , 下一題
-    			if((qindex+1) < questions.size()){
+    			if((qindex+1) < questions.size() && !isDoneCorrect){
     				session.setAttribute("character_mood", "_happy");
     				session.setAttribute("qindex", qindex+1);
     				session.setAttribute("question", questions.get(qindex+1));
