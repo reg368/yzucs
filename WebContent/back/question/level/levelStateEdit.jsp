@@ -37,11 +37,38 @@
 		
 		//--------------------------------------------------------
 		
-		//假裝都預設
-		 $("#fromQuestion").prop('disabled', true);
-		 $("#toQuestion").prop('disabled', true);
-		 $("#toQuestion option").remove();
-		 $("#fromQuestion option").remove();
+		 
+		 var fromQuestion = '${level.fromQuestion}';
+		 var toQuestion = '${level.toQuestion}';
+		 var qsize = '${questionSize}';
+		 if(toQuestion != null && toQuestion != '' && fromQuestion != null && fromQuestion != ''){
+			 
+			 $("#fromQuestion").prop('disabled', false);
+	   		 $("#toQuestion").prop('disabled', false);
+	   		 
+	   	   for(var i = 1 ; i <= qsize ; i ++){
+  		 	 	
+	   		   if(fromQuestion == i){
+	   			 $("#fromQuestion").append($("<option checked></option>").attr("value", i).text(i));
+	   		   }else{
+	   			 $("#fromQuestion").append($("<option></option>").attr("value", i).text(i));
+	   		   }
+	   		   
+	   		   if(toQuestion == i){
+	   			 $("#toQuestion").append($("<option checked></option>").attr("value", i).text(i));
+	   		   }else{
+	   			 $("#toQuestion").append($("<option></option>").attr("value", i).text(i));
+	   		   }
+  		 	}
+	   	   
+		 //預設全部	 
+		 }else{
+			 $("#fromQuestion").prop('disabled', true);
+			 $("#toQuestion").prop('disabled', true);
+			 $("#toQuestion option").remove();
+			 $("#fromQuestion option").remove();
+			 $("#isQRangeDefault").prop('checked', true);
+		 }
 		 
 		 
 		 $('#isQRangeDefault').change(function() {
@@ -110,7 +137,7 @@
 					  </select>	
 					 題
 				</td>
-				<td><input type="checkbox" name="isQRangeDefault" id="isQRangeDefault" checked>預設全部</td>			
+				<td><input type="checkbox" name="isQRangeDefault" id="isQRangeDefault" value="isQRangeDefault" >預設全部</td>			
 			</tr>
 			<tr>
 				<td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td>

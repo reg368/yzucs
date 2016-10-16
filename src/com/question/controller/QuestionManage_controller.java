@@ -545,6 +545,37 @@ public class QuestionManage_controller extends HttpServlet {
     		Question_levelVO levelvo = new Question_levelDAO().findByL_id(l_id);
     		if(levelvo != null ){
     			
+    			String isQRangeDefault = req.getParameter("isQRangeDefault");
+    			//出題範圍 : 預設全選
+    			if(isQRangeDefault != null && isQRangeDefault.trim().length() > 0){
+    				
+    				levelvo.setFromQuestion(null);
+    				levelvo.setToQuestion(null);
+    				
+    			//出題指定範圍	
+    			}else{
+    				   				
+    				Integer fromQuestion = NumberUtils.createInteger(req.getParameter("fromQuestion"));
+        			Integer toQuestion = NumberUtils.createInteger(req.getParameter("toQuestion"));
+        			
+        			//檢查答題是否有正確輸入
+        			if(fromQuestion != null && fromQuestion != 0 && toQuestion != null && toQuestion != 0){
+        				
+        				levelvo.setFromQuestion(fromQuestion);
+        				levelvo.setToQuestion(toQuestion);
+        				
+        			}else{
+        				errorMessage.add("出題範圍輸入錯誤");
+            			req.setAttribute("errorMessage", errorMessage);
+            			RequestDispatcher view = req
+            					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewLevelState&g_id="+g_id+"&l_id="+l_id);
+            			view.forward(req, res);	
+            			return;
+        			}
+    				
+    				
+    			}
+
     			int isVisible = NumberUtils.createInteger(req.getParameter("isVisible"));
     			int isRandom = NumberUtils.createInteger(req.getParameter("isRandom"));
     			String isDefaultCorrectNumber = req.getParameter("isDefaultCorrectNumber");

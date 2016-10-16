@@ -23,7 +23,16 @@
 	<h2>${level.l_level}</h2>
 	<ul>
 		<li>開放狀態:&nbsp;&nbsp;${ level.isVisible == 1  ? '開放' : '不開放'}</li>
-		<li>出題範圍*:&nbsp;&nbsp; ${ level.totalQNumber == null ? '預設全部' : level.totalQNumber}</li>
+		<li>出題範圍:&nbsp;&nbsp; 
+		<c:choose>
+			<c:when test="${not empty level.fromQuestion && not empty level.toQuestion }">
+				第${level.fromQuestion}題&nbsp;到&nbsp;第${level.toQuestion}題
+			</c:when>
+			<c:otherwise>
+				預設全部
+			</c:otherwise>
+		</c:choose>
+		</li>
 		<li>出題順序:&nbsp;&nbsp;${ level.isRandom == 1 ? '隨機' : '不隨機' }</li>
 		<li>答對幾題過關:&nbsp;&nbsp;${ level.correctQNumber == null  ? '預設全部' : level.correctQNumber }</li>
 		<li>過關獎勵金幣:&nbsp;&nbsp;${ level.awardMoney == null ? '尚未設定' : level.awardMoney }</li>
