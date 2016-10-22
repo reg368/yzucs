@@ -111,6 +111,13 @@
 	});
 </script>
 <body>
+	<c:if test="${not empty errorMessage}"  >
+		<ul>
+			<c:forEach var="message" items="${errorMessage}">
+					<li style="color:red;">${message}</li>
+			</c:forEach>
+		</ul>	
+	</c:if>
 	<h2>修改關卡狀態 關卡 : ${level.l_level}</h2>
 	<hr>
 	<form method="post" action="<%= request.getContextPath() %>/back/QuestionBackServlet.do">

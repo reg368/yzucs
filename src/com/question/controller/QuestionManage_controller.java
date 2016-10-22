@@ -580,17 +580,53 @@ public class QuestionManage_controller extends HttpServlet {
     			int isRandom = NumberUtils.createInteger(req.getParameter("isRandom"));
     			String isDefaultCorrectNumber = req.getParameter("isDefaultCorrectNumber");
     			if(isDefaultCorrectNumber == null || isDefaultCorrectNumber.trim().length() == 0){
-    				int correctQNumber = NumberUtils.createInteger(req.getParameter("correctQNumber"));
-    				levelvo.setCorrectQNumber(correctQNumber);
+    				
+    				try{
+    					int correctQNumber = NumberUtils.createInteger(req.getParameter("correctQNumber"));
+    					levelvo.setCorrectQNumber(correctQNumber);
+    				}catch(NumberFormatException e){
+    					errorMessage.add("答對幾題過關輸入錯誤");
+            			req.setAttribute("errorMessage", errorMessage);
+            			RequestDispatcher view = req
+            					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewLevelState&g_id="+g_id+"&l_id="+l_id);
+            			view.forward(req, res);	
+            			return;
+    				}	
+    			
     			}else{
     				levelvo.setCorrectQNumber(null);
     			}
-    			int awardMoney = NumberUtils.createInteger(req.getParameter("awardMoney"));
-    			int awardExperience = NumberUtils.createInteger(req.getParameter("awardExperience"));
+    			
+    			if(req.getParameter("awardMoney") != null && req.getParameter("awardMoney").trim().length() > 0){
+    				try{
+    					int awardMoney = NumberUtils.createInteger(req.getParameter("awardMoney"));
+        				levelvo.setAwardMoney(awardMoney);
+    				}catch(NumberFormatException e){
+    					errorMessage.add("過關獎勵金幣輸入錯誤");
+            			req.setAttribute("errorMessage", errorMessage);
+            			RequestDispatcher view = req
+            					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewLevelState&g_id="+g_id+"&l_id="+l_id);
+            			view.forward(req, res);	
+            			return;
+    				}	
+    			}
+    			
+    			if(req.getParameter("awardExperience") != null && req.getParameter("awardExperience").trim().length() > 0){
+    				try{
+    					int awardExperience = NumberUtils.createInteger(req.getParameter("awardExperience"));
+    					levelvo.setAwardExperience(awardExperience);
+    				}catch(NumberFormatException e){
+    					errorMessage.add("過關獎勵經驗值輸入錯誤");
+            			req.setAttribute("errorMessage", errorMessage);
+            			RequestDispatcher view = req
+            					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewLevelState&g_id="+g_id+"&l_id="+l_id);
+            			view.forward(req, res);	
+            			return;
+    				}
+    			}
+    			
     			levelvo.setIsVisible(isVisible);
     			levelvo.setIsRandom(isRandom);
-    			levelvo.setAwardMoney(awardMoney);
-    			levelvo.setAwardExperience(awardExperience);
     			new Question_levelDAO().saveOrUpdateGerPrimaryKey(levelvo);
     			
     			errorMessage.add("修改成功");
