@@ -19,6 +19,8 @@ import javax.servlet.http.Part;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
+import com.QL.model.QLVO;
+import com.QL.model.QL_DAO;
 import com.answer.model.AnswerDAO;
 import com.answer.model.AnswerVO;
 import com.question.model.QuestionDAO;
@@ -174,9 +176,6 @@ public class QuestionManage_controller extends HttpServlet {
     		List<StudentClassVO> sclasss = new StudentClassDAO().findStudentClassByQuestionGroupId(g_id);
     		req.setAttribute("sclasss", sclasss);
     		
-    		//課程關卡
-    		List<Question_levelVO> levels = new Question_levelDAO().findQustionLevelsByGid(g_id);
-    		req.setAttribute("levels", levels);
     		
     		//課程資料
     		Question_groupVO question = new Question_groupDAO().findByGid(g_id);
@@ -712,6 +711,9 @@ public class QuestionManage_controller extends HttpServlet {
     		int l_id = NumberUtils.createInteger(req.getParameter("l_id"));
     		int g_id = NumberUtils.createInteger(req.getParameter("g_id"));
     		
+    		Question_groupVO group = new Question_groupDAO().findByGid(g_id);
+    		req.setAttribute("group", group);
+    		
     		req.setAttribute("l_id", l_id);
     		req.setAttribute("g_id", g_id);
     		
@@ -721,6 +723,41 @@ public class QuestionManage_controller extends HttpServlet {
     		RequestDispatcher view = req
 					.getRequestDispatcher("/back/question/level/levelQuestionAdd.jsp");
 			view.forward(req, res);
+    		
+    	}else if("levelQuestionInsert".equals(action)){
+    		
+    		int l_id = NumberUtils.createInteger(req.getParameter("l_id"));
+    		int g_id = NumberUtils.createInteger(req.getParameter("g_id"));
+    		
+    		String[] q_ids= req.getParameterValues("q_ids");
+    		
+    		if(q_ids != null && q_ids.length > 0){
+    			
+    			QL_DAO qldao = new QL_DAO();
+    			
+    			for(int i = 0 ; i < q_ids.length ; i ++){
+    				QLVO qlvo = new QLVO();
+    				qlvo.setL_id(l_id);
+    				qlvo.setQ_id(NumberUtils.createInteger(q_ids[i]));
+    				qlvo.setG_id(g_id);
+    				qldao.insertGerPrimaryKey(qlvo);    				
+    			}
+    			
+    			errorMessage.add("新增成功");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id="+l_id+"&g_id="+g_id);
+    			view.forward(req, res);
+    			
+    		}else{
+    			
+    			errorMessage.add("請勾選至少一個題目");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=levelQuestionAdd&l_id="+l_id+"&g_id="+g_id);
+    			view.forward(req, res);
+    			
+    		}
     		
     	}
     }

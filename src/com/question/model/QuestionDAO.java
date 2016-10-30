@@ -11,7 +11,7 @@ import com.tool.HibernateUtil;
 public class QuestionDAO implements Question_interface {
 
 	private final String findQuestionByLevelIdAndGroupId = "select q.* from yzu_QL_mapping m join yzu_question q on m.Q_ID = q.Q_ID where m.L_ID = ? and  q.Q_GROUPID = ? ";
-	private final String findNotInLevelIdAndGroupId = "select * from yzu_question where Q_ID not in (select q.Q_ID from yzu_QL_mapping m join yzu_question q on m.Q_ID = q.Q_ID where m.L_ID = ? and q.Q_GROUPID = ?)";
+	private final String findNotInLevelIdAndGroupId = "select * from yzu_question where Q_ID not in (select q.Q_ID from yzu_QL_mapping m join yzu_question q on m.Q_ID = q.Q_ID where m.L_ID = ?) and Q_GROUPID = ?";
 	
 	
 	@Override

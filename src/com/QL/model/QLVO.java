@@ -6,6 +6,7 @@ public class QLVO implements Serializable {
 	private Integer ql_id;
 	private Integer l_id;
 	private Integer q_id;
+	private Integer g_id;
 	
 	public Integer getQl_id() {
 		return ql_id;
@@ -24,6 +25,12 @@ public class QLVO implements Serializable {
 	}
 	public void setQ_id(Integer q_id) {
 		this.q_id = q_id;
+	}
+	public Integer getG_id() {
+		return g_id;
+	}
+	public void setG_id(Integer g_id) {
+		this.g_id = g_id;
 	}
 	
 }

@@ -10,6 +10,7 @@
 			</generator>
 		</id>
 			<property name="l_id" column="l_id" />
-			<property name="q_id" column="q_id" />	
+			<property name="q_id" column="q_id" />
+			<property name="g_id" column="g_id" />		
 	</class>
 </hibernate-mapping>

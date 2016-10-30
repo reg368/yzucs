@@ -13,6 +13,11 @@
 	label{
 		width:150px;
 	}
+	#qTable td 
+	{
+    	text-align:center; 
+   	 	vertical-align:middle;
+	}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title></title>
@@ -20,7 +25,8 @@
 </script>
 </head>
 <body>
-	<h2>${question.g_name}</h2>
+	<h2>關卡:${group.g_name}</h2>
+	<p>新增題目</p>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -29,30 +35,36 @@
 		</ul>	
 	</c:if> 
 	<hr>
-	<br>
-	<label>課程關卡:</label><br>
-	<c:if test="${not empty levels }">
-		<table  border="1">
-			<tr bgcolor="#FFFF00">
-				<th>關卡名稱</th>
-				<th>關卡狀態</th>
-				<th>關卡設定</th>
-				<th>修改關卡名稱</th>
-			</tr>
-			<c:forEach var="level" items="${levels}" varStatus="loop">
-				<tr>
-					<td>${level.l_level}</td>
-					<td>${(level.isVisible == 0 )? '不開放' : '開放' }</td> 
-					<td><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id=${level.l_id}&g_id=${g_id}">設定</a></td>
-					<td><a href="<%= request.getContextPath() %>/back/question/level/levelNameEdit.jsp?&action=update&g_id=${g_id}&l_id=${level.l_id}">修改關卡名稱</a></td>
-				</tr>	
-			</c:forEach>
-	</table>
-	</c:if>
-	<br> 
-		<a href="<%= request.getContextPath() %>/back/question/level/levelNameAdd.jsp?action=insert&g_id=${g_id}">新增關卡</a>&nbsp;&nbsp;&nbsp;
-		<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewGroupLevelStatus&g_id=${g_id}">修改關卡狀態</a>
-	<hr>
+	<c:choose>
+		<c:when test="${not empty questions}">
+		<form method="post" action="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=levelQuestionInsert">
+			<table  border="1" id="qTable">
+				<tr bgcolor="#FFFF00">
+					<th>編號</th>
+					<th>勾選加入</th>
+					<th>題目</th>
+					<th>查看詳情</th>
+				</tr>
+				
+				<c:forEach var="question" items="${questions}" varStatus="loop">
+					<tr>
+						<td>${loop.index + 1}</td>
+						<td><input type="checkbox" name="q_ids" value="${question.q_id }"></td>
+						<td>${question.q_text}</td>
+						<td><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestion&q_id=${question.q_id}">查看詳情</a></td>
+					</tr>	
+				</c:forEach>
+			</table>
+			<br>
+			<input type="hidden" name="l_id" value="${l_id}">
+			<input type="hidden" name="g_id" value="${g_id}">
+			<input type="submit" value="送出">
+		</form>	
+		</c:when>
+		<c:otherwise>
+			<font >目前沒有可以增加的題目</font>		
+		</c:otherwise>	
+	</c:choose>
 
 </body>
 </html>

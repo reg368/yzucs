@@ -55,9 +55,18 @@
 	<c:choose>
 		<c:when test="${not empty questions}">
 			<table  border="1">
+			
+				<tr bgcolor="#FFFF00">
+					<th>編號</th>
+					<th>題目</th>
+					<th>查看詳情</th>
+				</tr>
+			
 				<c:forEach var="question" items="${questions}" varStatus="loop">
 					<tr>
-						<td>${question.q_text}  <a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestion&q_id=${question.q_id}">編輯</a> </td>
+						<td>${loop.index + 1}</td>
+						<td>${question.q_text} </td>
+						<td><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewQuestion&q_id=${question.q_id}">查看詳情</a></td>
 					</tr>	
 				</c:forEach>
 			</table>	
