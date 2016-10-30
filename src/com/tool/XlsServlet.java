@@ -68,7 +68,6 @@ public class XlsServlet extends HttpServlet {
 			Collection<Part> parts = req.getParts();
 			String format = "";
 			int g_id =  Integer.parseInt(req.getParameter("g_id"));
-			int level_id = Integer.parseInt(req.getParameter("l_id"));
 			for (Part part : parts) {
 				if ("question_xls".equals(part.getName())) {
 					if (getFileNameFromPart(part) != null && (
@@ -193,7 +192,7 @@ public class XlsServlet extends HttpServlet {
 								 			question.setQ_text(cellValue);
 								 		question.setQ_tip("");
 								 		question.setQ_groupid(g_id); //課程id
-								 		question.setQ_level_id(level_id);  //關卡id
+								 		question.setQ_level_id(0);  //關卡id
 								 		question.setQ_point("1");
 								 		if(isMulti)
 								 			question.setQ_isMulti(1);

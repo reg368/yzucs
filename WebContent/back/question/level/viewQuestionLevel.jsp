@@ -39,7 +39,6 @@
 		<li>過關獎勵經驗值:&nbsp;&nbsp;${ level.awardExperience == null ? '尚未設定' : level.awardExperience }</li>
 	</ul>
 	<br>
-	<a href="<%= request.getContextPath() %>/back/question/level/levelEdit.jsp?l_id=${level.l_id}&l_level=${level.l_level}">修改關卡名稱</a>
 	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=viewLevelState&l_id=${level.l_id}&g_id=${g_id}">修改關卡設定</a>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
@@ -48,22 +47,10 @@
 			</c:forEach>
 		</ul>	
 	</c:if>
-	<hr>
-	
-	<form method="post" action="<%= request.getContextPath() %>/XlsServlet.do?g_id=${g_id}&g_name=${g_name}&l_level=${level.l_level}" enctype="multipart/form-data">
-		<label  >xls匯入:</label><br><br>
-		<input type="file" name="question_xls">
-		<input type="hidden" name="action" value="questionImport">
-		<input type="hidden" name="finishUrl" value="/back/QuestionBackServlet.do?action=viewQuestionOfLevel">
-		
-		<input type="hidden" name="l_id" value="${level.l_id}">
-		<br>
-		<button type="submit">送出</button>	
-	</form>
 	
 	<hr>
 	<label>此關卡的題目:</label><br>
-	<a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp?l_id=${level.l_id}&l_level=${level.l_level}&g_id=${g_id}&g_name=${g_name}">新增題目</a><br>
+	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=levelQuestionAdd&l_id=${level.l_id}&g_id=${g_id}">新增題目</a><br>
 	<br>
 	<c:choose>
 		<c:when test="${not empty questions}">

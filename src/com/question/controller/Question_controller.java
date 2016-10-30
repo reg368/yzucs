@@ -319,7 +319,7 @@ public class Question_controller extends HttpServlet {
 			//表示QuestionBackServlet controller 取這2個參數值用req.getAttribute 取 ,
 			//直接寫在url 用 get 送中文會亂碼
     		RequestDispatcher view = req
-					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id="+q_level_id+"&l_level=&g_id="+g_id+"&g_name=");
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionList&g_id="+g_id);
 			view.forward(req, res);	
 			return;
     	}

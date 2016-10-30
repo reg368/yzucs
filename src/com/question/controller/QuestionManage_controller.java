@@ -64,12 +64,12 @@ public class QuestionManage_controller extends HttpServlet {
     	
     	UserVO uservo = (UserVO)session.getAttribute("UserBackVO");
     	
-    	if("view".equals(action)){
+    	if("courseManage".equals(action)){
     		Question_groupDAO dao = new Question_groupDAO();
     		List<Question_groupVO> groups = dao.findQuestion_groupsByUserId(uservo.getUser_id());
     		req.setAttribute("question_groups", groups);
     		RequestDispatcher view = req
-					.getRequestDispatcher("/back/question/questionManage.jsp");
+					.getRequestDispatcher("/back/question/courseManage.jsp");
 			view.forward(req, res);	
 			return;
     	}else if("question_group_insert".equals(action)){
@@ -151,7 +151,7 @@ public class QuestionManage_controller extends HttpServlet {
 			errorMessage.add("新增關卡成功");
 			req.setAttribute("errorMessage", errorMessage);
 			RequestDispatcher view = req
-					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+g_id);
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=levelList&g_id="+g_id);
 			view.forward(req, res);	
 			return;
 			
@@ -266,18 +266,18 @@ public class QuestionManage_controller extends HttpServlet {
     			errorMessage.add("編輯關卡題目失敗 , 請聯絡系統管理員");
     			req.setAttribute("errorMessage", errorMessage);
     			RequestDispatcher view = req
-    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+g_id+"&g_name=");
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=levelList&g_id="+g_id);
     			view.forward(req, res);	
     			return;
     		}
     		
     		req.setAttribute("l_id", l_id);
 
+    		List<QuestionVO> questions = new QuestionDAO().findByLevelIdAndGroupId(l_id,question.getG_id());
+    		req.setAttribute("questions", questions);
+    		
     		Question_levelVO levelvo = new Question_levelDAO().findByL_id(l_id);
     		req.setAttribute("level", levelvo);
-    		
-    		List<QuestionVO> questions = new QuestionDAO().findByLevelId(l_id);
-    		req.setAttribute("questions", questions);
     		
     		RequestDispatcher view = req
 					.getRequestDispatcher("/back/question/level/viewQuestionLevel.jsp");
@@ -451,7 +451,7 @@ public class QuestionManage_controller extends HttpServlet {
     		errorMessage.add("修改成功");
     		req.setAttribute("errorMessage", errorMessage);
     		RequestDispatcher view = req
-					.getRequestDispatcher("/back/QuestionBackServlet.do?action=viewQuestionOfLevel&l_id="+l_id+"&g_id="+vo.getL_group_id());
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=levelList&g_id="+vo.getL_group_id());
 			view.forward(req, res);	
 			
 			return;
@@ -507,7 +507,7 @@ public class QuestionManage_controller extends HttpServlet {
     		errorMessage.add("修改關卡狀態成功");
 			req.setAttribute("errorMessage", errorMessage);
 			RequestDispatcher view = req
-					.getRequestDispatcher("/back/QuestionBackServlet.do?action=questionGroupDetail&g_id="+req.getParameter("g_id"));
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=levelList&g_id="+req.getParameter("g_id"));
 			view.forward(req, res);	
 			return;
     	}else if ("viewLevelState".equals(action)){
@@ -645,8 +645,89 @@ public class QuestionManage_controller extends HttpServlet {
     			return;
     		}
     		
+    	}else if("questionManage".equals(action)){
+    		Question_groupDAO dao = new Question_groupDAO();
+    		List<Question_groupVO> groups = dao.findQuestion_groupsByUserId(uservo.getUser_id());
+    		req.setAttribute("question_groups", groups);
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/question/questionManage.jsp");
+			view.forward(req, res);	
+			return;
+    		
+    	}else if("questionList".equals(action)){
+    		
+    		//顯示課程名稱
+    		String g_id = req.getParameter("g_id");
+    		Question_groupVO question = new Question_groupDAO().findByGid(Integer.parseInt(g_id));
+    		req.setAttribute("g_name", question.getG_name());
+    		req.setAttribute("g_id", g_id);
+    		
+    		//顯示課程所有題目清單
+    		List<QuestionVO> questions = new QuestionDAO().findByGroupId(question.getG_id());
+    		req.setAttribute("questions", questions);
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/question/questionList.jsp");
+			view.forward(req, res);	
+			return;
+    	}else if("levelManage".equals(action)){
+    		Question_groupDAO dao = new Question_groupDAO();
+    		List<Question_groupVO> groups = dao.findQuestion_groupsByUserId(uservo.getUser_id());
+    		req.setAttribute("question_groups", groups);
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/level/levelManage.jsp");
+			view.forward(req, res);	
+			return;
+    	}else if("levelList".equals(action)){
+    		
+    		int g_id;
+    		try{
+    			g_id = Integer.parseInt(req.getParameter("g_id"));
+    		}catch(Exception e){
+    			errorMessage.add("編輯課程失敗 , 請聯絡系統管理員");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=levelManage");
+    			view.forward(req, res);	
+    			return;
+    		}
+    		 
+    		
+    		//課程關卡
+    		List<Question_levelVO> levels = new Question_levelDAO().findQustionLevelsByGid(g_id);
+    		req.setAttribute("levels", levels);
+    		
+    		//課程資料
+    		Question_groupVO question = new Question_groupDAO().findByGid(g_id);
+    		req.setAttribute("question", question);
+    		
+    		req.setAttribute("g_id", g_id);
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/level/levelList.jsp");
+			view.forward(req, res);
+    		
+    	}else if ("levelQuestionAdd".equals(action)){
+    		
+    		int l_id = NumberUtils.createInteger(req.getParameter("l_id"));
+    		int g_id = NumberUtils.createInteger(req.getParameter("g_id"));
+    		
+    		req.setAttribute("l_id", l_id);
+    		req.setAttribute("g_id", g_id);
+    		
+    		List<QuestionVO> questions = new QuestionDAO().findNotInLevelIdAndGroupId(l_id,g_id);
+    		req.setAttribute("questions", questions);
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/question/level/levelQuestionAdd.jsp");
+			view.forward(req, res);
+    		
     	}
     }
+    
+    
+    
+    
     
     private byte[] InputStreamConvertByteArray(InputStream in) {
 		byte[] buffer = new byte[4 * 1024];

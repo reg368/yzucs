@@ -12,7 +12,7 @@ public class StudentClassDAO implements StudentClass_interface {
 
 
 	private final String findStudentClassByQuestionGroupId = "select c.* from yzu_s_class_question s join yzu_student_class c on s.CLASS_ID = c.C_ID where s.GROUP_ID = ? ";
-	private final String findStudentClassByTeacherIdAndNotInGroupId = "select * from yzu_student_class where c_id NOT IN (select s. c_id from yzu_student_class s left join yzu_s_class_question c on s.C_ID = c.CLASS_ID where NVL(c.GROUP_ID,0) = ? and s.C_TEACHER_ID =  ?)";
+	private final String findStudentClassByTeacherIdAndNotInGroupId = "select * from yzu_student_class where c_id NOT IN (select s.c_id from yzu_student_class s left join yzu_s_class_question c on s.C_ID = c.CLASS_ID where NVL(c.GROUP_ID,0) = ? and s.C_TEACHER_ID =  ?)";
 	
 	
 	@Override

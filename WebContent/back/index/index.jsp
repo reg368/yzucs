@@ -52,7 +52,9 @@
 				<li><a href="<%= request.getContextPath() %>/back/character/addCharInfo.jsp" target="iframe">新增角色圖片資訊</a></li>
 				<li><a href="<%= request.getContextPath() %>/back/question/addQuestion.jsp" target="iframe">新增問題</a></li>
 			 </c:if>
-				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=view" target="iframe">課程管理</a></li>
+				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=courseManage" target="iframe">課程管理</a></li>
+				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=levelManage" target="iframe">課程關卡管理</a></li>
+				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=questionManage" target="iframe">課程題目管理</a></li>
 				<li><a href="<%= request.getContextPath() %>/back/StudentBackServlet.do?action=view" target="iframe">學生管理</a></li>
 			</ul> 
 			
