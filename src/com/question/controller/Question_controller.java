@@ -103,48 +103,60 @@ public class Question_controller extends HttpServlet {
     			
     			if(currentLevel != null){
     				
-    				//給question_level.jsp 的參數
-    				int nowlevel = totallevel - levels.size();
-    				//目前在第幾關
-    				session.setAttribute("nowlevel", nowlevel);
-    				session.setAttribute("nowlevelname", currentLevel.getL_level());
-    				session.setAttribute("currentlevelId", currentLevel.getL_id());
-    				
     				//找出關卡的總題目數量
-    				List<QuestionVO> questions = new QuestionDAO().findByLevelId(currentLevel.getL_id());
+    				List<QuestionVO> questions = new QuestionDAO().findByLevelIdAndGroupId(currentLevel.getL_id(), currentLevel.getL_group_id());
     				
-    				//判斷是否有出題範圍
-    				if(currentLevel.getFromQuestion() != null && currentLevel.getFromQuestion() != 0 && 
-    						currentLevel.getToQuestion() != null && currentLevel.getToQuestion() != 0){
-    					//判斷出題範圍參數設定是否正確 
-    					if(questions != null && questions.size() >= currentLevel.getToQuestion()){
-    						questions = questions.subList(currentLevel.getFromQuestion() - 1, currentLevel.getToQuestion());
-    					}
+    				//關卡有題目
+    				if(questions != null && questions.size() > 0){
     					
-    				}
-    				
-    				
-    				
-    				//如果要隨機出題的話
-    				if(currentLevel.getIsRandom() != null && currentLevel.getIsRandom() == 1){
-    					Collections.shuffle(questions);
-    				}
-    				
-    				
-    				session.setAttribute("currentLevel", currentLevel);
-    	    		session.setAttribute("questionList", questions);
-    	    		session.setAttribute("qindex", 0);
-    	    		session.setAttribute("question", questions.get(0));
-    	    		List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(0).getQ_id());
-    	    		Collections.shuffle(answer);
-    	    		session.setAttribute("answers", answer);
-    	    		session.setAttribute("tip", null);
-    	    		session.setAttribute("f_levels", levels);
-    	    		
-    	    		res.sendRedirect("/YZUCS/front/question/question_level.jsp");
-    	    		return;
+    					//給question_level.jsp 的參數
+        				int nowlevel = totallevel - levels.size();
+        				//目前在第幾關
+        				session.setAttribute("nowlevel", nowlevel);
+        				session.setAttribute("nowlevelname", currentLevel.getL_level());
+        				session.setAttribute("currentlevelId", currentLevel.getL_id());
+        				
+        			
+        				
+        				//判斷是否有出題範圍
+        				if(currentLevel.getFromQuestion() != null && currentLevel.getFromQuestion() != 0 && 
+        						currentLevel.getToQuestion() != null && currentLevel.getToQuestion() != 0){
+        					//判斷出題範圍參數設定是否正確 
+        					if(questions != null && questions.size() >= currentLevel.getToQuestion()){
+        						questions = questions.subList(currentLevel.getFromQuestion() - 1, currentLevel.getToQuestion());
+        					}
+        					
+        				}
+        				
+        				
+        				
+        				//如果要隨機出題的話
+        				if(currentLevel.getIsRandom() != null && currentLevel.getIsRandom() == 1){
+        					Collections.shuffle(questions);
+        				}
+        				
+        				
+        				session.setAttribute("currentLevel", currentLevel);
+        	    		session.setAttribute("questionList", questions);
+        	    		session.setAttribute("qindex", 0);
+        	    		session.setAttribute("question", questions.get(0));
+        	    		List<AnswerVO> answer = new AnswerDAO().findAnswersByQid(questions.get(0).getQ_id());
+        	    		Collections.shuffle(answer);
+        	    		session.setAttribute("answers", answer);
+        	    		session.setAttribute("tip", null);
+        	    		session.setAttribute("f_levels", levels);
+        	    		
+        	    		res.sendRedirect("/YZUCS/front/question/question_level.jsp");
+        	    		return;
 
-    	    		
+    				
+        	    	//關卡沒題目 , 跳下一題
+    				}else{
+    					
+    					res.sendRedirect("/YZUCS/front/question/QuestionServlet.do?action=nextLevel");
+    		    		return;
+    				}
+    				
     	    		
     	    	//抓不到問題資料物件
     			}else{
