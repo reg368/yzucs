@@ -98,9 +98,12 @@ public class User_controller_back extends HttpServlet {
     		
     		
     		session.setAttribute("UserBackVO", uservo);
-    		RequestDispatcher view = req
-					.getRequestDispatcher("/back/index/index.jsp");
-			view.forward(req, res);	
+    		
+    		res.sendRedirect("/YZUCS/back/index/index.jsp");
+    		
+//    		RequestDispatcher view = req
+//					.getRequestDispatcher("/back/index/index.jsp");
+//			view.forward(req, res);	
 			return;
     	}else if("insert".equals(action)){
     		String user_login_id = req.getParameter("user_login_id");
