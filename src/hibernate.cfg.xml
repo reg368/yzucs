@@ -40,6 +40,9 @@
 		<mapping resource="com/sc_question/model/scquestion.hbm.xml" />
 		<mapping resource="com/level_record/model/level_record.hbm.xml" />
 		<mapping resource="com/QL/model/QL.hbm.xml" />
+		<mapping resource="com/yzu_concept/model/ConceptVO.hbm.xml" />
+		<mapping resource="com/yzu_gc_mapping/model/GC.hbm.xml" />
+		<mapping resource="com/yzu_q_concept/model/QConcept.hbm.xml" />
 	</session-factory>
 	
 </hibernate-configuration>

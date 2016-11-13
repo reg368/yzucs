@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.yzu_q_concept.model.QConceptVO" table="yzu_q_concept" >
+			
+		<id name="qc_id" column="qc_id">
+			<generator class="sequence">
+				<param name="sequence">yzu_q_concept_seq</param>
+			</generator>
+		</id>
+			<property name="gc_id" column="gc_id" />
+			<property name="percentage" column="percentage" />
+			<property name="q_id" column="q_id" />		
+	</class>
+</hibernate-mapping>

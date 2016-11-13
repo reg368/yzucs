@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.yzu_gc_mapping.model.GCVO" table="yzu_gc_mapping" >
+			
+		<id name="gc_id" column="gc_id">
+			<generator class="sequence">
+				<param name="sequence">yzu_gc_mapping_seq</param>
+			</generator>
+		</id>
+			<property name="c_id" column="c_id" />
+			<property name="g_id" column="g_id" />		
+	</class>
+</hibernate-mapping>

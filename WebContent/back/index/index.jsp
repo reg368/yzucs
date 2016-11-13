@@ -55,6 +55,7 @@
 				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=courseManage" target="iframe">課程管理</a></li>
 				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=levelManage" target="iframe">課程關卡管理</a></li>
 				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=questionManage" target="iframe">課程題目管理</a></li>
+				<li><a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=conceptManage" target="iframe">題目概念管理</a></li>
 				<li><a href="<%= request.getContextPath() %>/back/StudentBackServlet.do?action=view" target="iframe">學生管理</a></li>
 			</ul> 
 			

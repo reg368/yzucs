@@ -18,6 +18,7 @@ import javax.servlet.http.Part;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.jsoup.helper.StringUtil;
 
 import com.QL.model.QLVO;
 import com.QL.model.QL_DAO;
@@ -34,6 +35,10 @@ import com.sc_question.model.SCQuestionVO;
 import com.student_class.model.StudentClassDAO;
 import com.student_class.model.StudentClassVO;
 import com.user.model.UserVO;
+import com.yzu_concept.model.ConceptVO;
+import com.yzu_concept.model.Concept_DAO;
+import com.yzu_gc_mapping.model.GCVO;
+import com.yzu_gc_mapping.model.GC_DAO;
 
 import java.util.Collection;
 
@@ -758,6 +763,133 @@ public class QuestionManage_controller extends HttpServlet {
     			view.forward(req, res);
     			
     		}
+    		
+    	}else if("conceptManage".equals(action)){
+    		
+    		Question_groupDAO dao = new Question_groupDAO();
+    		List<Question_groupVO> groups = dao.findQuestion_groupsByUserId(uservo.getUser_id());
+    		req.setAttribute("question_groups", groups);
+    		
+    		Concept_DAO conceptDao = new Concept_DAO();
+    		List<ConceptVO> concepts = conceptDao.findConceptByUserId(uservo.getUser_id());
+    		req.setAttribute("concepts", concepts);
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/concept/conceptManage.jsp");
+			view.forward(req, res);	
+			return;
+    	}else if("conceptAdd".equals(action)){
+    		
+    		
+    		String conceptName = req.getParameter("conceptName");
+    		if(conceptName != null && conceptName.trim().length() > 0){
+    			
+    			ConceptVO vo = new ConceptVO();
+    			vo.setC_name(conceptName);
+    			vo.setUser_id(uservo.getUser_id());
+    			int isSave =  new Concept_DAO().insertGetPrimaryKey(vo);
+    			if(isSave != -1){
+        			
+        			RequestDispatcher view = req
+        					.getRequestDispatcher("/back/QuestionBackServlet.do?action=conceptManage");
+        			view.forward(req, res);	
+    				
+    			}else{
+    				errorMessage.add("新增失敗/請洽系統管理員");
+        			req.setAttribute("errorMessage", errorMessage);
+        			RequestDispatcher view = req
+        					.getRequestDispatcher("/back/QuestionBackServlet.do?action=conceptManage");
+        			view.forward(req, res);	
+    			}
+    		}else{
+    			
+    			errorMessage.add("請輸入概念名稱/概念名稱不得為空白");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/concept/conceptAdd.jsp");
+    			view.forward(req, res);	
+    			
+    		}
+    	}else if("conceptGroup".equals(action)){
+    		
+    		String g_id = req.getParameter("g_id");
+    		
+    		if(g_id != null && g_id.trim().length() > 0 && StringUtil.isNumeric(g_id)){
+    			
+    			List<ConceptVO> concepts = new Concept_DAO().findConceptByUserIdAndGroupId(uservo.getUser_id(),NumberUtils.createInteger(g_id));
+        		req.setAttribute("concepts", concepts);
+    			
+        		Question_groupVO group = new Question_groupDAO().findByGid(NumberUtils.createInteger(g_id));
+        		req.setAttribute("group", group);
+        		
+        		RequestDispatcher view = req
+    					.getRequestDispatcher("/back/concept/conceptGroup.jsp");
+    			view.forward(req, res);	
+        		
+    		}else{
+    			errorMessage.add("編輯失敗/請洽系統管理員");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=conceptManage");
+    			view.forward(req, res);	
+    		}
+    		
+    	}else if("conceptGroupAdd".equals(action)){
+    		
+    		String g_id = req.getParameter("g_id");
+    		
+    		if(g_id != null && g_id.trim().length() > 0 && StringUtil.isNumeric(g_id)){
+    			
+    			List<ConceptVO> concepts = new Concept_DAO().findConceptNotInGroupByUserIdAndGroupId(uservo.getUser_id(),NumberUtils.createInteger(g_id));
+        		req.setAttribute("concepts", concepts);
+    			
+        		Question_groupVO group = new Question_groupDAO().findByGid(NumberUtils.createInteger(g_id));
+        		req.setAttribute("group", group);
+        		
+        		RequestDispatcher view = req
+    					.getRequestDispatcher("/back/concept/conceptGroupAdd.jsp");
+    			view.forward(req, res);	
+    			
+    		}else{
+    			errorMessage.add("編輯失敗/請洽系統管理員");
+    			req.setAttribute("errorMessage", errorMessage);
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=conceptManage");
+    			view.forward(req, res);	
+    		}	
+    	}else if("conceptGroupInsert".equals(action)){
+    		
+    		String g_id = req.getParameter("g_id");
+    		String[] cids = req.getParameterValues("c_id");
+    		
+    		
+    		
+    		if(cids == null || cids.length == 0){
+    			errorMessage.add("請選擇概念");
+    			req.setAttribute("errorMessage", errorMessage);		
+    			RequestDispatcher view = req
+    					.getRequestDispatcher("/back/QuestionBackServlet.do?action=conceptGroupAdd&g_id="+g_id);
+    			view.forward(req, res);	
+    			return;
+    		}
+    		
+    		
+    		
+    		GC_DAO dao = new GC_DAO();
+    		
+    		for(String cid : cids){
+    			
+    			GCVO vo = new GCVO();
+    			vo.setC_id(NumberUtils.createInteger(cid));
+    			vo.setG_id(NumberUtils.createInteger(g_id));
+    			dao.insertGetPrimaryKey(vo);
+    		}
+    		
+    		
+    		RequestDispatcher view = req
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=conceptGroup&g_id="+g_id);
+			view.forward(req, res);	
+			return;
     		
     	}
     }
