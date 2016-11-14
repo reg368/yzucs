@@ -20,7 +20,7 @@
 </script>
 </head>
 <body>
-	<h2>課程概念編輯 : ${group.g_name}</h2>
+	<h2>課程題目概念圖表 : ${group.g_name}</h2>
 	<c:if test="${not empty errorMessage}"  >
 		<ul>
 			<c:forEach var="message" items="${errorMessage}">
@@ -29,24 +29,21 @@
 		</ul>	
 	</c:if>
 	
-	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=conceptGroupAdd&g_id=${group.g_id}">新增概念</a>
-	
-	<hr>
-	
 	<c:choose>
 		<c:when test="${not empty concepts}">
-		<label>課程擁有的概念</label>
 		<table  border="1">
 			<tr bgcolor="#FFFF00">
-				<th>編號</th>
-				<th>概念名稱</th>
-				<th>編輯</th>
+				<th>題目/概念</th>
+				<c:forEach var="concept" items="${concepts}" varStatus="loop">
+					<th>${concept.c_name}</th>
+				</c:forEach>
 			</tr>
-			<c:forEach var="concept" items="${concepts}" varStatus="loop">
+			<c:forEach var="question" items="${questions}" varStatus="loop">
 				<tr>
-					<td>${loop.index + 1}</td>
-					<td>${concept.c_name}</td>
-					<td><a href="#">編輯</a></td>
+					<td>${question.q_text}</td>
+					<c:forEach var="concept" items="${concepts}" varStatus="loop">
+						<th>${concept.c_name}</th>
+					</c:forEach>
 				</tr>
 			</c:forEach>
 		</table>	
@@ -56,9 +53,5 @@
 		</c:otherwise>
 	</c:choose>
 	
-	<hr>
-	
-	<a href="<%= request.getContextPath() %>/back/QuestionBackServlet.do?action=conceptChart&g_id=${group.g_id}">課程概念題目編輯圖表</a>
-
 </body>
 </html>
