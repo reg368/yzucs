@@ -975,7 +975,8 @@ public class QuestionManage_controller extends HttpServlet {
 			}
 
 		}else if("conceptChartSave".equals(action)){
-		
+			String jsonStr = req.getParameter("jsonStr");
+			System.out.println("jsonStr : "+jsonStr);
 			
 			
 		}
