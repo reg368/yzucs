@@ -24,6 +24,8 @@ import com.QL.model.QLVO;
 import com.QL.model.QL_DAO;
 import com.answer.model.AnswerDAO;
 import com.answer.model.AnswerVO;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.question.model.QuestionDAO;
 import com.question.model.QuestionVO;
 import com.question_group.model.Question_groupDAO;
@@ -975,10 +977,47 @@ public class QuestionManage_controller extends HttpServlet {
 			}
 
 		}else if("conceptChartSave".equals(action)){
+			
+			String g_id = req.getParameter("g_id");
 			String jsonStr = req.getParameter("jsonStr");
-			System.out.println("jsonStr : "+jsonStr);
 			
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			
+			Map map = (Map) gson.fromJson(jsonStr, Object.class);
+			if(map != null && !map.isEmpty()){
+				for(Object obj : map.keySet()){
+					String key = (String)obj;
+					
+					Map saveobj = (Map)map.get(key);
+					String qc_id = (String)saveobj.get("qc_id");
+					String c_id = (String)saveobj.get("c_id");
+					String percentage = (String)saveobj.get("percentage");
+					String q_id = (String)saveobj.get("q_id");
+					
+					if(!"new".equals(qc_id) && StringUtil.isNumeric(qc_id)){
+						QConceptVO vo = new QConceptVO();
+						vo.setQc_id(NumberUtils.createInteger(qc_id));
+						vo.setPercentage(NumberUtils.createInteger(percentage));
+						vo.setC_id(NumberUtils.createInteger(c_id));
+						vo.setQ_id(NumberUtils.createInteger(q_id));
+						new QConcept_DAO().insertGetPermaryKey(vo);
+					}else{
+						QConceptVO vo = new QConceptVO();
+						vo.setPercentage(NumberUtils.createInteger(percentage));
+						vo.setC_id(NumberUtils.createInteger(c_id));
+						vo.setQ_id(NumberUtils.createInteger(q_id));
+						new QConcept_DAO().insertGetPermaryKey(vo);
+					}
+				}
+			}
+			
+			errorMessage.add("Àx¦s¦¨¥\");
+			req.setAttribute("errorMessage", errorMessage);
+			RequestDispatcher view = req
+					.getRequestDispatcher("/back/QuestionBackServlet.do?action=conceptChart&g_id="
+							+ g_id);
+			view.forward(req, res);
+			return;
 		}
 	}
 

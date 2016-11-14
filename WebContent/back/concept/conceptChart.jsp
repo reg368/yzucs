@@ -43,7 +43,7 @@
 	});
 	
 	function setJson(){
-		$('#jsonStr').val(JSON.stringify(saveObjs));
+		$('#jsonStr').val(JSON.stringify(saveObjs)); //物件轉json
 		$('#chartForm').submit();
 	}
 </script>
@@ -92,6 +92,8 @@
 		</table>
 			<textarea id="jsonStr" name="jsonStr" style="visibility: hidden;"></textarea>	
 			<input type="hidden" name="action" value="conceptChartSave">
+			<input type="hidden" name="g_id" value="${group.g_id}">
+			<hr>
 			<input type="button" onclick="setJson()" value="送出修改">
 		</form>	
 		</c:when>
