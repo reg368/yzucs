@@ -46,10 +46,10 @@
 							<c:set var="key">${question.q_id}${concept.c_id}</c:set>
 							<c:choose>
 								<c:when test="${not empty qconceptMap[key]}">
-									${qconceptMap[key].percentage}
+									<input type="number" name="percentages" value="${qconceptMap[key].percentage}">
 								</c:when>
 								<c:otherwise>
-									0
+									<input type="number" name="percentages" value="0">
 								</c:otherwise>
 							</c:choose>
 						</th>
