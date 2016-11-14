@@ -224,6 +224,7 @@ public class QuestionManage_controller extends HttpServlet {
 			String[] classIds = req.getParameterValues("c_id");
 			String g_id = req.getParameter("g_id");
 
+			
 			// ½Òµ{¸ê®Æ
 			Question_groupVO question = new Question_groupDAO()
 					.findByGid(Integer.parseInt(g_id));
@@ -973,6 +974,10 @@ public class QuestionManage_controller extends HttpServlet {
 				view.forward(req, res);
 			}
 
+		}else if("conceptChartSave".equals(action)){
+		
+			
+			
 		}
 	}
 

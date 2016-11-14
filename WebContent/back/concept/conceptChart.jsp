@@ -17,6 +17,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title></title>
 <script>
+	$( document ).ready(function() {
+			
+		$( ".percentage" ).change(function() {
+			$(this).attr('name','isSave');
+		});
+		
+	});
 </script>
 </head>
 <body>
@@ -31,6 +38,7 @@
 	
 	<c:choose>
 		<c:when test="${not empty concepts}">
+		<form method="post" action="<%= request.getContextPath() %>/back/QuestionBackServlet.do">
 		<table  border="1">
 			<tr bgcolor="#FFFF00">
 				<th>題目/概念</th>
@@ -38,18 +46,21 @@
 					<th>${concept.c_name}</th>
 				</c:forEach>
 			</tr>
-			<c:forEach var="question" items="${questions}" varStatus="loop">
+			<c:forEach var="question" items="${questions}" varStatus="qloop">
 				<tr>
 					<td>${question.q_text}</td>
-					<c:forEach var="concept" items="${concepts}" varStatus="loop">
+					<c:forEach var="concept" items="${concepts}" varStatus="cloop">
 						<th>
 							<c:set var="key">${question.q_id}${concept.c_id}</c:set>
+							<c:set var="indexId">${qloop.index}${cloop.index}</c:set>
 							<c:choose>
+							<!-- 2016/11/14 13:05 未完成  用2個欄位儲存每一個 QConceptVO 的資訊 , 一個 PK , 一個 percentage 因為servlet只能抓一個值  -->
 								<c:when test="${not empty qconceptMap[key]}">
-									<input type="number" name="percentages" value="${qconceptMap[key].percentage}">
+									<input class="percentage" type="number" name="isNotSave" id="${qconceptMap[key].qc_id}" value="${qconceptMap[key].percentage}">
+									<input class="qc_id" type="hidden" name="isNotSave" value="${qconceptMap[key].qc_id}">
 								</c:when>
 								<c:otherwise>
-									<input type="number" name="percentages" value="0">
+									<input class="percentage" type="number" name="isNotSave" id="${indexId}" value="0">
 								</c:otherwise>
 							</c:choose>
 						</th>
@@ -57,6 +68,8 @@
 				</tr>
 			</c:forEach>
 		</table>	
+			<input type="hidden" name="action" value="conceptChartSave">
+		</form>	
 		</c:when>
 		<c:otherwise>
 			此課程尚未有任何概念
