@@ -39,6 +39,8 @@ import com.yzu_concept.model.ConceptVO;
 import com.yzu_concept.model.Concept_DAO;
 import com.yzu_gc_mapping.model.GCVO;
 import com.yzu_gc_mapping.model.GC_DAO;
+import com.yzu_q_concept.model.QConceptVO;
+import com.yzu_q_concept.model.QConcept_DAO;
 
 import java.util.Collection;
 
@@ -937,15 +939,24 @@ public class QuestionManage_controller extends HttpServlet {
 			if (g_id != null && g_id.trim().length() > 0
 					&& StringUtil.isNumeric(g_id)) {
 
+				//圖表 x 軸 概念清單
 				List<ConceptVO> concepts = new Concept_DAO()
 						.findConceptByUserIdAndGroupId(uservo.getUser_id(),
 								NumberUtils.createInteger(g_id));
 				req.setAttribute("concepts", concepts);
-
+				
+				//圖表y 軸 題目清單
 				List<QuestionVO> questions = new QuestionDAO()
 						.findByGroupId(NumberUtils.createInteger(g_id));
 				req.setAttribute("questions", questions);
 
+				//取得產生圖表 conceptChart.jsp 所需要的資料
+				//Map key : {q_id(題目id 圖表y軸) + c_id (概念id 圖表x軸) (字串)} , value 物件 取得分數比重
+				Map<String,QConceptVO>  qconceptMap = new QConcept_DAO().findByUserIdAndGroupId(uservo.getUser_id(),
+								NumberUtils.createInteger(g_id));
+				req.setAttribute("qconceptMap", qconceptMap);
+				
+				//課程資料
 				Question_groupVO group = new Question_groupDAO()
 						.findByGid(NumberUtils.createInteger(g_id));
 				req.setAttribute("group", group);

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class QConceptVO implements Serializable {
 	private Integer qc_id;
-	private Integer gc_id;
+	private Integer c_id;
 	private Integer percentage;
 	private Integer q_id;
 	public Integer getQc_id() {
@@ -12,12 +12,6 @@ public class QConceptVO implements Serializable {
 	}
 	public void setQc_id(Integer qc_id) {
 		this.qc_id = qc_id;
-	}
-	public Integer getGc_id() {
-		return gc_id;
-	}
-	public void setGc_id(Integer gc_id) {
-		this.gc_id = gc_id;
 	}
 	public Integer getPercentage() {
 		return percentage;
@@ -30,6 +24,12 @@ public class QConceptVO implements Serializable {
 	}
 	public void setQ_id(Integer q_id) {
 		this.q_id = q_id;
+	}
+	public Integer getC_id() {
+		return c_id;
+	}
+	public void setC_id(Integer c_id) {
+		this.c_id = c_id;
 	}
 	
 	

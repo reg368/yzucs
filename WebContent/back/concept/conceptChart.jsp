@@ -42,7 +42,17 @@
 				<tr>
 					<td>${question.q_text}</td>
 					<c:forEach var="concept" items="${concepts}" varStatus="loop">
-						<th>${concept.c_name}</th>
+						<th>
+							<c:set var="key">${question.q_id}${concept.c_id}</c:set>
+							<c:choose>
+								<c:when test="${not empty qconceptMap[key]}">
+									${qconceptMap[key].percentage}
+								</c:when>
+								<c:otherwise>
+									0
+								</c:otherwise>
+							</c:choose>
+						</th>
 					</c:forEach>
 				</tr>
 			</c:forEach>

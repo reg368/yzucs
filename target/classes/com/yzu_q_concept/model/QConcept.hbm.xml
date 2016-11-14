@@ -9,7 +9,7 @@
 				<param name="sequence">yzu_q_concept_seq</param>
 			</generator>
 		</id>
-			<property name="gc_id" column="gc_id" />
+			<property name="c_id" column="c_id" />
 			<property name="percentage" column="percentage" />
 			<property name="q_id" column="q_id" />		
 	</class>
