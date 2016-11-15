@@ -11,8 +11,8 @@ import com.tool.HibernateUtil;
 public class Concept_DAO implements Concept_interface {
 
 	
-	private final String findConceptByUserIdAndGroupId = "select c.* from yzu_concept c join yzu_gc_mapping g on c.C_ID = g.C_ID where c.USER_ID = ? and g.G_ID = ? ";
-	private final String findConceptNotInGroupByUserIdAndGroupId = "select * from yzu_concept where c_id NOT IN  (select c.C_ID from yzu_concept c join yzu_gc_mapping g on c.C_ID = g.C_ID where c.USER_ID = ? and g.G_ID =  ? )";
+	private final String findConceptByUserIdAndGroupId = "select c.* from yzu_concept c join yzu_gc_mapping g on c.C_ID = g.C_ID where c.USER_ID = ? and g.G_ID = ? order by c.c_id ";
+	private final String findConceptNotInGroupByUserIdAndGroupId = "select * from yzu_concept where c_id NOT IN  (select c.C_ID from yzu_concept c join yzu_gc_mapping g on c.C_ID = g.C_ID where c.USER_ID = ? and g.G_ID =  ? ) order by c_id";
 	
 	@Override
 	public Integer insertGetPrimaryKey(ConceptVO vo) {

@@ -13,7 +13,7 @@ import com.tool.HibernateUtil;
 public class QConcept_DAO implements QConcept_interface {
 
 	//private final String  findByUserIdAndGroupId = "select * from yzu_q_concept where gc_id in (select g.gc_id from yzu_concept c join yzu_gc_mapping g on c.C_ID = g.C_ID where c.USER_ID = ? and g.G_ID = ? )";
-	private final String findByUserIdAndGroupId ="select q.* from yzu_concept c join yzu_gc_mapping g on c.C_ID = g.C_ID join yzu_q_concept q on q.C_ID = g.C_ID where c.USER_ID = ? and g.G_ID = ?";
+	private final String findByUserIdAndGroupId ="select q.* from yzu_concept c join yzu_gc_mapping g on c.C_ID = g.C_ID join yzu_q_concept q on q.C_ID = g.C_ID where c.USER_ID = ? and g.G_ID = ? order by q.qc_id";
 	
 	
 	@Override

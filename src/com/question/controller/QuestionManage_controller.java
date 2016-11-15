@@ -242,11 +242,13 @@ public class QuestionManage_controller extends HttpServlet {
 				return;
 			}
 
+			SCQuestionDAO dao = new SCQuestionDAO();
+			
 			for (String cid : classIds) {
 				SCQuestionVO scvo = new SCQuestionVO();
 				scvo.setGroup_id(Integer.parseInt(g_id));
 				scvo.setClass_id(Integer.parseInt(cid));
-				new SCQuestionDAO().insertGerPrimaryKey(scvo);
+				dao.insertGerPrimaryKey(scvo);
 			}
 
 			RequestDispatcher view = req
@@ -975,15 +977,17 @@ public class QuestionManage_controller extends HttpServlet {
 						.getRequestDispatcher("/back/QuestionBackServlet.do?action=conceptManage");
 				view.forward(req, res);
 			}
-
+			
+		//圖表資料儲存	
 		}else if("conceptChartSave".equals(action)){
 			
 			String g_id = req.getParameter("g_id");
 			String jsonStr = req.getParameter("jsonStr");
 			
+			//使用json紀錄什麼是要insert  什麼是要update
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-			
 			Map map = (Map) gson.fromJson(jsonStr, Object.class);
+			
 			if(map != null && !map.isEmpty()){
 				for(Object obj : map.keySet()){
 					String key = (String)obj;
