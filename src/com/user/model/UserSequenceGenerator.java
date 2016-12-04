@@ -18,6 +18,7 @@ import org.hibernate.engine.SessionImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
 
+
 public class UserSequenceGenerator implements IdentifierGenerator {
 
 	private static DataSource ds = null;
@@ -38,11 +39,13 @@ public class UserSequenceGenerator implements IdentifierGenerator {
 		Connection connection;
 		try {
 			connection = ds.getConnection();
+			//PreparedStatement pstmt = connection
+				//	.prepareStatement("SELECT yzu_user_seq.nextval as next from dual");
 			PreparedStatement pstmt = connection
-					.prepareStatement("SELECT yzu_user_seq.nextval as next from dual");
+						.prepareStatement("SELECT NEXT VALUE FOR YZUCS.YZU_USER_SEQ as NEXT");
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				int id = rs.getInt("next");
+				int id = rs.getInt("NEXT");
 				//System.out.println("sequence: " + id);
 				user_id = "U" + id;
 			}

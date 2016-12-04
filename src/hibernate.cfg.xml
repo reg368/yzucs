@@ -10,8 +10,11 @@
 		<property name="hibernate.connection.datasource">java:/comp/env/jdbc/yzucs</property>
         
 		<!--SQL方言,以下使用Oracle -->
-		<property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
-
+		<!--  <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property> -->
+		
+		<!--SQL方言,以下使用 Microsoft SQL Server -->
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+		
 		<!--是否要顯示實際操作資料庫時的SQL -->
 		<property name="hibernate.show_sql">false</property>
 
@@ -27,6 +30,8 @@
 		<!--Java物件與資料庫表格的映射檔 -->
 		<!--益營 -->
 		<mapping resource="com/user/model/user.hbm.xml" /> 
+		
+		<!--  
 		<mapping resource="com/answer/model/answer.hbm.xml" /> 
 		<mapping resource="com/question_group/model/question_group.hbm.xml" /> 
 		<mapping resource="com/question/model/question.hbm.xml" />
@@ -43,6 +48,8 @@
 		<mapping resource="com/yzu_concept/model/ConceptVO.hbm.xml" />
 		<mapping resource="com/yzu_gc_mapping/model/GC.hbm.xml" />
 		<mapping resource="com/yzu_q_concept/model/QConcept.hbm.xml" />
+		-->
+		
 	</session-factory>
 	
 </hibernate-configuration>

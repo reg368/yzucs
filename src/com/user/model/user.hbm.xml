@@ -6,7 +6,7 @@
 	<class name="com.user.model.UserVO" table="YZU_USER" >
 			
 			<id name="user_id" column="user_id">
-				 <generator class="com.user.model.UserSequenceGenerator" ></generator>
+				 <generator class="identity"/>
 			</id>
 			
 			<property name="user_name" column="user_name" />
